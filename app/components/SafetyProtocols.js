@@ -72,7 +72,7 @@ const protocols = [
 
 export default function SafetyProtocols() {
   return (
-    <section id="protocolos" className="border-t border-stone/15 bg-bone">
+    <section id="protocolos" className="border-t border-stone/15 bg-bone pt-20 md:pt-28">
       <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
         <Reveal className="flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-12 lg:py-0">
           <p className="text-xs uppercase tracking-[0.2em] text-violet">

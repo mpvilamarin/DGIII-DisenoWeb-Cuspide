@@ -30,14 +30,14 @@ const steps = [
     period: "Mes 5",
     duration: "1 semana",
     title: "Revisión y prueba de equipo",
-    body: "Chequeo individual de equipamiento técnico y prueba en condiciones simuladas antes de confirmar la expedición.",
+    body: "Revisión individual de equipamiento técnico y prueba en condiciones simuladas antes de confirmar la expedición.",
     image: "/images/rock-face.jpg",
   },
   {
     period: "Mes 6",
     duration: "2 días",
     title: "Briefing final y evaluación de aptitud",
-    body: "Evaluación de aptitud física y mental. El equipo de guías decide si estás en condiciones de avanzar. No hay excepciones.",
+    body: "Evaluación de aptitud física y mental. El equipo de guías determina si continuás. No hay excepciones.",
     image: "/images/pinnacle-back.jpg",
   },
   {
@@ -51,7 +51,7 @@ const steps = [
     period: "Posterior",
     duration: "1 día",
     title: "Debrief y evaluación de cierre",
-    body: "Análisis posterior a la expedición con tu guía a cargo. Aprendizajes, marcas y próximos pasos en tu formación.",
+    body: "Análisis posterior a la expedición con tu guía a cargo. Aprendizajes, observaciones técnicas, marcas y próximos pasos en tu formación.",
     image: "/images/fitzroy-approach.jpg",
   },
 ];
@@ -83,7 +83,35 @@ export default function Methodology() {
       className="border-t border-stone/15 bg-bone"
     >
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="px-6 py-28 md:px-10 md:py-36 lg:pr-16">
+        <div className="relative hidden md:block">
+          <div className="sticky top-0 h-screen overflow-hidden">
+            {steps.map((step, i) => (
+              <Image
+                key={step.image}
+                src={step.image}
+                alt={step.title}
+                fill
+                sizes="50vw"
+                className={`object-cover transition-opacity duration-700 ${
+                  active === i ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
+            <div className="absolute inset-0 bg-linear-to-r from-transparent to-bone" />
+            <div className="absolute inset-0 bg-violet/10 mix-blend-multiply" />
+
+            <div className="absolute bottom-10 left-8 z-10 max-w-65 border border-violet/40 bg-ink/80 px-4 py-3 backdrop-blur-sm">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-light">
+                {String(active + 1).padStart(2, "0")} / {steps[active].period}
+              </p>
+              <p className="mt-1 font-mono text-xs text-bone/90">
+                {steps[active].title}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-6 pt-28 pb-40 md:px-10 md:pt-36 md:pb-56 lg:pl-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.2em] text-violet">
               Metodología de preparación
@@ -132,34 +160,6 @@ export default function Methodology() {
               </li>
             ))}
           </ol>
-        </div>
-
-        <div className="relative hidden md:block">
-          <div className="sticky top-0 h-screen overflow-hidden">
-            {steps.map((step, i) => (
-              <Image
-                key={step.image}
-                src={step.image}
-                alt={step.title}
-                fill
-                sizes="50vw"
-                className={`object-cover transition-opacity duration-700 ${
-                  active === i ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
-            <div className="absolute inset-0 bg-linear-to-l from-transparent to-bone" />
-            <div className="absolute inset-0 bg-violet/10 mix-blend-multiply" />
-
-            <div className="absolute bottom-10 left-8 z-10 max-w-65 border border-violet/40 bg-ink/80 px-4 py-3 backdrop-blur-sm">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-light">
-                {String(active + 1).padStart(2, "0")} / {steps[active].period}
-              </p>
-              <p className="mt-1 font-mono text-xs text-bone/90">
-                {steps[active].title}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

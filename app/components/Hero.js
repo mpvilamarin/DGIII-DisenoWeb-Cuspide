@@ -14,7 +14,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-ink/55" />
       <div className="grain absolute inset-0" />
-      <div className="absolute inset-x-0 bottom-0 h-[55vh] bg-linear-to-b from-transparent to-bone md:h-[60vh]" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-b from-transparent to-bone md:h-48" />
 
       <div className="relative z-10">
         {/* ── Hero ── */}
@@ -60,7 +60,7 @@ export default function Hero() {
         </div>
 
         {/* ── Manifiesto ── */}
-        <div className="relative flex min-h-[70vh] items-center justify-center px-6 pt-28 pb-20 md:min-h-[75vh] md:px-10 md:pt-32 md:pb-28">
+        <div className="relative flex min-h-[70vh] items-center justify-center px-6 pt-28 pb-36 md:min-h-[75vh] md:px-10 md:pt-32 md:pb-52">
           <Reveal className="relative z-10 mx-auto w-full max-w-2xl text-center">
             <h2 className="font-display text-5xl uppercase leading-[0.95] text-bone sm:text-6xl md:text-7xl">
               La cumbre no se compra.
