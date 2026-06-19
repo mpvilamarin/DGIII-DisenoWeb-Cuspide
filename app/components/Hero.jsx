@@ -27,26 +27,24 @@ export default function Hero() {
             <h1 className="mt-4 font-display text-[19vw] uppercase leading-[0.82] text-bone sm:text-[13vw] md:text-[9vw]">
               Cúspide
             </h1>
-            <div className="mt-6 flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-md">
-                <p className="text-base font-medium leading-snug text-bone sm:text-lg">
-                  La Patagonia exige preparación. Nosotros la garantizamos.
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-bone/75 sm:text-base">
-                  Meses de entrenamiento físico, técnica certificada y
-                  protocolos de rescate antes de cada expedición.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-4">
+            <div className="mt-6">
+              <p className="whitespace-nowrap text-sm font-medium uppercase tracking-[0.18em] text-bone sm:text-base">
+                La Patagonia exige preparación. Nosotros la garantizamos.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-bone/75 sm:text-base">
+                Meses de entrenamiento físico, técnica certificada y
+                protocolos de rescate antes de cada expedición.
+              </p>
+              <div className="mt-6 flex justify-end gap-3">
                 <a
                   href="#metodologia"
-                  className="border border-bone/50 px-6 py-3 text-xs uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone hover:text-ink"
+                  className="border border-bone/50 px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone hover:text-ink"
                 >
                   Conocé la metodología
                 </a>
                 <a
                   href="#programas"
-                  className="bg-violet px-6 py-3 text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
+                  className="bg-violet px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
                 >
                   Ver programas
                 </a>
@@ -64,7 +62,7 @@ export default function Hero() {
         <div className="relative flex min-h-[70vh] items-center justify-center px-6 pt-28 pb-36 md:min-h-[75vh] md:px-10 md:pt-32 md:pb-52">
           <Reveal className="relative z-10 mx-auto w-full max-w-3xl text-center">
             <h2 className="font-display text-5xl uppercase leading-[0.95] text-bone sm:text-6xl md:text-7xl">
-              La cumbre no
+              <span className="whitespace-nowrap">La cumbre no</span>
               <br />
               se compra.
             </h2>

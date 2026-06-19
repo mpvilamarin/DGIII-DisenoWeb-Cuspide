@@ -85,6 +85,7 @@ export default function Methodology() {
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative hidden md:block">
           <div className="sticky top-0 h-screen overflow-hidden">
+            <div className="relative h-full w-full">
             {steps.map((step, i) => (
               <Image
                 key={step.image}
@@ -97,6 +98,7 @@ export default function Methodology() {
                 }`}
               />
             ))}
+            </div>
             <div className="absolute inset-0 bg-linear-to-r from-transparent to-bone" />
             <div className="absolute inset-0 bg-violet/10 mix-blend-multiply" />
 

@@ -80,9 +80,9 @@ export default function SafetyProtocols() {
           </p>
           <span className="mt-3 block h-px w-6 bg-violet" />
           <h2 className="mt-6 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
-            La seriedad
+            Cada decisión
             <br />
-            por sobre el marketing
+            tiene un protocolo.
           </h2>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-stone">
             En montaña, la improvisación no es una opción. Cada decisión
@@ -90,15 +90,15 @@ export default function SafetyProtocols() {
           </p>
         </Reveal>
 
-        <Reveal delay={100} className="relative h-64 sm:h-80 lg:h-auto">
+        <Reveal delay={100} className="relative h-64 sm:h-80 lg:h-auto lg:-ml-16">
           <Image
             src="/images/ice-couloir.jpg"
             alt="Montañista escalando un canalón helado entre paredes de roca"
             fill
             sizes="(min-width: 1024px) 60vw, 100vw"
-            className="object-cover"
+            className="object-cover object-[40%_center]"
           />
-          <div className="absolute inset-y-0 left-0 w-2/3 bg-linear-to-r from-bone to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-full bg-linear-to-r from-bone from-12% to-45% to-transparent" />
           <div className="absolute inset-0 bg-ink/15" />
 
           <div className="absolute bottom-6 right-6 text-right">
