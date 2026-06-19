@@ -31,7 +31,7 @@ const steps = [
     duration: "1 semana",
     title: "Revisión y prueba de equipo",
     body: "Revisión individual de equipamiento técnico y prueba en condiciones simuladas antes de confirmar la expedición.",
-    image: "/images/rock-face.jpg",
+    image: "/images/rock-face.png",
   },
   {
     period: "Mes 6",
@@ -111,7 +111,7 @@ export default function Methodology() {
           </div>
         </div>
 
-        <div className="px-6 pt-28 pb-40 md:px-10 md:pt-36 md:pb-56 lg:pl-16">
+        <div className="px-6 pt-28 pb-16 md:px-10 md:pt-36 md:pb-24 lg:pl-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.2em] text-violet">
               Metodología de preparación

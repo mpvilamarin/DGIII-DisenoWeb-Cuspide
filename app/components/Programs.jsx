@@ -23,7 +23,7 @@ const programs = [
     name: "Expedición Avanzada — Cerro Torre",
     grade: "D+",
     duration: "9 meses de preparación + 16 días de expedición",
-    image: "/images/rock-face.jpg",
+    image: "/images/rock-face.png",
   },
   {
     slug: "iniciacion-cordada",

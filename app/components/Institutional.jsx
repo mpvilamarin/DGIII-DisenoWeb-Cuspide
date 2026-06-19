@@ -63,7 +63,7 @@ export default function Institutional() {
       {/* ── Foto + ficha técnica ── */}
       <Reveal delay={100} className="relative min-h-[70vh] lg:min-h-0">
         <Image
-          src="/images/rock-face.jpg"
+          src="/images/rock-face.png"
           alt="Guía de Cúspide escalando una pared de roca con vista a la cordillera"
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"

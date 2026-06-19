@@ -9,6 +9,7 @@ export default function Hero() {
         alt="Montañista en la cima de una aguja rocosa sobre el campo de hielo patagónico"
         fill
         priority
+        quality={90}
         sizes="100vw"
         className="object-cover object-top"
       />
