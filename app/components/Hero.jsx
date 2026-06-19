@@ -61,17 +61,19 @@ export default function Hero() {
 
         {/* ── Manifiesto ── */}
         <div className="relative flex min-h-[70vh] items-center justify-center px-6 pt-28 pb-36 md:min-h-[75vh] md:px-10 md:pt-32 md:pb-52">
-          <Reveal className="relative z-10 mx-auto w-full max-w-2xl text-center">
+          <Reveal className="relative z-10 mx-auto w-full max-w-3xl text-center">
             <h2 className="font-display text-5xl uppercase leading-[0.95] text-bone sm:text-6xl md:text-7xl">
-              La cumbre no se compra.
+              La cumbre no
+              <br />
+              se compra.
             </h2>
 
-            <p className="mx-auto mt-10 max-w-xl text-base leading-relaxed text-bone/75 sm:text-lg">
+            <p className="mx-auto mt-10 max-w-3xl text-base leading-relaxed text-bone/75 sm:text-lg">
               La Patagonia exige preparación. Nosotros la garantizamos: meses
-              de entrenamiento, técnica certificada y protocolos de rescate
-              antes de cada expedición.
+              de entrenamiento, técnica certificada y protocolos de rescate antes
+              de cada expedición.
             </p>
-            <p className="mx-auto mt-4 max-w-xl text-base font-medium leading-relaxed text-bone sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base font-medium leading-relaxed text-bone sm:text-lg">
               Si buscás una excursión cómoda, esto no es para ti.
             </p>
 
