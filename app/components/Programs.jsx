@@ -43,11 +43,17 @@ export default function Programs() {
     >
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.2em] text-violet">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet">
             Programas
           </p>
-          <h2 className="mt-4 max-w-xl font-display text-3xl uppercase text-ink sm:text-4xl">
-            Expediciones, no excursiones
+          <span className="mt-4 block h-0.5 w-12 bg-linear-to-r from-violet to-glacier" />
+          <h2 className="mt-7 max-w-3xl font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl md:text-[3.4rem]">
+            Expediciones,
+            <br />
+            no{" "}
+            <span className="bg-linear-to-r from-violet via-violet-light to-glacier bg-clip-text text-transparent">
+              excursiones
+            </span>
           </h2>
         </Reveal>
 

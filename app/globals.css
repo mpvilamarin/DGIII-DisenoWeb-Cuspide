@@ -2,15 +2,16 @@
 
 :root {
   --background: #f3efe7;
-  --foreground: #0e0d12;
+  --foreground: #08101f;
 
-  --color-ink: #0e0d12;
+  --color-ink: #08101f;
   --color-stone: #4b4d52;
   --color-stone-light: #8a8c91;
-  --color-bone: #f3efe7;
-  --color-violet: #4b3f8b;
-  --color-violet-light: #a89cdc;
-  --color-glacier: #2bb6c4;
+  --color-bone: #f7f8fc;
+
+  --color-violet: #5740e0;
+  --color-violet-light: #7c68f0;
+  --color-glacier: #9ceeff;
 
   --font-display: "normalidad-ultraextended", sans-serif;
 }
