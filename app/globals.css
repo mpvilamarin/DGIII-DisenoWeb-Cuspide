@@ -4,14 +4,14 @@
   --background: #f3efe7;
   --foreground: #08101f;
 
-  --color-ink: #08101f;
+  --color-ink: #18102b;
   --color-stone: #4b4d52;
   --color-stone-light: #8a8c91;
   --color-bone: #f7f8fc;
 
-  --color-violet: #5740e0;
-  --color-violet-light: #7c68f0;
-  --color-glacier: #9ceeff;
+  --color-violet: #9D4EDD;
+  --color-violet-light: #3C096C;
+  --color-glacier: #F0E100;
 
   --font-display: "normalidad-ultraextended", sans-serif;
 }
@@ -38,6 +38,13 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(to right, #3C096C, #5A189A, #7B2CBF, #9D4EDD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .grain {
@@ -70,4 +77,26 @@ body {
 
 .font-display {
   font-weight: 700;
+}
+
+/* Quote — cortina por línea */
+.quote-bar {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.quote-bar.in-view {
+  transform: scaleX(1);
+}
+
+.quote-line {
+  display: block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.5s ease;
+}
+.quote-line.in-view {
+  transform: translateY(0);
+  opacity: 1;
 }

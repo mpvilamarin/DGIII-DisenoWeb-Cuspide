@@ -12,7 +12,7 @@ const team = [
     years: "16 años",
     specialty: "Rescate en grietas",
     detail: "Especialista en rescate glaciar, progresión en hielo y autorrescate.",
-    image: "/images/fitzroy-approach.jpg",
+    image: "/images/Martin-Aguirre.png",
   },
   {
     name: "Lucía Beltrán",
@@ -21,7 +21,7 @@ const team = [
     years: "11 años",
     specialty: "Medicina de montaña",
     detail: "Atención en zonas remotas, evaluación de riesgo y primeros auxilios.",
-    image: "/images/ridge-walk.jpg",
+    image: "/images/Lucia-Beltran.png",
   },
   {
     name: "Tomás Ferreyra",
@@ -30,7 +30,7 @@ const team = [
     years: "14 años",
     specialty: "Progresión en hielo",
     detail: "Técnica de crampones, cuerdas fijas y seguridad en terreno glaciario.",
-    image: "/images/ice-couloir.jpg",
+    image: "/images/Tomas-Ferreyraa.png",
   },
   {
     name: "Ana Reyes",
@@ -39,7 +39,7 @@ const team = [
     years: "9 años",
     specialty: "Expediciones de alta montaña",
     detail: "Planificación, logística, meteorología y gestión de grupos en altura.",
-    image: "/images/pinnacle-back.jpg",
+    image: "/images/Ana-Reeyes.png",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function Team() {
           <span className="mt-4 block h-[2px] w-12 bg-gradient-to-r from-violet to-glacier" />
 
           <h2 className="mt-7 max-w-4xl font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
-            <span className="bg-gradient-to-r from-violet via-violet-light to-glacier bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r text-gradient-purple">
               Instructores,
             </span>
             <br />
@@ -88,7 +88,7 @@ export default function Team() {
                     alt={member.name}
                     fill
                     sizes="(min-width: 1024px) 45vw, 90vw"
-                    className={`object-cover transition-all duration-700 ${
+                    className={`object-cover object-[center_15%] transition-all duration-700 ${
                       isActive
                         ? "scale-100 grayscale-0"
                         : "scale-105 grayscale brightness-[0.52]"
@@ -103,8 +103,8 @@ export default function Team() {
                     }`}
                   />
 
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(115,87,255,0.18),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_80%,rgba(156,238,255,0.12),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(131,77,251,0.22),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_80%,rgba(240,225,0,0.10),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* Cerrado */}
                   <div
@@ -113,7 +113,7 @@ export default function Team() {
                     }`}
                   >
                     <div>
-                      <p className="font-display text-2xl text-violet-light">
+                      <p className="font-display text-2xl text-glacier">
                         {String(i + 1).padStart(2, "0")}
                       </p>
                       <span className="mt-3 block h-px w-8 bg-gradient-to-r from-violet to-glacier" />
@@ -139,7 +139,7 @@ export default function Team() {
                         : "pointer-events-none translate-y-4 opacity-0"
                     }`}
                   >
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-violet-light">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-glacier">
                       {String(i + 1).padStart(2, "0")} — {member.specialty}
                     </p>
 

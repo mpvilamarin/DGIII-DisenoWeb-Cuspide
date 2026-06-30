@@ -57,7 +57,7 @@ export default function Navbar() {
           {/* CTA — solo desktop */}
           <Link
             href="/postulacion"
-            className="hidden border border-violet px-5 py-2 text-xs uppercase tracking-[0.18em] text-violet-light transition hover:bg-violet hover:text-bone md:inline-flex"
+            className="hidden border border-glacier px-5 py-2 text-xs uppercase tracking-[0.18em] text-glacier transition hover:bg-glacier hover:text-ink md:inline-flex"
           >
             Postulate
           </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
           <Link
             href="/postulacion"
             onClick={() => setOpen(false)}
-            className="mt-6 border border-bone/60 px-5 py-3 text-center text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
+            className="mt-6 border border-glacier px-5 py-3 text-center text-xs uppercase tracking-[0.18em] text-glacier transition hover:bg-glacier hover:text-ink"
           >
             Postulate
           </Link>

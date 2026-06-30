@@ -1,3 +1,11 @@
+const navLinks = [
+  { label: "PROGRAMAS", href: "#" },
+  { label: "ESCUELA DE GUÍAS", href: "#" },
+  { label: "EXPEDICIONES", href: "#" },
+  { label: "RECURSOS", href: "#" },
+  { label: "SOBRE CÚSPIDE", href: "#" },
+];
+
 const socials = [
   {
     label: "Instagram",
@@ -31,38 +39,54 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-stone/20 bg-ink text-bone/70">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:px-10">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="font-display text-xl uppercase tracking-widest text-bone">
-              Cúspide
-            </p>
-            <p className="mt-1 max-w-xs text-xs leading-relaxed text-bone/50">
-              No te llevamos a la montaña. Te preparamos para merecerla.
+    <footer className="bg-ink text-bone">
+      <div className="mx-auto max-w-350 px-8">
+        <div className="flex items-stretch border-b border-bone/10">
+          {/* Left: Logo + tagline */}
+          <div className="flex items-center gap-4 py-8 pr-10 border-r border-bone/10">
+            <svg viewBox="0 0 40 36" fill="none" className="h-9 w-9 shrink-0" aria-hidden="true">
+              <polygon points="20,2 38,34 2,34" stroke="#6B63E8" strokeWidth="2.2" fill="none" />
+              <polygon points="20,12 30,30 10,30" stroke="#6B63E8" strokeWidth="2.2" fill="none" />
+            </svg>
+            <div className="h-9 w-px bg-bone/20 mx-1" />
+            <span className="font-display text-xl font-bold uppercase tracking-widest text-bone">
+              CÚSPIDE
+            </span>
+            <div className="h-9 w-px bg-bone/10 ml-6" />
+            <p className="ml-6 text-xs leading-relaxed text-bone/70 whitespace-nowrap">
+              No te llevamos a la montaña.<br />
+              Te preparamos para{" "}
+              <a href="#" className="text-[#6B63E8] hover:underline">merecerla</a>.
             </p>
           </div>
 
-          <form className="flex w-full max-w-sm gap-2 sm:w-auto">
-            <input
-              type="email"
-              required
-              placeholder="Newsletter — Escuela de Guías"
-              className="w-full border border-bone/20 bg-transparent px-3 py-2 text-xs text-bone placeholder:text-bone/40 focus:border-violet-light focus:outline-none sm:w-56"
-            />
-            <button
-              type="submit"
-              className="whitespace-nowrap border border-bone/40 px-4 py-2 text-xs uppercase tracking-widest transition hover:bg-bone hover:text-ink"
-            >
-              Sumarme
-            </button>
-          </form>
+          {/* Center: Nav links */}
+          <div className="flex flex-1 items-center justify-center gap-8 px-10">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-[10px] font-medium uppercase tracking-widest text-bone/80 hover:text-bone transition whitespace-nowrap"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-10 flex flex-col-reverse items-center gap-4 border-t border-bone/10 pt-6 text-xs text-bone/40 sm:flex-row sm:justify-between">
+        {/* Bottom row */}
+        <div className="flex items-center justify-between py-3 text-xs text-bone/40">
           <p>© {new Date().getFullYear()} Cúspide · Formación de montaña</p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
+              <path d="M12 2C8.686 2 6 4.686 6 8c0 5 6 14 6 14s6-9 6-14c0-3.314-2.686-6-6-6z" />
+              <circle cx="12" cy="8" r="2" />
+            </svg>
+            <span>Patagonia Argentina · Cordón Marconi</span>
+          </div>
+
+          <div className="flex items-center gap-3">
             {socials.map((social) => (
               <a
                 key={social.label}
@@ -70,14 +94,14 @@ export default function Footer() {
                 aria-label={social.label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-bone/50 transition hover:text-violet-light"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-bone/20 text-bone/50 transition hover:border-bone/50 hover:text-bone"
               >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.3"
-                  className="h-4 w-4"
+                  className="h-3.5 w-3.5"
                 >
                   {social.icon}
                 </svg>

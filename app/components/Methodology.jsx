@@ -9,50 +9,29 @@ const steps = [
     period: "Mes 1",
     duration: "2 semanas",
     title: "Evaluación física y de antecedentes",
-    body: "Test de aptitud física y revisión de antecedentes médicos y de montaña. Entrevista con guías certificados antes de aceptar la postulación.",
-    image: "/images/team-smiling.jpg",
+    body: "Test de aptitud y entrevista con guías certificados.",
+    image: "/images/metodo-01.png",
   },
   {
-    period: "Mes 1—4",
-    duration: "3 meses",
-    title: "Plan de entrenamiento físico personalizado",
-    body: "Programa de resistencia, fuerza y carga progresiva diseñado según tu evaluación inicial. Seguimiento mensual obligatorio.",
-    image: "/images/ridge-walk.jpg",
+    period: "Mes 1—5",
+    duration: "4 meses",
+    title: "Entrenamiento y capacitación técnica",
+    body: "Resistencia, fuerza progresiva y clínica de cuerdas, crampones y autorrescate en terreno real.",
+    image: "/images/metodo-02.png",
   },
   {
-    period: "Mes 3—5",
-    duration: "4 días",
-    title: "Capacitación técnica: cuerdas, crampones, autorrescate",
-    body: "Clínica presencial de técnica de cuerdas, uso de crampones y protocolos de autorrescate en terreno glaciario.",
-    image: "/images/rope-team.jpg",
-  },
-  {
-    period: "Mes 5",
-    duration: "1 semana",
-    title: "Revisión y prueba de equipo",
-    body: "Revisión individual de equipamiento técnico y prueba en condiciones simuladas antes de confirmar la expedición.",
-    image: "/images/rock-face.png",
-  },
-  {
-    period: "Mes 6",
-    duration: "2 días",
-    title: "Briefing final y evaluación de aptitud",
-    body: "Evaluación de aptitud física y mental. El equipo de guías determina si continuás. No hay excepciones.",
-    image: "/images/pinnacle-back.jpg",
+    period: "Mes 5—6",
+    duration: "3 semanas",
+    title: "Revisión de equipo y briefing final",
+    body: "Prueba en condiciones simuladas y evaluación final de aptitud. Sin excepciones.",
+    image: "/images/meto-03.png",
   },
   {
     period: "Expedición",
     duration: "12—16 días",
-    title: "Ascenso en cordada con guías certificados",
-    body: "Ascenso en cordada, gestión de riesgo y campamento en zona glaciaria. El objetivo real de los seis meses anteriores.",
-    image: "/images/ice-couloir.jpg",
-  },
-  {
-    period: "Posterior",
-    duration: "1 día",
-    title: "Debrief y evaluación de cierre",
-    body: "Análisis posterior a la expedición con tu guía a cargo. Aprendizajes, observaciones técnicas, marcas y próximos pasos en tu formación.",
-    image: "/images/fitzroy-approach.jpg",
+    title: "Ascenso en cordada y debrief",
+    body: "El objetivo real de la preparación, con análisis y aprendizajes posteriores.",
+    image: "/images/meto-04.png",
   },
 ];
 
@@ -103,13 +82,19 @@ export default function Methodology() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(245,243,239,0.78),transparent_34%)]" />
             <div className="absolute inset-0 bg-violet/10 mix-blend-multiply" />
 
-            <div className="absolute bottom-10 left-8 z-10 max-w-72 border-l-2 border-violet bg-ink/88 px-5 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-violet-light">
-                {String(active + 1).padStart(2, "0")} / {steps[active].period}
-              </p>
-              <p className="mt-2 font-mono text-sm leading-snug text-bone">
-                {steps[active].title}
-              </p>
+            {/* Step indicator — top left */}
+            <div className="absolute left-8 top-8 z-10 flex items-start gap-3">
+              <span className="font-display text-[3.5rem] leading-none text-violet/20 select-none tabular-nums">
+                {String(active + 1).padStart(2, "0")}
+              </span>
+              <div className="border-t border-violet/60 pt-2">
+                <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-glacier">
+                  {steps[active].period}
+                </p>
+                <p className="mt-1.5 max-w-44 font-mono text-xs leading-snug text-bone drop-shadow-[0_1px_10px_rgba(0,0,0,0.9)]">
+                  {steps[active].title}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -125,7 +110,7 @@ export default function Methodology() {
 
             <h2 className="mt-7 max-w-3xl font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
               Un{" "}
-              <span className="bg-gradient-to-r from-violet via-violet-light to-glacier bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r text-gradient-purple">
                 sistema,
               </span>{" "}
               no un tour
