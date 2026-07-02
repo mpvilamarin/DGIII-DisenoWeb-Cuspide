@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 
 const features = [
   {
-    title: "Asesoramiento\npersonalizado",
+    title: "Asesoramiento personalizado",
     detail: "Te guiamos en cada paso de tu expedición.",
     icon: (
       <>
@@ -14,7 +14,7 @@ const features = [
     ),
   },
   {
-    title: "Itinerarios\na medida",
+    title: "Itinerarios a medida",
     detail: "Diseñamos experiencias seguras y desafiantes.",
     icon: (
       <path
@@ -25,7 +25,7 @@ const features = [
     ),
   },
   {
-    title: "Acompañamiento\nconstante",
+    title: "Acompañamiento constante",
     detail: "Desde la planificación hasta el regreso.",
     icon: (
       <>
@@ -95,7 +95,7 @@ export default function FinalCTA() {
                   >
                     {item.icon}
                   </svg>
-                  <p className="whitespace-pre-line font-mono text-[10px] font-semibold uppercase leading-snug tracking-[0.14em] text-bone">
+                  <p className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase leading-snug tracking-[0.14em] text-bone">
                     {item.title}
                   </p>
                   <p className="font-mono text-[10px] leading-relaxed text-bone/55">

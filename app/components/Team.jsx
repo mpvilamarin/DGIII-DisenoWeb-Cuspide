@@ -30,7 +30,7 @@ const team = [
     years: "14 años",
     specialty: "Progresión en hielo",
     detail: "Técnica de crampones, cuerdas fijas y seguridad en terreno glaciario.",
-    image: "/images/Tomas-Ferreyraa.png",
+    image: "/images/Martin-Ferreyraa.png",
   },
   {
     name: "Ana Reyes",

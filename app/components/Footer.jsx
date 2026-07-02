@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { label: "PROGRAMAS", href: "#" },
@@ -46,13 +47,15 @@ export default function Footer() {
         <div className="flex flex-col border-b border-bone/10 sm:flex-row sm:items-stretch">
           {/* Left: Logo + tagline */}
           <div className="flex flex-col items-center gap-2 py-5 text-center sm:flex-row sm:gap-4 sm:border-r sm:border-bone/10 sm:py-8 sm:pr-10 sm:text-left">
-            <Image
-              src="/images/Logo blanco.png"
-              alt="Cúspide"
-              width={140}
-              height={32}
-              className="h-7 w-auto shrink-0 sm:h-8"
-            />
+            <Link href="/" className="shrink-0">
+              <Image
+                src="/images/Logo blanco.png"
+                alt="Cúspide"
+                width={140}
+                height={32}
+                className="h-7 w-auto sm:h-8"
+              />
+            </Link>
             <div className="hidden h-9 w-px bg-bone/10 ml-6 shrink-0 sm:block" />
             <p className="text-xs leading-relaxed text-bone/70 sm:ml-6">
               No te llevamos a la montaña.<br />

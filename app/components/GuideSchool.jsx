@@ -80,7 +80,9 @@ export default function GuideSchool() {
                 ...(isActive ? { height: "calc(var(--stage-h) + 140px)" } : {}),
               }}
               onClick={() => setActive(isActive ? null : i)}
-              className="group relative flex-1 cursor-pointer overflow-hidden transition-[height] duration-300 ease-out sm:h-(--stage-h) sm:hover:h-[calc(var(--stage-h)+80px)]"
+              className={`group relative cursor-pointer overflow-hidden transition-[flex-grow,height] duration-300 ease-out sm:h-(--stage-h) sm:flex-1 sm:hover:h-[calc(var(--stage-h)+80px)] ${
+                isActive ? "flex-[3]" : "flex-1"
+              }`}
             >
               {/* Imagen */}
               <Image

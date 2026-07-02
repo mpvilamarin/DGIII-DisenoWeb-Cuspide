@@ -22,7 +22,11 @@
       "Bash(NODE_PATH=\"C:\\\\\\\\Users\\\\\\\\PaulaVillamarin\\\\\\\\AppData\\\\\\\\Local\\\\\\\\npm-cache\\\\\\\\_npx\\\\\\\\e41f203b7505f1fb\\\\\\\\node_modules\" node -e \"try{require\\('sharp'\\);console.log\\('sharp OK'\\)}catch\\(e\\){console.log\\('no sharp'\\)}\")",
       "Bash(node test.js)",
       "Bash(node test3.js)",
-      "Bash(node \"C:\\\\Users\\\\PAULAV~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--PaulaVillamarin-Documents-Universidad-Dise-o-Gr-fico-III-TP3-C-spide\\\\f104d50c-ba7c-4ce8-9b43-d759d4669ecb\\\\scratchpad\\\\check3.cjs\")"
+      "Bash(node \"C:\\\\Users\\\\PAULAV~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--PaulaVillamarin-Documents-Universidad-Dise-o-Gr-fico-III-TP3-C-spide\\\\f104d50c-ba7c-4ce8-9b43-d759d4669ecb\\\\scratchpad\\\\check3.cjs\")",
+      "Bash(curl -s -o /dev/null -w \"Martin-Aguirre: %{http_code}\\\\n\" \"http://localhost:3000/images/Martin-Aguirre.png\")",
+      "Bash(curl -s -o /dev/null -w \"Tomas-Ferreyraa: %{http_code}\\\\n\" \"http://localhost:3000/images/Tomas-Ferreyraa.png\")",
+      "Bash(curl -s -o /dev/null -w \"Martin-Ferreyraa: %{http_code}\\\\n\" \"http://localhost:3000/images/Martin-Ferreyraa.png\")",
+      "Bash(curl -s -o /dev/null -w \"Tomas photo now: %{http_code}\\\\n\" \"http://localhost:3000/images/Martin-Ferreyraa.png\")"
     ]
   }
 }
