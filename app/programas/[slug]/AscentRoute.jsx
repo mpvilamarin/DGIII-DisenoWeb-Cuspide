@@ -1,0 +1,308 @@
+"use client";
+
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
+
+const SVG_H = 300;
+const PAD_X = 56;
+const PAD_Y = 28;
+const LABEL_H = 60; // reserved at bottom for day / altitude labels
+
+export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
+  const pathRef = useRef(null);
+  const sectionRef = useRef(null);
+  const [pathLength, setPathLength] = useState(2000);
+  const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState(null);
+
+  const photos = galeria.length ? galeria : [mainImage].filter(Boolean);
+
+  // Wider canvas the more days there are, so the chart reads as a real elevation profile.
+  const SVG_W = Math.max(900, itinerario.length * 150);
+
+  const minAlt = Math.min(...itinerario.map((w) => w.altitudM));
+  const maxAlt = Math.max(...itinerario.map((w) => w.altitudM));
+  const normalize = (alt) => (maxAlt === minAlt ? 0.5 : (alt - minAlt) / (maxAlt - minAlt));
+
+  const innerW = SVG_W - PAD_X * 2;
+  const innerH = SVG_H - PAD_Y - LABEL_H;
+  const baseY = PAD_Y + innerH;
+
+  const points = itinerario.map((day, i) => ({
+    ...day,
+    dayShort: day.dia.replace(/^Días?\s*/i, ""),
+    x: PAD_X + (i / (itinerario.length - 1)) * innerW,
+    y: PAD_Y + (1 - normalize(day.altitudM)) * innerH,
+  }));
+
+  const buildPath = (pts) => {
+    if (pts.length < 2) return "";
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const prev = pts[i - 1];
+      const curr = pts[i];
+      const cpx = (prev.x + curr.x) / 2;
+      d += ` C ${cpx} ${prev.y}, ${cpx} ${curr.y}, ${curr.x} ${curr.y}`;
+    }
+    return d;
+  };
+
+  const pathData = buildPath(points);
+  const areaData = `${pathData} L ${points[points.length - 1].x} ${baseY} L ${points[0].x} ${baseY} Z`;
+
+  // Measure the real path length before paint, so the very first frame already
+  // shows the fully-hidden line — no flash while it recalibrates from a guess.
+  useLayoutEffect(() => {
+    const measured = pathRef.current?.getTotalLength();
+    if (measured) setPathLength(measured);
+  }, [pathData]);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      setProgress(1);
+      return;
+    }
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    // Reveal once the chart is meaningfully in view, then animate to completion
+    // on a fixed timer — not tied to further scrolling, so it never finishes off-screen.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setProgress(1);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const dashOffset = pathLength * (1 - progress);
+  const activePoint = active !== null ? points[active] : null;
+
+  return (
+    <section
+      ref={sectionRef}
+      className="flex min-h-[80vh] flex-col justify-center border-t border-stone/15 bg-bone px-6 py-10 md:px-10 lg:px-16"
+    >
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="flex items-center gap-3">
+          <span className="block h-5 w-px bg-violet" />
+          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-dark">
+            Ruta de ascenso
+          </p>
+        </div>
+        <h2 className="mt-3 font-display text-2xl uppercase text-ink sm:text-3xl">
+          Perfil de la expedición
+        </h2>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone">
+          Altitud día a día. Pasá el cursor sobre cada parada para ver el detalle de la jornada.
+        </p>
+
+        <div className="relative mt-10 w-full overflow-x-auto overflow-y-visible">
+          <svg
+            viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+            fill="none"
+            className="w-full min-w-180"
+            role="img"
+            aria-label="Gráfico de altitud por día del itinerario"
+          >
+            <defs>
+              <linearGradient id="ascent-line" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="var(--color-teal-dark)" />
+                <stop offset="100%" stopColor="var(--color-violet)" />
+              </linearGradient>
+              <linearGradient id="ascent-area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--color-violet)" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="var(--color-violet)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+
+            {/* Grid horizontal de altitud */}
+            {[0, 0.25, 0.5, 0.75, 1].map((frac) => {
+              const y = PAD_Y + (1 - frac) * innerH;
+              const alt = Math.round(minAlt + frac * (maxAlt - minAlt));
+              return (
+                <g key={frac}>
+                  <line
+                    x1={PAD_X}
+                    y1={y}
+                    x2={SVG_W - PAD_X}
+                    y2={y}
+                    stroke="rgba(24,16,43,0.08)"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x={PAD_X - 10}
+                    y={y + 4}
+                    textAnchor="end"
+                    fill="rgba(24,16,43,0.35)"
+                    fontSize="10"
+                    fontFamily="monospace"
+                  >
+                    {alt.toLocaleString("es")}m
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Área bajo la curva — se desvanece junto con el trazo, no antes */}
+            <path
+              d={areaData}
+              fill="url(#ascent-area)"
+              style={{ opacity: progress, transition: "opacity 2.6s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            />
+
+            {/* Trazo fantasma (guía estructural) */}
+            <path d={pathData} stroke="rgba(24,16,43,0.08)" strokeWidth="2" />
+
+            {/* Trazo animado por scroll */}
+            <path
+              ref={pathRef}
+              d={pathData}
+              stroke="url(#ascent-line)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeDasharray={pathLength}
+              strokeDashoffset={dashOffset}
+              style={{ transition: "stroke-dashoffset 2.6s cubic-bezier(0.16, 1, 0.3, 1)" }}
+            />
+
+            {/* Días */}
+            {points.map((pt, i) => {
+              const isVisible = progress === 1;
+              const isActive = active === i;
+              const isFirst = i === 0;
+              const isLast = i === points.length - 1;
+              const delay = (i / Math.max(1, points.length - 1)) * 2.3;
+
+              return (
+                <g
+                  key={i}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transition: `opacity 0.4s ease ${delay}s`,
+                  }}
+                  onMouseEnter={() => setActive(i)}
+                  onMouseLeave={() => setActive((curr) => (curr === i ? null : curr))}
+                  onClick={() => setActive((curr) => (curr === i ? null : i))}
+                  className="cursor-pointer"
+                >
+                  {/* Área de hit invisible, más generosa que el marcador visible */}
+                  <circle cx={pt.x} cy={pt.y} r="20" fill="transparent" />
+
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r={isActive ? (isFirst || isLast ? 7 : 5.5) : isFirst || isLast ? 5 : 3.5}
+                    fill={isActive || isFirst || isLast ? "#5B3894" : "#f7f8fc"}
+                    stroke="#5B3894"
+                    strokeWidth="1.5"
+                    style={{ transition: "r 0.2s ease, fill 0.2s ease" }}
+                  />
+
+                  {/* Línea vertical punteada hacia label */}
+                  <line
+                    x1={pt.x}
+                    y1={pt.y + 7}
+                    x2={pt.x}
+                    y2={baseY + 12}
+                    stroke="rgba(91,56,148,0.2)"
+                    strokeWidth="1"
+                    strokeDasharray="2 3"
+                  />
+
+                  {/* Día */}
+                  <text
+                    x={pt.x}
+                    y={baseY + 26}
+                    textAnchor="middle"
+                    fill="rgba(24,16,43,0.7)"
+                    fontSize="9"
+                    fontWeight="bold"
+                    fontFamily="monospace"
+                    letterSpacing="0.6"
+                  >
+                    DÍA {pt.dayShort}
+                  </text>
+
+                  {/* Altitud */}
+                  <text
+                    x={pt.x}
+                    y={baseY + 40}
+                    textAnchor="middle"
+                    fill="var(--color-violet-dark)"
+                    fontSize="8"
+                    fontFamily="monospace"
+                    letterSpacing="0.6"
+                  >
+                    {pt.altitud}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* Tarjeta con la jornada del día — aparece junto al punto activo */}
+          {activePoint && (() => {
+            // Flip below the point when it sits too high for the card to fit above it.
+            const below = activePoint.y / SVG_H < 0.4;
+            return (
+              <div
+                className="pointer-events-none absolute z-20 w-60 border border-ink/10 bg-bone shadow-lg sm:w-72"
+                style={{
+                  left: `${(activePoint.x / SVG_W) * 100}%`,
+                  top: `${(activePoint.y / SVG_H) * 100}%`,
+                  transform: below
+                    ? "translate(-50%, 0%) translateY(14px)"
+                    : "translate(-50%, -100%) translateY(-14px)",
+                }}
+              >
+                {photos.length > 0 && (
+                  <div className="relative h-28 w-full overflow-hidden sm:h-32">
+                    <Image
+                      src={photos[active % photos.length]}
+                      alt={activePoint.titulo}
+                      fill
+                      sizes="288px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="p-3.5">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-violet-dark">
+                    {activePoint.dia} · {activePoint.altitud}
+                  </p>
+                  <p className="mt-1.5 font-display text-sm uppercase leading-tight text-ink">
+                    {activePoint.titulo}
+                  </p>
+                  <p className="mt-2 font-mono text-[10px] leading-relaxed text-stone">
+                    {activePoint.descripcion}
+                  </p>
+                </div>
+                <span
+                  className={
+                    below
+                      ? "absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-ink/10 bg-bone"
+                      : "absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-ink/10 bg-bone"
+                  }
+                />
+              </div>
+            );
+          })()}
+        </div>
+
+        <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-stone-light lg:hidden">
+          Tocá los puntos del recorrido
+        </p>
+      </div>
+    </section>
+  );
+}

@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BadgeCheck, ShieldCheck, Calendar } from "lucide-react";
+
+const FADE_MS = 500;
+const FADE_LEAD = 0.80;
 
 const credentials = [
   { icon: BadgeCheck, label: "Certificación UIAGM / IFMGA" },
@@ -11,11 +14,54 @@ const credentials = [
 
 export default function Hero() {
   const videoRef = useRef(null);
+  const [videoOpacity, setVideoOpacity] = useState(1);
+  const fadingOut = useRef(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.6;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    video.playbackRate = 0.6;
+
+    if (prefersReduced) {
+      // Mantener loop nativo sin fade
+      video.loop = true;
+      video.onloadeddata = () => setVideoOpacity(1);
+      return;
     }
+
+    // Fade in al cargar
+    const handleLoaded = () => {
+      setVideoOpacity(1);
+    };
+
+    // Fade loop: detectar cuando se acerca el fin
+    const handleTimeUpdate = () => {
+      const { currentTime, duration } = video;
+      if (!duration) return;
+
+      if (!fadingOut.current && currentTime >= duration - FADE_LEAD) {
+        fadingOut.current = true;
+        setVideoOpacity(0);
+
+        setTimeout(() => {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+          setVideoOpacity(1);
+          fadingOut.current = false;
+        }, FADE_MS);
+      }
+    };
+
+    video.addEventListener("loadeddata", handleLoaded);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoaded);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+    };
   }, []);
 
   return (
@@ -25,20 +71,25 @@ export default function Hero() {
         src="/Hero.mp4"
         autoPlay
         muted
-        loop
         playsInline
+        preload="auto"
         poster="/images/Hero.png"
+        style={{
+          transition: `opacity ${FADE_MS}ms ease`,
+          opacity: videoOpacity,
+        }}
         className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
       />
 
-      {/* Overlays — atmospheric dissolve */}
-      <div className="absolute inset-0 bg-ink/40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_130%_at_100%_50%,rgba(14,13,18,0.65)_0%,rgba(14,13,18,0.0)_68%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_100%_at_0%_50%,rgba(14,13,18,0.50)_0%,rgba(14,13,18,0.0)_70%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_30%_at_50%_0%,rgba(14,13,18,0.5)_0%,rgba(14,13,18,0.0)_100%)]" />
-      <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/30 to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_35%,rgba(131,77,251,0.20),transparent_32%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_60%,rgba(240,225,0,0.07),transparent_30%)]" />
+      {/* Overlay: degradado oscuro solo donde hay texto, centro transparente */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 45%), " +
+            "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 40%)",
+        }}
+      />
       <div className="grain absolute inset-0" />
 
       <div className="relative z-10 flex h-screen min-h-160 flex-col items-start justify-end">
@@ -50,23 +101,21 @@ export default function Hero() {
 
           <div className="mt-6 max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-bone sm:whitespace-nowrap sm:text-base">
-              La Patagonia exige{" "}
-              <span className="text-glacier">preparación.</span> Nosotros
-              la garantizamos.
+              La Patagonia exige preparación. Nosotros la garantizamos.
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap justify-start gap-3">
             <a
               href="#metodologia"
-              className="border border-glacier/45 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-glacier transition hover:border-glacier hover:bg-glacier hover:text-ink"
+              className="rounded-md border border-violet-light/45 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-violet-light transition hover:border-violet hover:bg-violet hover:text-bone"
             >
               Conocé la metodología
             </a>
 
             <a
               href="#programas"
-              className="bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-violet-light"
+              className="rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
             >
               Ver programas
             </a>
@@ -80,7 +129,7 @@ export default function Hero() {
                   key={item.label}
                   className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-bone/80"
                 >
-                  <Icon className="h-4 w-4 text-glacier" strokeWidth={1.6} />
+                  <Icon className="h-4 w-4 text-teal" strokeWidth={1.6} />
                   {item.label}
                 </span>
               );

@@ -49,18 +49,18 @@ export default function Team() {
   return (
     <section
       id="equipo-tecnico"
-      className="border-t border-stone/15 bg-bone py-24 md:py-32"
+      className="border-t border-stone/15 py-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
             Equipo técnico
           </p>
 
-          <span className="mt-4 block h-[2px] w-12 bg-gradient-to-r from-violet to-glacier" />
+          <span className="mt-4 block h-[2px] w-12 bg-violet-light" />
 
           <h2 className="mt-7 max-w-4xl font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
-            <span className="bg-gradient-to-r text-gradient-purple">
+            <span className="bg-gradient-to-r text-gradient-cool">
               Instructores,
             </span>
             <br />
@@ -103,8 +103,8 @@ export default function Team() {
                     }`}
                   />
 
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(131,77,251,0.22),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_80%,rgba(240,225,0,0.10),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(122,82,184,0.12),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_80%,rgba(122,82,184,0.06),transparent_34%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* Cerrado */}
                   <div
@@ -113,10 +113,10 @@ export default function Team() {
                     }`}
                   >
                     <div>
-                      <p className="font-display text-2xl text-glacier">
+                      <p className="font-display text-2xl text-bone/40">
                         {String(i + 1).padStart(2, "0")}
                       </p>
-                      <span className="mt-3 block h-px w-8 bg-gradient-to-r from-violet to-glacier" />
+                      <span className="mt-3 block h-px w-8 bg-violet-light" />
                     </div>
 
                     <p className="font-mono text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-bone [writing-mode:vertical-rl] rotate-180">
@@ -125,9 +125,9 @@ export default function Team() {
 
                     <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-bone/70">
                       <p className="text-bone/45">Cert.</p>
-                      <p className="mt-1 text-glacier">{member.cert.split(" / ")[0]}</p>
+                      <p className="mt-1 text-bone/90">{member.cert.split(" / ")[0]}</p>
                       <p className="mt-4 text-bone/45">Exp.</p>
-                      <p className="mt-1 text-glacier">{member.years}</p>
+                      <p className="mt-1 text-bone/90">{member.years}</p>
                     </div>
                   </div>
 
@@ -139,7 +139,7 @@ export default function Team() {
                         : "pointer-events-none translate-y-4 opacity-0"
                     }`}
                   >
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-glacier">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-bone/55">
                       {String(i + 1).padStart(2, "0")} — {member.specialty}
                     </p>
 
@@ -149,7 +149,7 @@ export default function Team() {
                       {lastName}
                     </h3>
 
-                    <span className="mt-5 block h-[2px] w-12 bg-gradient-to-r from-violet to-glacier" />
+                    <span className="mt-5 block h-[2px] w-12 bg-violet-light" />
 
                     <p className="mt-5 max-w-sm text-sm leading-relaxed text-bone/78">
                       {member.detail}
@@ -160,7 +160,7 @@ export default function Team() {
                         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-bone/45">
                           Certificación
                         </p>
-                        <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-glacier">
+                        <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-bone">
                           {member.cert}
                         </p>
                       </div>
@@ -169,7 +169,7 @@ export default function Team() {
                         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-bone/45">
                           Experiencia
                         </p>
-                        <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-glacier">
+                        <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-bone">
                           {member.years}
                         </p>
                       </div>

@@ -24,7 +24,7 @@ export default function PostulationForm({ programName }) {
   if (submitted) {
     return (
       <div className="flex flex-col items-start gap-5 py-8">
-        <span className="block h-px w-12 bg-linear-to-r from-violet to-glacier" />
+        <span className="block h-px w-12 bg-violet-light" />
         <p className="font-display text-2xl uppercase text-bone">
           Postulación recibida
         </p>
@@ -41,7 +41,7 @@ export default function PostulationForm({ programName }) {
   }
 
   const inputClass =
-    "w-full border-b border-bone/20 bg-transparent py-3 font-mono text-sm text-bone placeholder:text-bone/30 outline-none focus:border-violet transition-colors";
+    "w-full border-b border-bone/20 bg-transparent py-3 font-mono text-sm text-bone placeholder:text-bone/30 outline-none focus:border-violet-light transition-colors";
   const labelClass =
     "font-mono text-[10px] uppercase tracking-[0.2em] text-bone/50";
 
@@ -127,7 +127,7 @@ export default function PostulationForm({ programName }) {
       <div className="pt-2">
         <button
           type="submit"
-          className="group inline-flex items-center gap-4 bg-violet px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-bone transition hover:bg-violet-light"
+          className="group inline-flex items-center gap-4 bg-violet px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-bone transition hover:bg-bone hover:text-ink"
         >
           Enviar postulación
           <span className="transition group-hover:translate-x-1">→</span>

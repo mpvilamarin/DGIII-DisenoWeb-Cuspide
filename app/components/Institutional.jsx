@@ -5,81 +5,59 @@ import Reveal from "./Reveal";
 const stats = [
   {
     icon: Mountain,
-    variant: "dark",
     value: "UIAGM",
     valueSize: "text-xl",
     label: (
       <>
         Certificación internacional{" "}
-        <span className="text-glacier">IFMGA</span>
+        <span className="text-violet-light">IFMGA</span>
       </>
     ),
   },
   {
     icon: Mountain,
-    variant: "blue",
     value: "240+",
     valueSize: "text-3xl",
     label: "Expediciones realizadas",
   },
   {
     icon: Clock,
-    variant: "light",
     value: "18",
     valueSize: "text-3xl",
     label: "Años de experiencia",
   },
   {
     icon: CirclePlus,
-    variant: "light",
     value: "WFR",
     valueSize: "text-xl",
     label: "Wilderness First Responder",
   },
   {
     icon: Users,
-    variant: "purple",
     value: "1:4",
     valueSize: "text-3xl",
     label: "Ratio máximo guía / cliente",
   },
   {
     icon: ShieldCheck,
-    variant: "light",
     value: "Seguridad como cultura",
     valueSize: "text-base",
     label: "Protocolos propios en cada salida",
   },
 ];
 
-const variantClasses = {
-  dark: "bg-ink text-bone",
-  blue: "bg-gradient-to-br from-violet to-[#18102b] text-bone",
-  purple: "bg-gradient-to-br from-violet-light to-violet text-bone",
-  light: "border border-stone/15 bg-white text-ink",
-};
-
-const iconVariantClasses = {
-  dark: "text-glacier",
-  blue: "text-bone",
-  purple: "text-bone",
-  light: "text-violet",
-};
-
 export default function Institutional() {
   return (
-    <section className="border-t border-stone/15 bg-bone px-6 py-20 md:px-10 md:py-28 lg:px-16">
+    <section className="border-t border-stone/15 px-6 py-20 md:px-10 md:py-28 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
             La institución
           </p>
-          <h2 className="mt-4 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-display text-3xl uppercase leading-[0.95] text-violet-dark sm:text-4xl md:text-5xl">
             Una formación.
             <br />
-            <span className="bg-gradient-to-r text-gradient-purple">
-              No una agencia.
-            </span>
+            No una agencia.
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-stone">
             Cúspide nace de guías de montaña, no de operadores turísticos.
@@ -88,9 +66,11 @@ export default function Institutional() {
         </Reveal>
 
         {/* Foto + stats */}
-        <Reveal delay={80}>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:grid-rows-2">
-            <div className="relative col-span-1 row-span-2 min-h-[280px] overflow-hidden sm:min-h-0">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:grid-rows-2">
+
+          {/* Foto — ocupa 2 filas */}
+          <Reveal delay={60} className="col-span-1 row-span-2">
+            <div className="relative h-full min-h-70 overflow-hidden rounded-2xl sm:min-h-0">
               <Image
                 src="/images/rock-face.png"
                 alt="Guía de Cúspide escalando una pared de roca con vista a la cordillera"
@@ -98,56 +78,48 @@ export default function Institutional() {
                 sizes="(min-width: 640px) 40vw, 100vw"
                 className="object-cover object-[18%_38%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-bl from-ink/80 via-ink/10 to-transparent" />
-              <div className="absolute right-6 top-6 text-right">
-                <p className="flex items-center justify-end gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-bone/75">
-                  <MapPin className="h-3.5 w-3.5 text-bone/75" strokeWidth={1.6} />
+              <div className="absolute inset-0 bg-linear-to-tr from-ink/75 via-ink/15 to-ink/50" />
+
+              {/* Top-right: ubicación + nombre */}
+              <div className="absolute right-5 top-5 text-right">
+                <p className="flex items-center justify-end gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-bone/65">
+                  <MapPin className="h-3 w-3 text-bone/65" strokeWidth={1.6} />
                   Cordón Marconi
                 </p>
-                <p className="mt-1 font-display text-xl uppercase text-bone">
-                  Patagonia Argentina
-                </p>
-                <span className="ml-auto mt-3 block h-px w-32 bg-bone/30" />
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-glacier">
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.08em] text-bone/40">
                   48°12′03″S / 72°45′12″W
+                </p>
+                <p className="mt-2 font-display text-sm uppercase leading-[0.95] text-bone/75 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:text-base">
+                  Patagonia
+                  <br />
+                  Argentina
                 </p>
               </div>
             </div>
+          </Reveal>
 
-            {stats.map((stat) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={stat.value}
-                  className={`flex flex-col justify-between gap-6 rounded-2xl p-6 ${variantClasses[stat.variant]}`}
-                >
-                  <Icon className={`h-6 w-6 ${iconVariantClasses[stat.variant]}`} strokeWidth={1.4} />
+          {/* Stat cards — animación escalonada */}
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <Reveal key={stat.value} delay={100 + i * 70}>
+                <div className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-stone/10 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_6px_28px_rgba(5,205,194,0.14)]">
+                  <Icon className="h-6 w-6 text-stone/40" strokeWidth={1.4} />
                   <div>
-                    <p className={`font-display uppercase ${stat.valueSize}`}>
+                    <p className={`font-display uppercase text-ink ${stat.valueSize}`}>
                       {stat.value}
                     </p>
-                    <p className="mt-1 text-xs leading-relaxed opacity-70">
+                    <p className="mt-1 text-xs leading-relaxed text-stone">
                       {stat.label}
                     </p>
-                    <span className="mt-4 block h-0.5 w-6 bg-violet" />
+                    <span className="mt-4 block h-0.5 w-6 bg-violet-light" />
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </Reveal>
+              </Reveal>
+            );
+          })}
+        </div>
 
-        <Reveal delay={200}>
-          <a
-            href="#equipo-tecnico"
-            className="group mt-10 inline-flex items-center gap-4 bg-ink px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-bone transition hover:bg-violet"
-          >
-            Conocé a los guías
-            <span className="text-glacier/60 transition group-hover:text-glacier">
-              →
-            </span>
-          </a>
-        </Reveal>
       </div>
     </section>
   );

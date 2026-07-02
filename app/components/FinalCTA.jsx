@@ -25,17 +25,6 @@ const features = [
     ),
   },
   {
-    title: "Información clara\ny transparente",
-    detail: "Todos los detalles que necesitás, antes de decidir.",
-    icon: (
-      <>
-        <rect x="4" y="14" width="3.5" height="6" rx="0.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="10.25" y="10" width="3.5" height="10" rx="0.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="16.5" y="6" width="3.5" height="14" rx="0.5" strokeLinecap="round" strokeLinejoin="round" />
-      </>
-    ),
-  },
-  {
     title: "Acompañamiento\nconstante",
     detail: "Desde la planificación hasta el regreso.",
     icon: (
@@ -51,9 +40,9 @@ const features = [
 
 export default function FinalCTA() {
   return (
-    <section className="px-4 py-16 sm:px-6 lg:px-10">
+    <section className="py-16 pr-4 sm:pr-6 lg:pr-10">
       <Reveal>
-        <div className="relative overflow-hidden rounded-2xl">
+        <div className="relative overflow-hidden rounded-r-2xl">
           {/* Foto de fondo */}
           <Image
             src="/images/summit-clouds.jpg"
@@ -64,21 +53,21 @@ export default function FinalCTA() {
           />
 
           {/* Overlay: oscuro a izquierda, transparente a derecha */}
-          <div className="absolute inset-0 bg-gradient-to-r from-ink from-[30%] via-ink/80 via-[55%] to-ink/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-ink from-[30%] via-ink/80 via-[55%] to-ink/25" />
+          <div className="absolute inset-0 bg-linear-to-t from-ink/40 to-transparent" />
 
           {/* Contenido */}
           <div className="relative z-10 flex flex-col gap-8 px-8 py-10 lg:flex-row lg:items-center lg:gap-0 lg:px-12 lg:py-12">
 
             {/* Izquierda: texto */}
             <div className="shrink-0 lg:min-w-[280px] lg:max-w-sm lg:pr-10">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-glacier">
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-light">
                 Hablemos de tu próxima expedición
               </p>
-              <span className="mt-2 block h-px w-8 bg-violet" />
+              <span className="mt-2 block h-px w-8 bg-violet-light" />
               <h2 className="mt-4 font-display text-2xl uppercase leading-[0.95] text-bone lg:text-[1.75rem]">
                 ¿Listo para tu{" "}
-                <span className="bg-gradient-to-r text-gradient-purple">
+                <span className="bg-gradient-to-r text-gradient-cool">
                   próxima cumbre?
                 </span>
               </h2>
@@ -102,7 +91,7 @@ export default function FinalCTA() {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.3"
-                    className="h-5 w-5 text-glacier"
+                    className="h-5 w-5 text-teal"
                   >
                     {item.icon}
                   </svg>
@@ -120,7 +109,7 @@ export default function FinalCTA() {
             <div className="shrink-0 lg:pl-8">
               <Link
                 href="#contacto"
-                className="group inline-flex items-center gap-3 bg-violet px-7 py-4 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-violet-light"
+                className="group inline-flex items-center gap-3 bg-violet px-7 py-4 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
               >
                 Contactanos
                 <span className="transition group-hover:translate-x-1">→</span>

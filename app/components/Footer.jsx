@@ -45,8 +45,8 @@ export default function Footer() {
           {/* Left: Logo + tagline */}
           <div className="flex items-center gap-4 py-8 pr-10 border-r border-bone/10">
             <svg viewBox="0 0 40 36" fill="none" className="h-9 w-9 shrink-0" aria-hidden="true">
-              <polygon points="20,2 38,34 2,34" stroke="#6B63E8" strokeWidth="2.2" fill="none" />
-              <polygon points="20,12 30,30 10,30" stroke="#6B63E8" strokeWidth="2.2" fill="none" />
+              <polygon points="20,2 38,34 2,34" stroke="#05CDC2" strokeWidth="2.2" fill="none" />
+              <polygon points="20,12 30,30 10,30" stroke="#05CDC2" strokeWidth="2.2" fill="none" />
             </svg>
             <div className="h-9 w-px bg-bone/20 mx-1" />
             <span className="font-display text-xl font-bold uppercase tracking-widest text-bone">
@@ -56,7 +56,7 @@ export default function Footer() {
             <p className="ml-6 text-xs leading-relaxed text-bone/70 whitespace-nowrap">
               No te llevamos a la montaña.<br />
               Te preparamos para{" "}
-              <a href="#" className="text-[#6B63E8] hover:underline">merecerla</a>.
+              <a href="#" className="text-violet-light hover:underline">merecerla</a>.
             </p>
           </div>
 

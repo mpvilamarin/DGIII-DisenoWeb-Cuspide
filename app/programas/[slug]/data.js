@@ -10,6 +10,14 @@ export const programs = [
     image: "/images/pinnacle-back.jpg",
     altImage: "/images/fitzroy-approach.jpg",
 
+    waypoints: [
+      { nombre: "El Chaltén", altitud: 400, tipo: "salida" },
+      { nombre: "Camp. Polacos", altitud: 800, tipo: "campamento" },
+      { nombre: "Col Superior", altitud: 1800, tipo: "campamento" },
+      { nombre: "Supercanaleta", altitud: 2800, tipo: "riesgo" },
+      { nombre: "Cumbre", altitud: 3405, tipo: "cumbre" },
+    ],
+
     ficha: [
       { label: "Dificultad", value: "D — Difficile" },
       { label: "Altitud máxima", value: "3.405 m s.n.m." },
@@ -175,6 +183,13 @@ export const programs = [
     image: "/images/ice-couloir.jpg",
     altImage: "/images/rope-team.jpg",
 
+    waypoints: [
+      { nombre: "El Calafate", altitud: 200, tipo: "salida" },
+      { nombre: "Ingreso Glaciar", altitud: 600, tipo: "campamento" },
+      { nombre: "Zona Crevasses", altitud: 1000, tipo: "riesgo" },
+      { nombre: "Punto Máximo", altitud: 1200, tipo: "cumbre" },
+    ],
+
     ficha: [
       { label: "Dificultad", value: "AD — Assez Difficile" },
       { label: "Altitud máxima", value: "1.200 m s.n.m." },
@@ -309,6 +324,14 @@ export const programs = [
     tagline: "El grito de piedra. La línea donde termina la preparación y empieza el alpinismo de élite.",
     image: "/images/rock-face.png",
     altImage: "/images/ice-couloir.jpg",
+
+    waypoints: [
+      { nombre: "El Chaltén", altitud: 400, tipo: "salida" },
+      { nombre: "Camp. Torres", altitud: 900, tipo: "campamento" },
+      { nombre: "Col Reconocimiento", altitud: 1400, tipo: "campamento" },
+      { nombre: "Ruta Ragni", altitud: 3000, tipo: "riesgo" },
+      { nombre: "Cumbre", altitud: 3128, tipo: "cumbre" },
+    ],
 
     ficha: [
       { label: "Dificultad", value: "D+ — Très Difficile" },
@@ -463,6 +486,13 @@ export const programs = [
     tagline: "El primer paso en la montaña real. Sin atajos, sin simulaciones.",
     image: "/images/rope-team.jpg",
     altImage: "/images/ridge-walk.jpg",
+
+    waypoints: [
+      { nombre: "El Chaltén", altitud: 400, tipo: "salida" },
+      { nombre: "Camp. Base", altitud: 600, tipo: "campamento" },
+      { nombre: "Glaciar Inferior", altitud: 1000, tipo: "campamento" },
+      { nombre: "Cordón Marconi", altitud: 1800, tipo: "cumbre" },
+    ],
 
     ficha: [
       { label: "Dificultad", value: "PD — Peu Difficile" },

@@ -9,9 +9,14 @@
   --color-stone-light: #8a8c91;
   --color-bone: #f7f8fc;
 
-  --color-violet: #9D4EDD;
-  --color-violet-light: #3C096C;
-  --color-glacier: #F0E100;
+  /* Sistema de dos colores vibrantes */
+  --color-teal: #05CDC2;          /* turquesa — acento interactivo (solo sobre fondos oscuros) */
+  --color-teal-dark: #0F6E56;     /* turquesa oscuro — texto sobre fondo claro */
+  --color-violet: #5B3894;        /* violeta — superficies/badges acotados */
+  --color-violet-light: #7A52B8;  /* violeta claro */
+  --color-violet-dark: #3C2568;   /* violeta oscuro — texto sobre fondo claro */
+  --color-risk: #E24B4A;          /* rojo — exclusivo para peligro/protocolo */
+  --accent: var(--color-violet);
 
   --font-display: "normalidad-ultraextended", sans-serif;
 }
@@ -23,16 +28,19 @@
   --color-stone: var(--color-stone);
   --color-stone-light: var(--color-stone-light);
   --color-bone: var(--color-bone);
+  --color-teal: var(--color-teal);
+  --color-teal-dark: var(--color-teal-dark);
   --color-violet: var(--color-violet);
   --color-violet-light: var(--color-violet-light);
-  --color-glacier: var(--color-glacier);
+  --color-violet-dark: var(--color-violet-dark);
+  --color-risk: var(--color-risk);
   --font-display: var(--font-display);
   --font-sans: var(--font-body);
   --font-mono: var(--font-technical);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--color-bone);
   color: var(--foreground);
 }
 
@@ -40,8 +48,9 @@ body {
   text-wrap: balance;
 }
 
-.text-gradient-purple {
-  background: linear-gradient(to right, #3C096C, #5A189A, #7B2CBF, #9D4EDD);
+/* Degradado de marca: violeta → azul glacial, izquierda a derecha */
+.text-gradient-cool {
+  background: linear-gradient(to right, var(--color-violet-light), var(--color-teal));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -73,6 +82,25 @@ body {
 
 .blob {
   border-radius: 63% 37% 54% 46% / 43% 47% 53% 57%;
+}
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.animate-blink-dot {
+  animation: blink-dot 2.5s ease-in-out infinite;
+}
+
+.map-grid {
+  background-image:
+    linear-gradient(rgba(5, 205, 194, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 205, 194, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(5, 205, 194, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 205, 194, 0.05) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px, 96px 96px, 96px 96px;
+  background-position: -1px -1px;
 }
 
 .font-display {
