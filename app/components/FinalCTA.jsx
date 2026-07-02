@@ -80,11 +80,11 @@ export default function FinalCTA() {
             <span className="hidden h-20 w-px shrink-0 bg-bone/20 lg:block" />
 
             {/* Features */}
-            <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:flex-1 lg:gap-0 lg:divide-x lg:divide-bone/20">
+            <div className="flex min-w-0 flex-col gap-3 sm:gap-4 lg:flex-row lg:flex-1 lg:gap-0 lg:divide-x lg:divide-bone/20">
               {features.map((item) => (
                 <div
                   key={item.title}
-                  className="flex items-center gap-3 text-left lg:flex-col lg:items-start lg:gap-2 lg:px-6 lg:first:pl-8"
+                  className="flex min-w-0 items-center gap-3 text-left lg:flex-col lg:items-start lg:gap-2 lg:px-6 lg:first:pl-8"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -95,8 +95,8 @@ export default function FinalCTA() {
                   >
                     {item.icon}
                   </svg>
-                  <div>
-                    <p className="whitespace-nowrap font-mono text-xs font-semibold uppercase leading-snug tracking-[0.12em] text-bone">
+                  <div className="min-w-0">
+                    <p className="font-mono text-xs font-semibold uppercase leading-snug tracking-[0.12em] text-bone">
                       {item.title}
                     </p>
                     <p className="mt-0.5 font-mono text-[11px] leading-snug text-bone/55">

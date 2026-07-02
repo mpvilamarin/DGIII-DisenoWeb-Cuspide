@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import Parallax from "./Parallax";
 
 const stages = [
   {
@@ -88,15 +89,17 @@ export default function GuideSchool() {
               }`}
             >
               {/* Imagen */}
-              <Image
-                src={stage.image}
-                alt={stage.title}
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className={`object-cover transition-all duration-500 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 group-hover:scale-105 ${
-                  isActive ? "grayscale-0 brightness-90 scale-105" : ""
-                }`}
-              />
+              <Parallax strength={0.06}>
+                <Image
+                  src={stage.image}
+                  alt={stage.title}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className={`object-cover transition-all duration-500 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 group-hover:scale-105 ${
+                    isActive ? "grayscale-0 brightness-90 scale-105" : ""
+                  }`}
+                />
+              </Parallax>
 
               {/* Overlay base — siempre oscuro */}
               <div className="absolute inset-0 bg-ink/40" />

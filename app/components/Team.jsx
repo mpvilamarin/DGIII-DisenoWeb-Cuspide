@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import Parallax from "./Parallax";
 
 const team = [
   {
@@ -68,33 +69,38 @@ export default function Team() {
           </h2>
         </Reveal>
 
-        <Reveal delay={100}>
-          <div className="mt-10 flex h-[75vh] min-h-160 flex-col gap-2 sm:h-[68vh] sm:min-h-120 sm:flex-row md:gap-3">
-            {team.map((member, i) => {
-              const isActive = active === i;
-              const [firstName, ...lastNameParts] = member.name.split(" ");
-              const lastName = lastNameParts.join(" ");
+        <div className="mt-10 flex h-[75vh] min-h-160 flex-col gap-2 sm:h-[68vh] sm:min-h-120 sm:flex-row md:gap-3">
+          {team.map((member, i) => {
+            const isActive = active === i;
+            const [firstName, ...lastNameParts] = member.name.split(" ");
+            const lastName = lastNameParts.join(" ");
 
-              return (
+            return (
+              <Reveal
+                key={member.name}
+                delay={100 + i * 90}
+                className={`transition-all duration-500 ease-in-out ${
+                  isActive ? "flex-[4.4]" : "flex-[1]"
+                }`}
+              >
                 <div
-                  key={member.name}
                   onMouseEnter={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`group relative cursor-pointer overflow-hidden border border-bone/60 bg-ink transition-all duration-500 ease-in-out ${
-                    isActive ? "flex-[4.4]" : "flex-[1]"
-                  }`}
+                  className="group relative h-full cursor-pointer overflow-hidden border border-bone/60 bg-ink"
                 >
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    sizes="(min-width: 1024px) 45vw, 90vw"
-                    className={`object-cover object-[center_15%] transition-all duration-700 ${
-                      isActive
-                        ? "scale-100 grayscale-0"
-                        : "scale-105 grayscale brightness-[0.52]"
-                    }`}
-                  />
+                  <Parallax strength={0.08}>
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      sizes="(min-width: 1024px) 45vw, 90vw"
+                      className={`object-cover object-[center_15%] transition-all duration-700 ${
+                        isActive
+                          ? "scale-100 grayscale-0"
+                          : "scale-105 grayscale brightness-[0.52]"
+                      }`}
+                    />
+                  </Parallax>
 
                   <div
                     className={`absolute inset-0 transition-all duration-500 ${
@@ -177,10 +183,10 @@ export default function Team() {
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </Reveal>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Mountain, Clock, CirclePlus, Users, ShieldCheck, MapPin } from "lucide-react";
 import Reveal from "./Reveal";
+import Parallax from "./Parallax";
 
 const stats = [
   {
@@ -71,13 +72,15 @@ export default function Institutional() {
           {/* Foto — ocupa 2 filas */}
           <Reveal delay={60} className="col-span-2 sm:col-span-1 sm:row-span-2">
             <div className="relative h-full min-h-70 overflow-hidden rounded-2xl sm:min-h-0">
-              <Image
-                src="/images/rock-face.png"
-                alt="Guía de Cúspide escalando una pared de roca con vista a la cordillera"
-                fill
-                sizes="(min-width: 640px) 40vw, 100vw"
-                className="object-cover object-[18%_38%]"
-              />
+              <Parallax>
+                <Image
+                  src="/images/rock-face.png"
+                  alt="Guía de Cúspide escalando una pared de roca con vista a la cordillera"
+                  fill
+                  sizes="(min-width: 640px) 40vw, 100vw"
+                  className="object-cover object-[18%_38%]"
+                />
+              </Parallax>
               <div className="absolute inset-0 bg-linear-to-tr from-ink/75 via-ink/15 to-ink/50" />
 
               {/* Top-right: ubicación + nombre */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 import Reveal from "../../components/Reveal";
 
@@ -10,24 +11,28 @@ const REVIEWS = [
     time: "hace 1 semana",
     rating: 5,
     text: "La preparación previa fue increíblemente detallada. Llegué al glaciar sabiendo exactamente qué esperar y con el equipo justo. Los guías inspiran una confianza total.",
+    photo: "/detail/martina-rios.jpg",
   },
   {
     name: "Diego Salas",
     time: "hace 10 días",
     rating: 5,
     text: "Ya hice dos expediciones con Cúspide y ambas superaron mis expectativas. El ratio guía/cliente se nota en cada decisión que toman en el terreno.",
+    photo: "/detail/diego-salas.jpg",
   },
   {
     name: "Julieta Corvo",
     time: "hace 3 semanas",
     rating: 4,
     text: "Experiencia exigente pero muy bien acompañada. El proceso de postulación filtra en serio, así que llegás sabiendo que el grupo está a la altura.",
+    photo: "/detail/julieta corvo.jpg",
   },
   {
     name: "Fede Almada",
     time: "hace 1 mes",
     rating: 5,
     text: "El nivel de detalle en los protocolos de seguridad me hizo sentir tranquilo incluso en el tramo más técnico. Volvería a elegirlos sin dudar.",
+    photo: "/detail/fede-almada.jpg",
   },
 ];
 
@@ -84,8 +89,8 @@ export default function Reviews() {
               <span className="font-display text-6xl leading-none text-violet/15">
                 &ldquo;
               </span>
-              <p className="mt-1 font-display text-xl uppercase leading-tight text-ink">
-                Lo que dicen nuestros expedicionarios
+              <p className="mt-1 font-display text-lg uppercase leading-tight text-ink">
+                Lo que dicen nuestros excursionistas
               </p>
               <div className="mt-7 flex items-center justify-center gap-3 lg:justify-start">
                 <button
@@ -129,8 +134,14 @@ export default function Reviews() {
 
                   {/* Avatar debajo, sin superponerse a la burbuja */}
                   <div className="relative z-10 mt-4 flex items-center gap-3 pl-9">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet/10 font-mono text-xs font-bold text-violet-dark ring-2 ring-bone">
-                      {r.name.charAt(0)}
+                    <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-bone">
+                      <Image
+                        src={r.photo}
+                        alt={r.name}
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                      />
                     </span>
                     <div>
                       <p className="text-xs font-semibold text-ink">{r.name}</p>
