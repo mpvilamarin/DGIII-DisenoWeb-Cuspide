@@ -49,7 +49,7 @@ export default function Team() {
   return (
     <section
       id="equipo-tecnico"
-      className="border-t border-stone/15 py-24 md:py-32"
+      className="border-t border-stone/15 py-24 md:py-20"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>

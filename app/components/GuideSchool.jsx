@@ -39,6 +39,8 @@ const stages = [
   },
 ];
 
+const maxStageHeight = stages[stages.length - 1].height;
+
 export default function GuideSchool() {
   const [active, setActive] = useState(null);
 
@@ -77,10 +79,11 @@ export default function GuideSchool() {
               key={stage.num}
               style={{
                 "--stage-h": stage.height,
-                ...(isActive ? { height: "calc(var(--stage-h) + 140px)" } : {}),
+                "--max-h": maxStageHeight,
+                ...(isActive ? { height: "var(--max-h)" } : {}),
               }}
               onClick={() => setActive(isActive ? null : i)}
-              className={`group relative cursor-pointer overflow-hidden transition-[flex-grow,height] duration-300 ease-out sm:h-(--stage-h) sm:flex-1 sm:hover:h-[calc(var(--stage-h)+80px)] ${
+              className={`group relative cursor-pointer overflow-hidden transition-[flex-grow,height] duration-300 ease-out sm:h-(--stage-h) sm:flex-1 sm:hover:h-(--max-h) ${
                 isActive ? "flex-[3]" : "flex-1"
               }`}
             >
