@@ -45,24 +45,24 @@ export default function Footer() {
       <div className="mx-auto max-w-350 px-6 sm:px-8">
         <div className="flex flex-col border-b border-bone/10 sm:flex-row sm:items-stretch">
           {/* Left: Logo + tagline */}
-          <div className="flex items-center gap-4 py-8 sm:border-r sm:border-bone/10 sm:pr-10">
+          <div className="flex flex-col items-center gap-2 py-5 text-center sm:flex-row sm:gap-4 sm:border-r sm:border-bone/10 sm:py-8 sm:pr-10 sm:text-left">
             <Image
               src="/images/Logo blanco.png"
               alt="Cúspide"
               width={140}
               height={32}
-              className="h-8 w-auto shrink-0"
+              className="h-7 w-auto shrink-0 sm:h-8"
             />
-            <div className="h-9 w-px bg-bone/10 ml-6 shrink-0" />
-            <p className="ml-6 text-xs leading-relaxed text-bone/70">
+            <div className="hidden h-9 w-px bg-bone/10 ml-6 shrink-0 sm:block" />
+            <p className="text-xs leading-relaxed text-bone/70 sm:ml-6">
               No te llevamos a la montaña.<br />
               Te preparamos para{" "}
               <a href="#" className="text-violet-light hover:underline">merecerla</a>.
             </p>
           </div>
 
-          {/* Center: Nav links */}
-          <div className="flex flex-1 flex-wrap items-center gap-x-6 gap-y-3 pb-8 sm:justify-center sm:gap-8 sm:px-10 sm:py-0">
+          {/* Center: Nav links — oculto en mobile */}
+          <div className="hidden flex-1 flex-wrap items-center gap-x-6 gap-y-3 sm:flex sm:justify-center sm:gap-8 sm:px-10 sm:py-0">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col items-center gap-3 py-5 text-center text-xs text-bone/40 sm:flex-row sm:justify-between sm:py-3 sm:text-left">
+        <div className="flex flex-col items-center gap-2 py-4 text-center text-xs text-bone/40 sm:flex-row sm:justify-between sm:gap-3 sm:py-3 sm:text-left">
           <p>© {new Date().getFullYear()} Cúspide · Formación de montaña</p>
 
           <div className="flex items-center gap-2">

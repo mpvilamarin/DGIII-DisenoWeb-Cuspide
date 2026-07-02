@@ -71,17 +71,17 @@ export default function GearShowcase() {
   return (
     <section className="border-t border-stone/15 bg-bone px-6 py-14 md:px-10 md:py-20 lg:px-16">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
-        {/* Left: título, texto y lista interactiva */}
-        <div>
+        {/* Left: título, texto y lista interactiva — oculto en mobile, solo queda la foto */}
+        <div className="hidden text-center sm:block sm:text-left">
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark">
             Equipo técnico
           </p>
-          <span className="mt-3 block h-0.5 w-10 bg-violet" />
+          <span className="mx-auto mt-3 block h-0.5 w-10 bg-violet sm:mx-0" />
           <h2 className="mt-6 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
             Lo que llevás{" "}
             <span className="text-gradient-cool">puesto no es opcional.</span>
           </h2>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-stone">
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone sm:mx-0">
             Pasá el cursor o tocá cada ítem para ver el detalle del equipo
             técnico que se usa en esta expedición.
           </p>
@@ -130,92 +130,89 @@ export default function GearShowcase() {
               className="object-cover"
               priority={false}
             />
-          </div>
 
-          {/* Líneas guía — igual que en el gráfico de ascenso, siempre hacia el borde izquierdo */}
-          <svg
-            viewBox="0 0 100 133.33"
-            preserveAspectRatio="none"
-            className="pointer-events-none absolute inset-0 mx-auto h-full max-w-md lg:mx-0"
-          >
-            {GEAR.map((g) => {
-              if (g.id !== active) return null;
-              const y = (g.y / 100) * 133.33;
-              return (
-                <line
-                  key={g.id}
-                  x1={g.x}
-                  y1={y}
-                  x2={0}
-                  y2={y}
-                  stroke="rgba(247,248,252,0.8)"
-                  strokeWidth="0.35"
-                />
-              );
-            })}
-          </svg>
-
-          {/* Pines — mismo halo estático con blur que los puntos del gráfico de ascenso */}
-          <div className="pointer-events-none absolute inset-0 mx-auto max-w-md lg:mx-0">
-            {GEAR.map((g) => {
-              const isActive = active === g.id;
-              return (
-                <button
-                  key={g.id}
-                  type="button"
-                  aria-label={g.label}
-                  onMouseEnter={() => setHover(g.id)}
-                  onMouseLeave={() => clearHover(g.id)}
-                  onClick={() => toggle(g.id)}
-                  className="pointer-events-auto absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-                  style={{ left: `${g.x}%`, top: `${g.y}%` }}
-                >
-                  {!isActive && (
-                    <span
-                      className="pulse-halo absolute h-3.5 w-3.5 rounded-full bg-violet-light"
-                      style={{ filter: "blur(4px)" }}
-                    />
-                  )}
-                  <span
-                    className={`relative h-2.5 w-2.5 rounded-full border transition-all ${
-                      isActive
-                        ? "scale-125 border-bone bg-violet"
-                        : "border-bone/70 bg-violet-light"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Tarjeta flotante — siempre sale hacia la izquierda de la foto */}
-          {activeItem && (
-            <div
-              className="pointer-events-none absolute z-20 w-56 -translate-y-1/2 left-2 lg:left-0 lg:translate-x-[-112%]"
-              style={{ top: `${activeItem.y}%` }}
+            {/* Líneas guía — igual que en el gráfico de ascenso, siempre hacia el borde izquierdo */}
+            <svg
+              viewBox="0 0 100 133.33"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-0 h-full w-full"
             >
-              <div className="overflow-hidden rounded-lg border border-bone/15 bg-bone/95 shadow-xl backdrop-blur-sm">
-                <div className="h-20 w-full overflow-hidden bg-ink">
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      backgroundImage: "url(/detail/ropa01.png)",
-                      backgroundSize: `${activeItem.zoom}% auto`,
-                      backgroundPosition: `${activeItem.x}% ${activeItem.y}%`,
-                    }}
+              {GEAR.map((g) => {
+                if (g.id !== active) return null;
+                const y = (g.y / 100) * 133.33;
+                return (
+                  <line
+                    key={g.id}
+                    x1={g.x}
+                    y1={y}
+                    x2={0}
+                    y2={y}
+                    stroke="rgba(247,248,252,0.8)"
+                    strokeWidth="0.35"
                   />
-                </div>
-                <div className="p-3">
-                  <p className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-violet-dark">
-                    {activeItem.label}
-                  </p>
-                  <p className="mt-1.5 text-[11px] leading-relaxed text-stone">
-                    {activeItem.description}
-                  </p>
+                );
+              })}
+            </svg>
+
+            {/* Pines — punto igual al del gráfico de ascenso, con halo pulsante */}
+            <div className="pointer-events-none absolute inset-0">
+              {GEAR.map((g) => {
+                const isActive = active === g.id;
+                return (
+                  <button
+                    key={g.id}
+                    type="button"
+                    aria-label={g.label}
+                    onMouseEnter={() => setHover(g.id)}
+                    onMouseLeave={() => clearHover(g.id)}
+                    onClick={() => toggle(g.id)}
+                    className="pointer-events-auto absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+                    style={{ left: `${g.x}%`, top: `${g.y}%` }}
+                  >
+                    {!isActive && (
+                      <span className="pulse-halo absolute h-4 w-4 rounded-full border border-dashed border-violet" />
+                    )}
+                    <span
+                      className={`relative h-2.5 w-2.5 rounded-full border transition-all ${
+                        isActive
+                          ? "scale-125 border-bone bg-violet"
+                          : "border-bone/70 bg-violet-light"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Tarjeta flotante — siempre sobre la foto, pegada al costado izquierdo */}
+            {activeItem && (
+              <div
+                className="pointer-events-none absolute z-20 left-2 w-56 -translate-y-1/2"
+                style={{ top: `${activeItem.y}%` }}
+              >
+                <div className="overflow-hidden rounded-lg border border-bone/15 bg-bone/95 shadow-xl backdrop-blur-sm">
+                  <div className="h-20 w-full overflow-hidden bg-ink">
+                    <div
+                      className="h-full w-full"
+                      style={{
+                        backgroundImage: "url(/detail/ropa01.png)",
+                        backgroundSize: `${activeItem.zoom}% auto`,
+                        backgroundPosition: `${activeItem.x}% ${activeItem.y}%`,
+                      }}
+                    />
+                  </div>
+                  <div className="p-3">
+                    <p className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-violet-dark">
+                      {activeItem.label}
+                    </p>
+                    <p className="mt-1.5 text-[11px] leading-relaxed text-stone">
+                      {activeItem.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-stone-light lg:hidden">
             Tocá los puntos del equipo

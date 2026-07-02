@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const SVG_H = 240;
-const PAD_X = 56;
+const PAD_X_DESKTOP = 56;
+const PAD_X_MOBILE = 36;
 const PAD_Y = 28;
 const LABEL_H = 60; // reserved at bottom for day / altitude labels
 
@@ -14,11 +15,26 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
   const [pathLength, setPathLength] = useState(2000);
   const [progress, setProgress] = useState(0);
   const [active, setActive] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const photos = galeria.length ? galeria : [mainImage].filter(Boolean);
 
   // Wider canvas the more days there are, so the chart reads as a real elevation profile.
-  const SVG_W = Math.max(900, itinerario.length * 150);
+  // En mobile angostamos el lienzo para que entre sin scroll horizontal, cuidando
+  // no achatar tanto el ancho como para que la relación de aspecto se vuelva
+  // demasiado alta (lo que empujaría la tarjeta de hover contra el texto de arriba).
+  const SVG_W = isMobile
+    ? Math.max(500, itinerario.length * 110)
+    : Math.max(900, itinerario.length * 150);
+  const PAD_X = isMobile ? PAD_X_MOBILE : PAD_X_DESKTOP;
 
   const minAlt = Math.min(...itinerario.map((w) => w.altitudM));
   const maxAlt = Math.max(...itinerario.map((w) => w.altitudM));
@@ -93,27 +109,27 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
       className="flex min-h-[80vh] flex-col justify-center border-t border-stone/15 bg-bone px-6 py-10 md:px-10 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-3 sm:justify-start">
           <span className="block h-5 w-px bg-violet" />
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-dark">
             Ruta de ascenso
           </p>
         </div>
-        <h2 className="mt-3 font-display text-2xl uppercase text-ink sm:text-3xl">
+        <h2 className="mt-3 text-center font-display text-2xl uppercase text-ink sm:text-left sm:text-3xl">
           Perfil de la expedición
         </h2>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone">
+        <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-stone sm:mx-0 sm:text-left">
           Altitud día a día. Pasá el cursor sobre cada parada para ver el detalle de la jornada.
         </p>
 
         {/* El wrapper exterior no recorta nada (para que la tarjeta de hover nunca
             quede cortada); el scroll horizontal del gráfico vive solo en el div interno. */}
         <div className="relative mt-10 w-full">
-          <div className="overflow-x-auto">
+          <div className="sm:overflow-x-auto">
           <svg
             viewBox={`0 0 ${SVG_W} ${SVG_H}`}
             fill="none"
-            className="w-full min-w-180"
+            className="w-full sm:min-w-180"
             role="img"
             aria-label="Gráfico de altitud por día del itinerario"
           >
@@ -202,24 +218,34 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
                   className="cursor-pointer"
                 >
                   {/* Área de hit invisible, más generosa que el marcador visible */}
-                  <circle cx={pt.x} cy={pt.y} r="20" fill="transparent" />
+                  <circle cx={pt.x} cy={pt.y} r={isMobile ? 26 : 20} fill="transparent" />
 
-                  {/* Halo pulsante — sugiere que el punto es interactivo */}
+                  {/* Anillo punteado pulsante — señala que el punto es tocable */}
                   {!isActive && (
                     <circle
                       cx={pt.x}
                       cy={pt.y}
-                      r={isFirst || isLast ? 5 : 3.5}
-                      fill="#5B3894"
-                      filter="url(#point-glow)"
-                      className="pulse-halo pointer-events-none"
+                      r={(isFirst || isLast ? (isMobile ? 7 : 5) : isMobile ? 5.5 : 3.5) + 3}
+                      fill="none"
+                      stroke="#5B3894"
+                      strokeWidth="1"
+                      strokeDasharray="1.5 2.5"
+                      className="pulse-halo-svg pointer-events-none"
                     />
                   )}
 
                   <circle
                     cx={pt.x}
                     cy={pt.y}
-                    r={isActive ? (isFirst || isLast ? 7 : 5.5) : isFirst || isLast ? 5 : 3.5}
+                    r={
+                      isActive
+                        ? isFirst || isLast
+                          ? isMobile ? 9 : 7
+                          : isMobile ? 7.5 : 5.5
+                        : isFirst || isLast
+                          ? isMobile ? 7 : 5
+                          : isMobile ? 5.5 : 3.5
+                    }
                     fill={isActive || isFirst || isLast ? "#5B3894" : "#f7f8fc"}
                     stroke="#5B3894"
                     strokeWidth="1.5"
@@ -272,16 +298,21 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
           {/* Tarjeta con la jornada del día — aparece junto al punto activo */}
           {activePoint && (() => {
             // Flip below the point when it sits too high for the card to fit above it.
-            const below = activePoint.y / SVG_H < 0.4;
+            // En mobile el gráfico es más bajo, así que siempre mostramos la tarjeta abajo
+            // para no superponerla con el título de la sección.
+            const below = isMobile || activePoint.y / SVG_H < 0.4;
+            // Clamp horizontal anchor cerca de los bordes para que la tarjeta nunca quede cortada.
+            const xPct = activePoint.x / SVG_W;
+            const xAnchor = xPct < 0.22 ? "0%" : xPct > 0.78 ? "-100%" : "-50%";
             return (
               <div
-                className="pointer-events-none absolute z-20 w-60 border border-ink/10 bg-bone shadow-lg sm:w-72"
+                className="pointer-events-none absolute z-20 w-52 border border-ink/10 bg-bone shadow-lg sm:w-72"
                 style={{
-                  left: `${(activePoint.x / SVG_W) * 100}%`,
+                  left: `${xPct * 100}%`,
                   top: `${(activePoint.y / SVG_H) * 100}%`,
                   transform: below
-                    ? "translate(-50%, 0%) translateY(14px)"
-                    : "translate(-50%, -100%) translateY(-14px)",
+                    ? `translate(${xAnchor}, 0%) translateY(14px)`
+                    : `translate(${xAnchor}, -100%) translateY(-14px)`,
                 }}
               >
                 {photos.length > 0 && (
@@ -307,11 +338,15 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
                   </p>
                 </div>
                 <span
-                  className={
-                    below
-                      ? "absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-ink/10 bg-bone"
-                      : "absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-ink/10 bg-bone"
-                  }
+                  className={`absolute h-3 w-3 rotate-45 bg-bone ${
+                    below ? "-top-1.5 border-l border-t border-ink/10" : "-bottom-1.5 border-b border-r border-ink/10"
+                  } ${
+                    xAnchor === "0%"
+                      ? "left-5"
+                      : xAnchor === "-100%"
+                        ? "right-5"
+                        : "left-1/2 -translate-x-1/2"
+                  }`}
                 />
               </div>
             );

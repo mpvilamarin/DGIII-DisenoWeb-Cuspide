@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const links = [
-  { href: "/metodologia", label: "Metodología" },
-  { href: "/programas", label: "Programas" },
-  { href: "/protocolos", label: "Protocolos" },
-  { href: "/escuela-de-guias", label: "Escuela de Guías" },
+  { href: "/#metodologia", label: "Metodología" },
+  { href: "/#programas", label: "Programas" },
+  { href: "/#protocolos", label: "Protocolos" },
+  { href: "/#escuela-de-guias", label: "Escuela de Guías" },
 ];
 
 export default function Navbar() {

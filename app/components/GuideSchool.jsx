@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 
@@ -39,6 +40,8 @@ const stages = [
 ];
 
 export default function GuideSchool() {
+  const [active, setActive] = useState(null);
+
   return (
     <section id="escuela-de-guias" className="text-bone">
       {/* Header */}
@@ -65,63 +68,92 @@ export default function GuideSchool() {
         </div>
       </Reveal>
 
-      {/* Paneles en escalera — mismo ancho, suben al hover */}
-      <div className="flex items-end gap-[3px] px-6 pb-0 md:px-10 lg:px-16">
-        {stages.map((stage, i) => (
-          <div
-            key={stage.num}
-            style={{ height: stage.height }}
-            className="group relative flex-1 cursor-pointer overflow-hidden transition-transform duration-300 ease-out hover:-translate-y-3"
-          >
-            {/* Imagen */}
-            <Image
-              src={stage.image}
-              alt={stage.title}
-              fill
-              sizes="(min-width: 1024px) 25vw, 50vw"
-              className="object-cover transition-all duration-500 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 group-hover:scale-105"
-            />
+      {/* Mobile: acordeón vertical — Desktop: paneles en escalera */}
+      <div className="flex h-[65vh] min-h-140 flex-col gap-2 px-6 pb-10 sm:h-auto sm:min-h-0 sm:flex-row sm:items-end sm:gap-[3px] sm:pb-0 md:px-10 lg:px-16">
+        {stages.map((stage, i) => {
+          const isActive = active === i;
+          return (
+            <div
+              key={stage.num}
+              style={{
+                "--stage-h": stage.height,
+                ...(isActive ? { height: "calc(var(--stage-h) + 140px)" } : {}),
+              }}
+              onClick={() => setActive(isActive ? null : i)}
+              className="group relative flex-1 cursor-pointer overflow-hidden transition-[height] duration-300 ease-out sm:h-(--stage-h) sm:hover:h-[calc(var(--stage-h)+80px)]"
+            >
+              {/* Imagen */}
+              <Image
+                src={stage.image}
+                alt={stage.title}
+                fill
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                className={`object-cover transition-all duration-500 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 group-hover:scale-105 ${
+                  isActive ? "grayscale-0 brightness-90 scale-105" : ""
+                }`}
+              />
 
-            {/* Overlay base — siempre oscuro */}
-            <div className="absolute inset-0 bg-ink/40" />
-            {/* Overlay hover — gradiente fuerte para leer el texto */}
-            <div className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/50 to-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              {/* Overlay base — siempre oscuro */}
+              <div className="absolute inset-0 bg-ink/40" />
+              {/* Overlay hover — gradiente fuerte para leer el texto */}
+              <div
+                className={`absolute inset-0 bg-linear-to-t from-ink/90 via-ink/50 to-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                  isActive ? "opacity-100" : ""
+                }`}
+              />
 
-            {/* Número */}
-            <div className="absolute left-4 top-4 font-display text-4xl leading-none text-bone/35 transition-colors duration-300 group-hover:text-bone/20">
-              {stage.num}
+              {/* Número */}
+              <div
+                className={`absolute left-4 top-4 font-display text-2xl leading-none text-bone/35 transition-colors duration-300 group-hover:text-bone/20 sm:text-4xl ${
+                  isActive ? "text-bone/20" : ""
+                }`}
+              >
+                {stage.num}
+              </div>
+
+              {/* Línea izquierda */}
+              <span
+                className={`absolute left-0 top-0 h-full w-0.5 bg-violet-light opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                  isActive ? "opacity-100" : ""
+                }`}
+              />
+
+              {/* Título (estado normal): horizontal en mobile, vertical rotado en desktop */}
+              <div
+                className={`absolute inset-x-0 bottom-0 flex items-center justify-center px-4 py-3 transition-opacity duration-200 group-hover:opacity-0 sm:bottom-5 sm:py-0 ${
+                  isActive ? "opacity-0" : ""
+                }`}
+              >
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-bone/70 sm:rotate-180 sm:text-[9px] sm:tracking-[0.18em] sm:text-bone/60 sm:[writing-mode:vertical-rl]">
+                  {stage.title}
+                </p>
+              </div>
+
+              {/* Contenido expandido */}
+              <div
+                className={`absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
+                  isActive ? "translate-y-0 opacity-100" : ""
+                }`}
+              >
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-violet-light sm:text-[10px]">
+                  {stage.duration}
+                </p>
+                <h3 className="mt-1.5 font-display text-xl uppercase leading-[0.95] text-bone sm:text-lg">
+                  {stage.title}
+                </h3>
+                <span className="mt-2.5 block h-px w-7 bg-violet-light" />
+                <p className="mt-2.5 font-mono text-xs leading-relaxed text-bone/60 sm:text-[10px]">
+                  {stage.body}
+                </p>
+              </div>
             </div>
-
-            {/* Línea izquierda */}
-            <span className="absolute left-0 top-0 h-full w-0.5 bg-violet-light opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-            {/* Título vertical (estado normal) */}
-            <div className="absolute inset-x-0 bottom-5 flex justify-center transition-opacity duration-200 group-hover:opacity-0">
-              <p className="rotate-180 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-bone/60 [writing-mode:vertical-rl]">
-                {stage.title}
-              </p>
-            </div>
-
-            {/* Contenido expandido (hover) */}
-            <div className="absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-violet-light">
-                {stage.duration}
-              </p>
-              <h3 className="mt-1.5 font-display text-lg uppercase leading-[0.95] text-bone sm:text-xl">
-                {stage.title}
-              </h3>
-              <span className="mt-2.5 block h-px w-7 bg-violet-light" />
-              <p className="mt-2.5 font-mono text-[10px] leading-relaxed text-bone/60">
-                {stage.body}
-              </p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {/* Línea base */}
-      <div className="mx-6 border-t border-dashed border-violet/25 md:mx-10 lg:mx-16" />
-      <div className="flex gap-0.75 px-6 pb-10 md:px-10 lg:px-16">
+      {/* Línea base — solo desktop */}
+      <div className="mx-6 hidden border-t border-dashed border-violet/25 sm:block md:mx-10 lg:mx-16" />
+      <div className="hidden gap-0.75 px-6 pb-10 sm:flex md:px-10 lg:px-16">
         {stages.map((stage) => (
           <div key={stage.num} className="flex-1 pt-3">
             <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-bone/30">

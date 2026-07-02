@@ -57,7 +57,7 @@ export default function Methodology() {
   }, []);
 
   return (
-    <section id="metodologia" className="border-t border-stone/15 pt-20 md:pt-28">
+    <section id="metodologia" className="border-t border-stone/15 pt-8 sm:pt-20 md:pt-28">
       <div className="grid grid-cols-1 md:grid-cols-2 md:items-start">
         <div className="sticky top-[10vh] hidden h-[80vh] overflow-hidden md:block">
           <div className="relative h-full w-full">
@@ -76,7 +76,7 @@ export default function Methodology() {
           </div>
           <div className="absolute inset-0 bg-violet/10 mix-blend-multiply" />
 
-          <div className="absolute bottom-10 left-8 z-10 max-w-65 border border-violet/40 bg-ink/80 px-4 py-3 backdrop-blur-sm">
+          <div className="absolute bottom-10 left-8 z-10 max-w-65 rounded-lg border border-bone/10 bg-ink/10 px-4 py-3 backdrop-blur-md">
             <p className="font-mono text-[10px] uppercase tracking-widest text-violet-light">
               {String(active + 1).padStart(2, "0")} / {steps[active].period}
             </p>
@@ -86,7 +86,7 @@ export default function Methodology() {
           </div>
         </div>
 
-        <div className="px-6 pt-28 pb-16 md:px-10 md:pt-36 md:pb-24 lg:pl-16">
+        <div className="px-6 pt-8 pb-16 sm:pt-28 md:px-10 md:pt-36 md:pb-24 lg:pl-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.2em] text-violet">
               Metodología de preparación

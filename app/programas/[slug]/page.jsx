@@ -4,15 +4,15 @@ import { notFound } from "next/navigation";
 import {
   Calendar, Users, Mountain,
   User, Package, Wrench, Home, Radio, Shield,
-  MapPin, HeartPulse, Footprints, ClipboardCheck,
+  MapPin, HeartPulse, Footprints, ClipboardCheck, Mail, Phone, Info,
 } from "lucide-react";
 import Reveal from "../../components/Reveal";
 import TopoBackground from "../../components/TopoBackground";
 import PostulationForm from "./PostulationForm";
-import ProgramGallery from "./ProgramGallery";
 import { programs, getProgramBySlug } from "./data";
 import AscentRoute from "./AscentRoute";
 import GearShowcase from "./GearShowcase";
+import Reviews from "./Reviews";
 
 export function generateStaticParams() {
   return programs.map((p) => ({ slug: p.slug }));
@@ -74,7 +74,7 @@ export default async function ProgramaPage({ params }) {
       <TopoBackground />
 
       {/* ─── HERO ─── */}
-      <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-bone">
+      <section className="relative flex min-h-[80vh] flex-col overflow-hidden bg-ink text-bone sm:min-h-screen">
         <Image
           src={program.image}
           alt={`${program.name} — ${program.subtitle}`}
@@ -109,8 +109,8 @@ export default async function ProgramaPage({ params }) {
           </p>
         </div>
 
-        {/* Main content — vertically centered, left-aligned */}
-        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 pb-16 pt-24 md:px-10 lg:max-w-[60%] lg:px-16">
+        {/* Main content — vertically centered; centrado en mobile, alineado a la izquierda desde lg */}
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-16 pt-24 text-center md:px-10 lg:max-w-[60%] lg:items-start lg:px-16 lg:text-left">
           {/* Ubicación — reemplaza el badge de grado */}
           <div className="flex items-center gap-2">
             <MapPin className="h-3.5 w-3.5 text-teal" strokeWidth={1.6} />
@@ -148,22 +148,22 @@ export default async function ProgramaPage({ params }) {
         </div>
 
         {/* Stats bar — integrated at bottom of hero, contenida con margen */}
-        <div className="relative z-10 mx-6 mb-6 mt-auto rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xl md:mx-10 lg:mx-16">
+        <div className="relative z-10 mx-6 mb-4 mt-6 rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xl sm:mt-auto md:mx-10 md:mb-6 lg:mx-16">
           <div className="grid grid-cols-2 divide-x divide-bone/10 md:grid-cols-4">
             {statItems.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div key={i} className="flex flex-col items-center gap-1.5 px-3 py-4 text-center">
+                <div key={i} className="flex flex-col items-center gap-0.5 px-1.5 py-1.5 text-center sm:gap-1.5 sm:px-3 sm:py-4">
                   {Icon ? (
-                    <Icon className="h-3.5 w-3.5 text-teal" strokeWidth={1.4} />
+                    <Icon className="h-2.5 w-2.5 text-teal sm:h-3.5 sm:w-3.5" strokeWidth={1.4} />
                   ) : (
                     <DifficultyBars grade={program.grade} />
                   )}
-                  <p className="font-display text-base uppercase leading-none text-bone">
+                  <p className="font-display text-[11px] uppercase leading-none text-bone sm:text-base">
                     {stat.value}
                   </p>
                   <span className="h-px w-4 bg-bone/20" />
-                  <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-bone/40 leading-snug">
+                  <p className="font-mono text-[6px] uppercase tracking-[0.1em] text-bone/40 leading-snug sm:text-[8px] sm:tracking-[0.16em]">
                     {stat.label}
                   </p>
                 </div>
@@ -181,32 +181,34 @@ export default async function ProgramaPage({ params }) {
         <div className="grid grid-cols-1 gap-12 px-6 py-14 md:px-10 md:py-20 lg:grid-cols-2 lg:gap-16 lg:px-16">
           {/* Left: qué incluye */}
           <Reveal>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark">
+            <p className="text-center font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark sm:text-left">
               ¿Qué incluye?
             </p>
-            <span className="mt-3 block h-0.5 w-10 bg-violet" />
-            <h2 className="mt-6 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
+            <span className="mx-auto mt-3 block h-0.5 w-10 bg-violet sm:mx-0" />
+            <h2 className="mt-6 text-center font-display text-3xl uppercase leading-[0.95] text-ink sm:text-left sm:text-4xl">
               Todo lo que necesitás,{" "}
               <span className="text-gradient-cool">para llegar preparado.</span>
             </h2>
 
-            <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <div className="mt-9 grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-4">
               {program.incluye.map((item, i) => {
                 const Icon = ICON_MAP[item.icon] || Shield;
                 return (
                   <div
                     key={i}
-                    className="rounded-xl border border-stone/15 bg-white/70 p-5 text-center shadow-sm"
+                    className="flex items-center gap-3 rounded-xl border border-stone/15 bg-white/70 p-3 text-left shadow-sm sm:flex-col sm:gap-0 sm:p-5 sm:text-center"
                   >
-                    <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-violet/10">
-                      <Icon className="h-5 w-5 text-violet-dark" strokeWidth={1.6} />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet/10 sm:mx-auto sm:h-11 sm:w-11">
+                      <Icon className="h-4 w-4 text-violet-dark sm:h-5 sm:w-5" strokeWidth={1.6} />
                     </span>
-                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.04em] text-ink">
-                      {item.label}
-                    </p>
-                    <p className="mt-1 text-xs leading-snug text-stone-light">
-                      {item.sub}
-                    </p>
+                    <div className="sm:mt-3">
+                      <p className="text-xs font-bold uppercase tracking-[0.04em] text-ink">
+                        {item.label}
+                      </p>
+                      <p className="mt-0.5 text-xs leading-snug text-stone-light sm:mt-1">
+                        {item.sub}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
@@ -217,11 +219,11 @@ export default async function ProgramaPage({ params }) {
           {/* Right: requisitos */}
           <Reveal delay={80}>
             <div className="rounded-2xl border border-stone/15 bg-white/70 p-8 shadow-sm lg:p-10">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark">
+              <p className="text-center font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark sm:text-left">
                 Requisitos
               </p>
-              <span className="mt-3 block h-0.5 w-10 bg-violet" />
-              <h2 className="mt-6 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl">
+              <span className="mx-auto mt-3 block h-0.5 w-10 bg-violet sm:mx-0" />
+              <h2 className="mt-6 text-center font-display text-2xl uppercase leading-[0.95] text-ink sm:text-left sm:text-3xl">
                 Para tu seguridad,{" "}
                 <span className="text-gradient-cool">exigimos lo mejor.</span>
               </h2>
@@ -254,36 +256,24 @@ export default async function ProgramaPage({ params }) {
       {/* ─── EQUIPO TÉCNICO ─── */}
       <GearShowcase />
 
-      {/* ─── 4. GALERÍA ─── */}
-      <section className="bg-ink py-14 text-bone lg:py-20">
-        <div className="px-8 lg:px-14">
-          <Reveal>
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-light">
-                  La montaña
-                </p>
-                <h2 className="mt-3 font-display text-3xl uppercase text-bone sm:text-4xl">
-                  Imponente. Salvaje. Inolvidable.
-                </h2>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={80}>
-            <ProgramGallery images={program.galeria} />
-          </Reveal>
-        </div>
-      </section>
+      {/* ─── 4. RESEÑAS ─── */}
+      <Reviews />
 
       {/* ─── 5. CTA ─── */}
       <section className="py-10 pr-4 sm:pr-6 lg:pr-10">
         <div className="relative overflow-hidden rounded-r-2xl bg-violet-dark px-6 py-7 sm:px-9">
           <div className="map-grid pointer-events-none absolute inset-0" />
           <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bone/30">
-                <Mountain className="h-5 w-5 text-bone" strokeWidth={1.6} />
+            <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4 sm:text-left">
+              <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bone/30">
+                <span className="absolute inset-0 rounded-full border border-bone/30 animate-ping [animation-duration:2.5s]" />
+                <Image
+                  src="/images/Logo blanco.png"
+                  alt="Cúspide"
+                  width={24}
+                  height={24}
+                  className="relative h-5 w-5 object-contain"
+                />
               </span>
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
@@ -305,54 +295,86 @@ export default async function ProgramaPage({ params }) {
       </section>
 
       {/* ─── POSTULACIÓN ─── */}
-      <section
-        id="postulacion"
-        className="border-t border-stone/15 bg-ink px-6 py-20 text-bone md:px-10 md:py-28 lg:px-16"
-      >
+      <section id="postulacion" className="border-t border-stone/15 px-6 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
+            <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-violet-dark sm:text-left">
               Proceso de postulación
             </p>
-            <span className="mt-4 block h-0.5 w-12 bg-violet-light" />
-            <h2 className="mt-7 font-display text-3xl uppercase leading-[0.95] text-bone sm:text-4xl">
+            <span className="mx-auto mt-4 block h-0.5 w-12 bg-violet sm:mx-0" />
+            <h2 className="mt-7 text-center font-display text-3xl uppercase leading-[0.95] text-ink sm:text-left sm:text-4xl">
               Requisitos y{" "}
-              <span className="text-violet-light">postulación</span>
+              <span className="text-gradient-cool">postulación</span>
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr]">
-            <Reveal delay={60}>
-              <div>
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-bone/50">
-                  Requisitos para postular
+          {/* Tarjetas superpuestas: info de contacto + formulario */}
+          <Reveal delay={60}>
+            <div className="relative mt-14 lg:grid lg:grid-cols-[340px_1fr] lg:items-center">
+              <div className="relative z-0 rounded-2xl bg-violet-dark p-8 text-bone shadow-xl lg:mr-[-48px] lg:p-10">
+                {/* Info de requisitos — ícono con hover */}
+                <div className="group absolute left-5 top-5 z-20">
+                  <button
+                    type="button"
+                    aria-label="Ver requisitos para postular"
+                    className="flex h-7 w-7 items-center justify-center rounded-full border border-bone/30 text-bone/70 transition hover:border-bone hover:text-bone"
+                  >
+                    <Info className="h-3.5 w-3.5" strokeWidth={1.8} />
+                  </button>
+                  <div className="pointer-events-none absolute left-0 top-9 z-30 w-64 origin-top-left scale-95 opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100">
+                    <div className="rounded-lg border border-stone/10 bg-white p-4 shadow-xl">
+                      <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-violet-dark">
+                        Requisitos para postular
+                      </p>
+                      <ul className="mt-3 space-y-2.5">
+                        {program.postulacion.requisitos.map((req, i) => (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <span className="mt-0.5 shrink-0 font-mono text-[9px] font-bold text-violet-dark">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span className="text-[11px] leading-relaxed text-stone">
+                              {req}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="mt-10 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bone/50 sm:text-left">
+                  ¿Tenés dudas?
                 </p>
-                <span className="mt-3 block h-px w-8 bg-violet-light/40" />
-                <ul className="mt-7 space-y-5">
-                  {program.postulacion.requisitos.map((req, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border border-violet-light/40 font-mono text-[9px] text-violet-light/70">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <p className="font-mono text-xs leading-relaxed text-bone/70">{req}</p>
-                    </li>
-                  ))}
+                <h3 className="mt-2 text-center font-display text-xl uppercase leading-tight text-bone sm:text-left">
+                  Hablemos antes de postular.
+                </h3>
+                <ul className="mt-8 space-y-5">
+                  <li className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-teal" strokeWidth={1.6} />
+                    <span className="text-xs leading-relaxed text-bone/75">
+                      El Chaltén, Santa Cruz, Patagonia Argentina
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-teal" strokeWidth={1.6} />
+                    <span className="text-xs leading-relaxed text-bone/75">
+                      info@cuspide.com
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-teal" strokeWidth={1.6} />
+                    <span className="text-xs leading-relaxed text-bone/75">
+                      +54 9 2962 45-0000
+                    </span>
+                  </li>
                 </ul>
               </div>
-            </Reveal>
 
-            <Reveal delay={120}>
-              <div>
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-bone/50">
-                  Formulario de postulación
-                </p>
-                <span className="mt-3 block h-px w-8 bg-violet-light/40" />
-                <div className="mt-7">
-                  <PostulationForm programName={`${program.name} — ${program.subtitle}`} />
-                </div>
+              <div className="relative z-10 mt-6 lg:mt-0">
+                <PostulationForm programName={`${program.name} — ${program.subtitle}`} />
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -360,16 +382,18 @@ export default async function ProgramaPage({ params }) {
       <section className="border-t border-stone/15 bg-bone px-6 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
-              Programas relacionados
-            </p>
-            <span className="mt-4 block h-0.5 w-12 bg-violet-light" />
-            <h2 className="mt-7 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
-              Seguí{" "}
-              <span className="text-gradient-cool bg-linear-to-r">
-                sumando
-              </span>
-            </h2>
+            <div className="text-center sm:text-left">
+              <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
+                Programas relacionados
+              </p>
+              <span className="mx-auto mt-4 block h-0.5 w-12 bg-violet-light sm:mx-0" />
+              <h2 className="mt-7 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
+                Seguí{" "}
+                <span className="text-gradient-cool bg-linear-to-r">
+                  sumando
+                </span>
+              </h2>
+            </div>
           </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -377,7 +401,7 @@ export default async function ProgramaPage({ params }) {
               <Reveal key={rel.slug} delay={i * 80}>
                 <Link
                   href={`/programas/${rel.slug}`}
-                  className="group relative flex h-72 flex-col justify-between overflow-hidden p-8"
+                  className="group relative flex h-72 flex-col justify-between overflow-hidden rounded-2xl p-8"
                 >
                   <Image
                     src={rel.image}

@@ -72,24 +72,42 @@ body {
   transform: translateY(0);
 }
 
-/* Halo pulsante — puntos interactivos (gráfico de ascenso, equipo técnico) */
+/* Halo pulsante — puntos interactivos (gráfico de ascenso, equipo técnico).
+   Variante HTML: se autocentra porque el elemento no tiene posición propia.
+   Variante SVG: usa fill-box para escalar alrededor de su propio centro (cx/cy). */
 .pulse-halo {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pulse-halo 1s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation: pulse-halo-center 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
 }
 
-@keyframes pulse-halo {
+.pulse-halo-svg {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-halo-scale 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+@keyframes pulse-halo-center {
   0% {
-    transform: scale(0.9);
-    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.9;
   }
-  70% {
-    transform: scale(2.4);
+  70%,
+  100% {
+    transform: translate(-50%, -50%) scale(2.6);
     opacity: 0;
   }
+}
+
+@keyframes pulse-halo-scale {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  70%,
   100% {
-    transform: scale(2.4);
+    transform: scale(2.6);
     opacity: 0;
   }
 }

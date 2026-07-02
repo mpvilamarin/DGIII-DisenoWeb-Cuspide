@@ -46,7 +46,7 @@ export default function Quote() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-6 py-6 text-center md:px-10 md:py-20"
+      className="relative overflow-hidden px-2 py-10 text-center sm:py-20 md:px-6 md:py-6"
     >
       {/* Línea decorativa */}
       <span

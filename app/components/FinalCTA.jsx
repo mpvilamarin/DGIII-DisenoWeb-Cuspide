@@ -52,9 +52,9 @@ export default function FinalCTA() {
             className="object-cover object-[60%_40%]"
           />
 
-          {/* Overlay: oscuro a izquierda, transparente a derecha */}
-          <div className="absolute inset-0 bg-linear-to-r from-ink from-[30%] via-ink/80 via-[55%] to-ink/25" />
-          <div className="absolute inset-0 bg-linear-to-t from-ink/40 to-transparent" />
+          {/* Overlay: plano en mobile, degradado oscuro a izquierda en desktop */}
+          <div className="absolute inset-0 bg-ink/65 sm:bg-linear-to-r sm:from-ink sm:from-[30%] sm:via-ink/80 sm:via-[55%] sm:to-ink/25" />
+          <div className="absolute inset-0 hidden sm:block sm:bg-linear-to-t sm:from-ink/40 sm:to-transparent" />
 
           {/* Contenido */}
           <div className="relative z-10 flex flex-col gap-8 px-8 py-10 lg:flex-row lg:items-center lg:gap-0 lg:px-12 lg:py-12">
@@ -80,7 +80,7 @@ export default function FinalCTA() {
             <span className="hidden h-20 w-px shrink-0 bg-bone/20 lg:block" />
 
             {/* Features */}
-            <div className="grid grid-cols-2 gap-6 lg:flex lg:flex-1 lg:divide-x lg:divide-bone/20 lg:gap-0">
+            <div className="flex flex-col gap-6 lg:flex-row lg:flex-1 lg:divide-x lg:divide-bone/20 lg:gap-0">
               {features.map((item) => (
                 <div
                   key={item.title}
