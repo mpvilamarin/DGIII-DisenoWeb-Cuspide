@@ -29,7 +29,7 @@ export default function SafetyProtocols() {
 
       <div className="relative grid grid-cols-1 md:grid-cols-[1fr_4fr]">
         {/* Encabezado */}
-        <div className="flex flex-col justify-center border-b border-teal/15 px-6 py-12 md:border-b-0 md:border-r md:px-10 md:py-16 lg:px-16">
+        <div className="flex flex-col items-center justify-center border-b border-teal/15 px-6 py-12 text-center md:items-start md:border-b-0 md:border-r md:px-10 md:py-16 md:text-left lg:px-16">
           <Reveal>
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-teal/50">
               Protocolos de seguridad
@@ -52,7 +52,7 @@ export default function SafetyProtocols() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {pillars.map((pillar, i) => (
             <Reveal key={pillar.title} delay={i * 100} className="h-full">
-              <div className="group relative h-full overflow-hidden border-b border-bone/6 px-6 py-10 transition-colors duration-300 last:border-b-0 hover:bg-teal/[0.04] sm:border-r sm:border-b-0 sm:last:border-r-0 md:py-12">
+              <div className="group relative h-full overflow-hidden border-b border-bone/6 px-6 py-5 transition-colors duration-300 last:border-b-0 hover:bg-teal/[0.04] sm:border-r sm:border-b-0 sm:py-8 sm:last:border-r-0 md:py-12">
                 {/* Barra superior de acento */}
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-teal transition-transform duration-400 ease-out group-hover:scale-x-100" />
 
@@ -61,7 +61,7 @@ export default function SafetyProtocols() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <div className="relative mb-5 flex items-center justify-between">
+                <div className="relative mb-3 flex items-center justify-between sm:mb-5">
                   <span className="font-mono text-[10px] tracking-[0.1em] text-teal">
                     {String(i + 1).padStart(2, "0")}
                   </span>

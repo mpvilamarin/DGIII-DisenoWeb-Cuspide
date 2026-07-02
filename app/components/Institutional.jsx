@@ -6,7 +6,7 @@ const stats = [
   {
     icon: Mountain,
     value: "UIAGM",
-    valueSize: "text-xl",
+    valueSize: "text-base sm:text-xl",
     label: (
       <>
         Certificación internacional{" "}
@@ -17,31 +17,31 @@ const stats = [
   {
     icon: Mountain,
     value: "240+",
-    valueSize: "text-3xl",
+    valueSize: "text-xl sm:text-3xl",
     label: "Expediciones realizadas",
   },
   {
     icon: Clock,
     value: "18",
-    valueSize: "text-3xl",
+    valueSize: "text-xl sm:text-3xl",
     label: "Años de experiencia",
   },
   {
     icon: CirclePlus,
     value: "WFR",
-    valueSize: "text-xl",
+    valueSize: "text-base sm:text-xl",
     label: "Wilderness First Responder",
   },
   {
     icon: Users,
     value: "1:4",
-    valueSize: "text-3xl",
+    valueSize: "text-xl sm:text-3xl",
     label: "Ratio máximo guía / cliente",
   },
   {
     icon: ShieldCheck,
     value: "Seguridad como cultura",
-    valueSize: "text-base",
+    valueSize: "text-sm sm:text-base",
     label: "Protocolos propios en cada salida",
   },
 ];
@@ -51,25 +51,25 @@ export default function Institutional() {
     <section className="border-t border-stone/15 px-6 py-20 md:px-10 md:py-28 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-stone sm:text-left">
             La institución
           </p>
-          <h2 className="mt-4 font-display text-3xl uppercase leading-[0.95] text-violet-dark sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 text-center font-display text-3xl uppercase leading-[0.95] text-violet-dark sm:text-left sm:text-4xl md:text-5xl">
             Una formación.
             <br />
             No una agencia.
           </h2>
-          <p className="mt-5 text-sm leading-relaxed text-stone">
+          <p className="mt-5 text-center text-sm leading-relaxed text-stone sm:text-left">
             Cúspide nace de guías de montaña, no de operadores turísticos.
             Cada programa tiene la rigurosidad de una formación de rescate.
           </p>
         </Reveal>
 
         {/* Foto + stats */}
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:grid-rows-2">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-[1.5fr_1fr_1fr_1fr] sm:grid-rows-2 sm:gap-4">
 
           {/* Foto — ocupa 2 filas */}
-          <Reveal delay={60} className="col-span-1 row-span-2">
+          <Reveal delay={60} className="col-span-2 sm:col-span-1 sm:row-span-2">
             <div className="relative h-full min-h-70 overflow-hidden rounded-2xl sm:min-h-0">
               <Image
                 src="/images/rock-face.png"
@@ -103,16 +103,16 @@ export default function Institutional() {
             const Icon = stat.icon;
             return (
               <Reveal key={stat.value} delay={100 + i * 70}>
-                <div className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-stone/10 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_6px_28px_rgba(5,205,194,0.14)]">
-                  <Icon className="h-6 w-6 text-stone/40" strokeWidth={1.4} />
+                <div className="flex h-full flex-col justify-between gap-3 rounded-xl border border-stone/10 bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_6px_28px_rgba(5,205,194,0.14)] sm:gap-6 sm:rounded-2xl sm:p-6">
+                  <Icon className="h-5 w-5 text-stone/40 sm:h-6 sm:w-6" strokeWidth={1.4} />
                   <div>
                     <p className={`font-display uppercase text-ink ${stat.valueSize}`}>
                       {stat.value}
                     </p>
-                    <p className="mt-1 text-xs leading-relaxed text-stone">
+                    <p className="mt-1 text-[11px] leading-relaxed text-stone sm:text-xs">
                       {stat.label}
                     </p>
-                    <span className="mt-4 block h-0.5 w-6 bg-violet-light" />
+                    <span className="mt-3 block h-0.5 w-5 bg-violet-light sm:mt-4 sm:w-6" />
                   </div>
                 </div>
               </Reveal>

@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-const SVG_H = 300;
+const SVG_H = 240;
 const PAD_X = 56;
 const PAD_Y = 28;
 const LABEL_H = 60; // reserved at bottom for day / altitude labels
@@ -106,7 +106,10 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
           Altitud día a día. Pasá el cursor sobre cada parada para ver el detalle de la jornada.
         </p>
 
-        <div className="relative mt-10 w-full overflow-x-auto overflow-y-visible">
+        {/* El wrapper exterior no recorta nada (para que la tarjeta de hover nunca
+            quede cortada); el scroll horizontal del gráfico vive solo en el div interno. */}
+        <div className="relative mt-10 w-full">
+          <div className="overflow-x-auto">
           <svg
             viewBox={`0 0 ${SVG_W} ${SVG_H}`}
             fill="none"
@@ -116,13 +119,16 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
           >
             <defs>
               <linearGradient id="ascent-line" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="var(--color-teal-dark)" />
-                <stop offset="100%" stopColor="var(--color-violet)" />
+                <stop offset="0%" stopColor="var(--color-violet-dark)" />
+                <stop offset="100%" stopColor="var(--color-violet-light)" />
               </linearGradient>
               <linearGradient id="ascent-area" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="var(--color-violet)" stopOpacity="0.22" />
                 <stop offset="100%" stopColor="var(--color-violet)" stopOpacity="0" />
               </linearGradient>
+              <filter id="point-glow" x="-150%" y="-150%" width="400%" height="400%">
+                <feGaussianBlur stdDeviation="4" />
+              </filter>
             </defs>
 
             {/* Grid horizontal de altitud */}
@@ -198,6 +204,18 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
                   {/* Área de hit invisible, más generosa que el marcador visible */}
                   <circle cx={pt.x} cy={pt.y} r="20" fill="transparent" />
 
+                  {/* Halo pulsante — sugiere que el punto es interactivo */}
+                  {!isActive && (
+                    <circle
+                      cx={pt.x}
+                      cy={pt.y}
+                      r={isFirst || isLast ? 5 : 3.5}
+                      fill="#5B3894"
+                      filter="url(#point-glow)"
+                      className="pulse-halo pointer-events-none"
+                    />
+                  )}
+
                   <circle
                     cx={pt.x}
                     cy={pt.y}
@@ -249,6 +267,7 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
               );
             })}
           </svg>
+          </div>
 
           {/* Tarjeta con la jornada del día — aparece junto al punto activo */}
           {activePoint && (() => {

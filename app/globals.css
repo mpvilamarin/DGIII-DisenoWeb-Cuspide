@@ -72,6 +72,28 @@ body {
   transform: translateY(0);
 }
 
+/* Halo pulsante — puntos interactivos (gráfico de ascenso, equipo técnico) */
+.pulse-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-halo 1s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+@keyframes pulse-halo {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
 .diagonal-top {
   clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
 }

@@ -2,15 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  Gauge, Calendar, Users, Mountain,
-  User, Package, Wrench, Home, Radio, Shield, Mail,
-  MapPin, ChevronRight,
+  Calendar, Users, Mountain,
+  User, Package, Wrench, Home, Radio, Shield,
+  MapPin, HeartPulse, Footprints, ClipboardCheck,
 } from "lucide-react";
 import Reveal from "../../components/Reveal";
+import TopoBackground from "../../components/TopoBackground";
 import PostulationForm from "./PostulationForm";
 import ProgramGallery from "./ProgramGallery";
 import { programs, getProgramBySlug } from "./data";
 import AscentRoute from "./AscentRoute";
+import GearShowcase from "./GearShowcase";
 
 export function generateStaticParams() {
   return programs.map((p) => ({ slug: p.slug }));
@@ -27,6 +29,27 @@ export async function generateMetadata({ params }) {
 }
 
 const ICON_MAP = { User, Package, Wrench, Home, Radio, Shield };
+const REQ_ICONS = [HeartPulse, Footprints, Shield, ClipboardCheck];
+
+// Escala alpina francesa: F, PD, AD, D, TD, ED — se ignoran los +/- para el nivel de barras.
+const GRADE_LEVELS = { F: 1, PD: 2, AD: 3, D: 4, TD: 5, ED: 5 };
+const gradeLevel = (grade) => GRADE_LEVELS[grade.replace(/[+-]$/, "")] || 3;
+const BAR_HEIGHTS = [5, 7, 9, 11, 14];
+
+function DifficultyBars({ grade }) {
+  const level = gradeLevel(grade);
+  return (
+    <div className="flex items-end gap-0.75 h-3.5" aria-hidden="true">
+      {BAR_HEIGHTS.map((h, i) => (
+        <span
+          key={i}
+          className={`w-1 rounded-xs ${i < level ? "bg-teal" : "bg-bone/15"}`}
+          style={{ height: `${h}px` }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default async function ProgramaPage({ params }) {
   const { slug } = await params;
@@ -40,7 +63,7 @@ export default async function ProgramaPage({ params }) {
   const getFicha = (label) => program.ficha.find((f) => f.label === label)?.value ?? "—";
 
   const statItems = [
-    { icon: Gauge,    value: `Grado ${program.grade}`,                              label: "Dificultad" },
+    { icon: null,     value: `Grado ${program.grade}`,                              label: "Dificultad" },
     { icon: Calendar, value: getFicha("Días en terreno"),                           label: "Duración total" },
     { icon: Users,    value: getFicha("Ratio guía / cliente").replace(/\s/g, ""),   label: "Máximo guías / cliente" },
     { icon: Mountain, value: getFicha("Altitud máxima").replace(" s.n.m.", ""),     label: "Altitud máxima" },
@@ -48,6 +71,8 @@ export default async function ProgramaPage({ params }) {
 
   return (
     <>
+      <TopoBackground />
+
       {/* ─── HERO ─── */}
       <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-bone">
         <Image
@@ -59,58 +84,53 @@ export default async function ProgramaPage({ params }) {
           className="object-cover object-center"
         />
 
-        {/* Overlays: heavy left, fades right so photo shows */}
-        <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/80 to-ink/20" />
-        <div className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/20 to-transparent" />
+        {/* Overlays — mismo esquema que el Hero de la home */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 45%), " +
+              "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 40%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.6) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+          }}
+        />
         <div className="grain absolute inset-0 opacity-50" />
 
-        {/* Vertical brand tagline — right edge */}
+        {/* Vertical program name — right edge */}
         <div className="pointer-events-none absolute right-6 top-24 bottom-32 z-10 hidden items-center lg:right-10 lg:flex">
-          <p className="origin-center rotate-180 font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 [writing-mode:vertical-rl]">
-            No te llevamos a la montaña. Te preparamos para merecerla.
-          </p>
-        </div>
-
-        {/* Breadcrumb */}
-        <div className="relative z-10 flex items-center gap-2 px-6 pt-8 md:px-10 lg:px-16">
-          <Link
-            href="/programas"
-            className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/45 transition hover:text-bone/70"
-          >
-            Programas
-          </Link>
-          <ChevronRight className="h-3 w-3 text-bone/30" strokeWidth={1.5} />
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/45">
+          <p className="origin-center rotate-180 font-mono text-[20px] uppercase tracking-[0.3em] text-bone/40 [writing-mode:vertical-rl]">
             {program.name}
-          </span>
-          <ChevronRight className="h-3 w-3 text-bone/30" strokeWidth={1.5} />
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70">
-            {program.subtitle}
-          </span>
+          </p>
         </div>
 
         {/* Main content — vertically centered, left-aligned */}
-        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-16 md:px-10 lg:max-w-[58%] lg:px-16">
-          {/* Grade badge — filled */}
-          <span className="inline-flex w-fit items-center bg-violet px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.26em] text-bone">
-            Grado {program.grade}
-          </span>
-
-          {/* Title: subtitle (mountain) big, name (type) below */}
-          <h1 className="mt-5 font-display text-5xl uppercase leading-[0.88] text-bone sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-            {program.subtitle}
-          </h1>
-          <p className="mt-3 font-display text-2xl uppercase leading-none text-bone/60 sm:text-3xl">
-            {program.name}
-          </p>
-
-          {/* Metadata row */}
-          <div className="mt-7 flex items-center gap-2">
+        <div className="relative z-10 flex flex-1 flex-col justify-center px-6 pb-16 pt-24 md:px-10 lg:max-w-[60%] lg:px-16">
+          {/* Ubicación — reemplaza el badge de grado */}
+          <div className="flex items-center gap-2">
             <MapPin className="h-3.5 w-3.5 text-teal" strokeWidth={1.6} />
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-bone/60">
               {program.location}
             </span>
           </div>
+
+          {/* Title: subtitle (mountain) big, name (type) below */}
+          <h1 className="mt-8 font-display text-4xl uppercase leading-[0.88] text-bone sm:text-5xl md:text-6xl lg:text-[4rem]">
+            {program.subtitle.split(" ").length > 1 ? (
+              <>
+                {program.subtitle.split(" ")[0]}
+                <br />
+                {program.subtitle.split(" ").slice(1).join(" ")}
+              </>
+            ) : (
+              program.subtitle
+            )}
+          </h1>
 
           <p className="mt-5 max-w-md font-mono text-xs leading-relaxed text-bone/50">
             {program.tagline}
@@ -120,26 +140,30 @@ export default async function ProgramaPage({ params }) {
           <div className="mt-9">
             <a
               href="#postulacion"
-              className="inline-flex items-center gap-3 bg-violet px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-bone transition hover:bg-bone hover:text-ink"
+              className="rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
             >
-              Ver programa <span>→</span>
+              Ver programa →
             </a>
           </div>
         </div>
 
-        {/* Stats bar — integrated at bottom of hero, full-bleed edge to edge */}
-        <div className="relative z-10 mt-auto w-full border-t border-bone/10 bg-ink/80 backdrop-blur-sm">
+        {/* Stats bar — integrated at bottom of hero, contenida con margen */}
+        <div className="relative z-10 mx-6 mb-6 mt-auto rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xl md:mx-10 lg:mx-16">
           <div className="grid grid-cols-2 divide-x divide-bone/10 md:grid-cols-4">
             {statItems.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div key={i} className="flex flex-col items-center gap-3 px-4 py-9 text-center sm:py-10">
-                  <Icon className="h-5 w-5 text-teal" strokeWidth={1.4} />
-                  <p className="font-display text-xl uppercase leading-none text-bone sm:text-2xl">
+                <div key={i} className="flex flex-col items-center gap-1.5 px-3 py-4 text-center">
+                  {Icon ? (
+                    <Icon className="h-3.5 w-3.5 text-teal" strokeWidth={1.4} />
+                  ) : (
+                    <DifficultyBars grade={program.grade} />
+                  )}
+                  <p className="font-display text-base uppercase leading-none text-bone">
                     {stat.value}
                   </p>
-                  <span className="h-px w-6 bg-bone/20" />
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/40 leading-snug">
+                  <span className="h-px w-4 bg-bone/20" />
+                  <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-bone/40 leading-snug">
                     {stat.label}
                   </p>
                 </div>
@@ -153,63 +177,82 @@ export default async function ProgramaPage({ params }) {
       <AscentRoute itinerario={program.itinerario} galeria={program.galeria} mainImage={program.image} />
 
       {/* ─── 3. QUÉ INCLUYE + REQUISITOS ─── */}
-      <section className="grid grid-cols-1 border-t border-stone/10 bg-bone lg:grid-cols-2">
-        {/* Left: qué incluye */}
-        <div className="border-b border-stone/10 px-8 py-14 lg:border-b-0 lg:border-r lg:px-14 lg:py-20">
+      <section className="border-t border-stone/10 bg-bone">
+        <div className="grid grid-cols-1 gap-12 px-6 py-14 md:px-10 md:py-20 lg:grid-cols-2 lg:gap-16 lg:px-16">
+          {/* Left: qué incluye */}
           <Reveal>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-stone">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark">
               ¿Qué incluye?
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-8">
+            <span className="mt-3 block h-0.5 w-10 bg-violet" />
+            <h2 className="mt-6 font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
+              Todo lo que necesitás,{" "}
+              <span className="text-gradient-cool">para llegar preparado.</span>
+            </h2>
+
+            <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3">
               {program.incluye.map((item, i) => {
                 const Icon = ICON_MAP[item.icon] || Shield;
                 return (
-                  <div key={i} className="flex items-start gap-3">
-                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-stone/50" strokeWidth={1.4} />
-                    <div>
-                      <p className="text-sm font-semibold leading-snug text-ink">
-                        {item.label}
-                      </p>
-                      <p className="mt-0.5 text-xs leading-snug text-stone-light">
-                        {item.sub}
-                      </p>
-                    </div>
+                  <div
+                    key={i}
+                    className="rounded-xl border border-stone/15 bg-white/70 p-5 text-center shadow-sm"
+                  >
+                    <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-violet/10">
+                      <Icon className="h-5 w-5 text-violet-dark" strokeWidth={1.6} />
+                    </span>
+                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.04em] text-ink">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 text-xs leading-snug text-stone-light">
+                      {item.sub}
+                    </p>
                   </div>
                 );
               })}
             </div>
-            <a
-              href="#"
-              className="mt-10 inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-stone transition hover:text-ink"
-            >
-              Ver todo lo que incluye <span>→</span>
-            </a>
-          </Reveal>
-        </div>
 
-        {/* Right: requisitos */}
-        <div className="px-8 py-14 lg:px-14 lg:py-20">
+          </Reveal>
+
+          {/* Right: requisitos */}
           <Reveal delay={80}>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-stone">
-              Requisitos
-            </p>
-            <ul className="mt-8 space-y-5">
-              {program.postulacion.requisitos.map((req, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 shrink-0 font-bold text-stone">✓</span>
-                  <span className="text-sm leading-relaxed text-stone">{req}</span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#postulacion"
-              className="mt-10 inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-stone transition hover:text-ink"
-            >
-              Ver requisitos detallados <span>→</span>
-            </a>
+            <div className="rounded-2xl border border-stone/15 bg-white/70 p-8 shadow-sm lg:p-10">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark">
+                Requisitos
+              </p>
+              <span className="mt-3 block h-0.5 w-10 bg-violet" />
+              <h2 className="mt-6 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl">
+                Para tu seguridad,{" "}
+                <span className="text-gradient-cool">exigimos lo mejor.</span>
+              </h2>
+
+              <ul className="mt-8 divide-y divide-stone/10">
+                {program.postulacion.requisitos.map((req, i) => {
+                  const Icon = REQ_ICONS[i % REQ_ICONS.length];
+                  return (
+                    <li key={i} className="flex items-center gap-4 py-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet/10">
+                        <Icon className="h-4.5 w-4.5 text-violet-dark" strokeWidth={1.6} />
+                      </span>
+                      <span className="text-sm leading-relaxed text-stone">{req}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <a
+                href="#postulacion"
+                className="mt-7 inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-stone transition hover:text-ink"
+              >
+                Ver requisitos detallados <span>→</span>
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>
+
+      {/* ─── EQUIPO TÉCNICO ─── */}
+      <GearShowcase />
 
       {/* ─── 4. GALERÍA ─── */}
       <section className="bg-ink py-14 text-bone lg:py-20">
@@ -234,25 +277,30 @@ export default async function ProgramaPage({ params }) {
       </section>
 
       {/* ─── 5. CTA ─── */}
-      <section className="border-t border-bone/10 bg-ink py-10 text-bone">
-        <div className="mx-auto flex flex-col gap-6 px-8 sm:flex-row sm:items-center sm:justify-between lg:px-14">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <Mail className="h-4 w-4 text-bone/40" strokeWidth={1.4} />
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/50">
-                ¿Tenés dudas sobre este programa?
-              </p>
+      <section className="py-10 pr-4 sm:pr-6 lg:pr-10">
+        <div className="relative overflow-hidden rounded-r-2xl bg-violet-dark px-6 py-7 sm:px-9">
+          <div className="map-grid pointer-events-none absolute inset-0" />
+          <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bone/30">
+                <Mountain className="h-5 w-5 text-bone" strokeWidth={1.6} />
+              </span>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
+                  ¿Listo para tu próximo desafío?
+                </p>
+                <h2 className="mt-1 font-display text-xl uppercase text-bone sm:text-2xl">
+                  Hablemos de tu expedición.
+                </h2>
+              </div>
             </div>
-            <h2 className="mt-3 font-display text-2xl uppercase text-bone sm:text-3xl">
-              Hablemos de tu próxima expedición.
-            </h2>
+            <a
+              href="mailto:info@cuspide.com"
+              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-md bg-bone px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-ink transition hover:bg-violet-dark hover:text-bone"
+            >
+              Escribinos <span>→</span>
+            </a>
           </div>
-          <a
-            href="mailto:info@cuspide.com"
-            className="shrink-0 inline-flex items-center gap-3 bg-violet px-8 py-4 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
-          >
-            Escribinos <span>→</span>
-          </a>
         </div>
       </section>
 

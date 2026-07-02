@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const links = [
   { href: "/metodologia", label: "Metodología" },
@@ -16,11 +17,18 @@ export default function Navbar() {
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
-        <Link
-          href="/"
-          className="font-display text-xl tracking-widest text-bone uppercase"
-        >
-          Cúspide
+        <Link href="/" className="flex shrink-0 items-center gap-3">
+          <Image
+            src="/images/Logo blanco.png"
+            alt="Cúspide"
+            width={160}
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
+          <span className="font-display text-xl tracking-widest text-bone uppercase">
+            Cúspide
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -57,7 +65,7 @@ export default function Navbar() {
           {/* CTA — solo desktop */}
           <Link
             href="/postulacion"
-            className="hidden border border-violet-light px-5 py-2 text-xs uppercase tracking-[0.18em] text-violet-light transition hover:bg-violet hover:text-bone md:inline-flex"
+            className="rounded-md hidden border border-white px-5 py-2 text-xs uppercase tracking-[0.18em] text-white transition hover:bg-violet hover:text-bone md:inline-flex"
           >
             Postulate
           </Link>

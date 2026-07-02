@@ -53,13 +53,13 @@ export default function Team() {
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-stone sm:text-left">
             Equipo técnico
           </p>
 
-          <span className="mt-4 block h-[2px] w-12 bg-violet-light" />
+          <span className="mx-auto mt-4 block h-[2px] w-12 bg-violet-light sm:mx-0" />
 
-          <h2 className="mt-7 max-w-4xl font-display text-3xl uppercase leading-[0.95] text-ink sm:text-4xl">
+          <h2 className="mx-auto mt-7 max-w-4xl wrap-break-word text-center font-display text-2xl uppercase leading-[0.95] text-ink sm:mx-0 sm:text-left sm:text-3xl md:text-4xl">
             <span className="bg-gradient-to-r text-gradient-cool">
               Instructores,
             </span>
@@ -69,7 +69,7 @@ export default function Team() {
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-10 flex h-[68vh] min-h-120 gap-2 md:gap-3">
+          <div className="mt-10 flex h-[75vh] min-h-160 flex-col gap-2 sm:h-[68vh] sm:min-h-120 sm:flex-row md:gap-3">
             {team.map((member, i) => {
               const isActive = active === i;
               const [firstName, ...lastNameParts] = member.name.split(" ");
@@ -79,6 +79,7 @@ export default function Team() {
                 <div
                   key={member.name}
                   onMouseEnter={() => setActive(i)}
+                  onClick={() => setActive(i)}
                   className={`group relative cursor-pointer overflow-hidden border border-bone/60 bg-ink transition-all duration-500 ease-in-out ${
                     isActive ? "flex-[4.4]" : "flex-[1]"
                   }`}
@@ -108,22 +109,22 @@ export default function Team() {
 
                   {/* Cerrado */}
                   <div
-                    className={`absolute inset-0 flex flex-col justify-between px-5 py-7 transition-opacity duration-300 ${
+                    className={`absolute inset-0 flex flex-row items-center justify-between gap-4 px-5 py-4 transition-opacity duration-300 sm:flex-col sm:items-stretch sm:py-7 ${
                       isActive ? "pointer-events-none opacity-0" : "opacity-100"
                     }`}
                   >
-                    <div>
+                    <div className="flex items-center gap-3 sm:block">
                       <p className="font-display text-2xl text-bone/40">
                         {String(i + 1).padStart(2, "0")}
                       </p>
-                      <span className="mt-3 block h-px w-8 bg-violet-light" />
+                      <span className="hidden h-px w-8 bg-violet-light sm:mt-3 sm:block" />
                     </div>
 
-                    <p className="font-mono text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-bone [writing-mode:vertical-rl] rotate-180">
+                    <p className="font-mono text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-bone sm:[writing-mode:vertical-rl] sm:rotate-180">
                       {member.specialty}
                     </p>
 
-                    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-bone/70">
+                    <div className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-bone/70 sm:block">
                       <p className="text-bone/45">Cert.</p>
                       <p className="mt-1 text-bone/90">{member.cert.split(" / ")[0]}</p>
                       <p className="mt-4 text-bone/45">Exp.</p>

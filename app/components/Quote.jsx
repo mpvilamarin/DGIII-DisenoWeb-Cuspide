@@ -46,7 +46,7 @@ export default function Quote() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-6 py-14 text-center md:px-10 md:py-20"
+      className="relative overflow-hidden px-6 py-6 text-center md:px-10 md:py-20"
     >
       {/* Línea decorativa */}
       <span
@@ -55,7 +55,7 @@ export default function Quote() {
       />
 
       {/* Texto principal — cada línea en su propia máscara */}
-      <h3 className="mx-auto mt-8 max-w-4xl font-display text-xl uppercase leading-[1.15] tracking-tight sm:text-2xl md:text-[2.5rem]">
+      <h3 className="mx-auto mt-4 max-w-4xl font-display text-xl uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-2xl md:text-[2.5rem]">
         {lines.map((line, i) => (
           <span key={i} className="block overflow-hidden py-[0.06em]">
             <span

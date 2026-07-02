@@ -90,25 +90,41 @@ export default function Hero() {
             "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 40%)",
         }}
       />
+
+      {/* Overlay morado sutil del lado del título, se desvanece hacia el resto */}
+      <div
+        className="absolute inset-0 sm:hidden"
+        style={{
+          background:
+            "radial-gradient(ellipse 120% 100% at 50% 100%, rgba(76,29,149,0.4) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden sm:block"
+        style={{
+          background:
+            "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.4) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+        }}
+      />
       <div className="grain absolute inset-0" />
 
-      <div className="relative z-10 flex h-screen min-h-160 flex-col items-start justify-end">
-        <div className="mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16">
+      <div className="relative z-10 flex h-screen min-h-160 flex-col items-center justify-end sm:items-start">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-10 text-center md:px-10 md:pb-10 sm:text-left">
 
-          <h1 className="mt-5 font-display text-[9vw] uppercase leading-[0.82] text-bone drop-shadow-[0_12px_45px_rgba(0,0,0,0.45)] sm:text-[9vw] md:text-[6vw]">
+          <h1 className="mt-5 font-display text-[9vw] uppercase leading-[0.82] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] sm:text-[9vw] md:text-[6vw]">
             Cúspide
           </h1>
 
-          <div className="mt-6 max-w-4xl">
+          <div className="mt-6 max-w-4xl sm:mx-0 mx-auto">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-bone sm:whitespace-nowrap sm:text-base">
               La Patagonia exige preparación. Nosotros la garantizamos.
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-start gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-3 sm:justify-start">
             <a
               href="#metodologia"
-              className="rounded-md border border-violet-light/45 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-violet-light transition hover:border-violet hover:bg-violet hover:text-bone"
+              className="hidden rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:inline-flex"
             >
               Conocé la metodología
             </a>
@@ -121,7 +137,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-bone/15 pt-6">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-bone/15 pt-6 sm:justify-start">
             {credentials.map((item) => {
               const Icon = item.icon;
               return (

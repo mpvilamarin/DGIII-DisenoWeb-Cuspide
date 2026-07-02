@@ -44,7 +44,7 @@ export default function GuideSchool() {
       {/* Header */}
       <Reveal>
         <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pt-20 lg:px-16">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
                 Escuela de Guías

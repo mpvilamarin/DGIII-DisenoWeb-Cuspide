@@ -60,18 +60,18 @@ export default function FinalCTA() {
           <div className="relative z-10 flex flex-col gap-8 px-8 py-10 lg:flex-row lg:items-center lg:gap-0 lg:px-12 lg:py-12">
 
             {/* Izquierda: texto */}
-            <div className="shrink-0 lg:min-w-[280px] lg:max-w-sm lg:pr-10">
+            <div className="shrink-0 text-center lg:min-w-[280px] lg:max-w-sm lg:pr-10 lg:text-left">
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-light">
                 Hablemos de tu próxima expedición
               </p>
-              <span className="mt-2 block h-px w-8 bg-violet-light" />
+              <span className="mx-auto mt-2 block h-px w-8 bg-violet-light lg:mx-0" />
               <h2 className="mt-4 font-display text-2xl uppercase leading-[0.95] text-bone lg:text-[1.75rem]">
                 ¿Listo para tu{" "}
                 <span className="bg-gradient-to-r text-gradient-cool">
                   próxima cumbre?
                 </span>
               </h2>
-              <p className="mt-3 max-w-xs font-mono text-xs leading-relaxed text-bone/65">
+              <p className="mx-auto mt-3 max-w-xs font-mono text-xs leading-relaxed text-bone/65 lg:mx-0">
                 Escribinos y armemos juntos tu próxima aventura.
               </p>
             </div>
@@ -84,7 +84,7 @@ export default function FinalCTA() {
               {features.map((item) => (
                 <div
                   key={item.title}
-                  className="flex flex-col gap-2 lg:px-6 lg:first:pl-8"
+                  className="flex flex-col items-center gap-2 text-center lg:items-start lg:px-6 lg:text-left lg:first:pl-8"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -106,7 +106,7 @@ export default function FinalCTA() {
             </div>
 
             {/* Botón */}
-            <div className="shrink-0 lg:pl-8">
+            <div className="flex shrink-0 justify-center lg:justify-start lg:pl-8">
               <Link
                 href="#contacto"
                 className="group inline-flex items-center gap-3 bg-violet px-7 py-4 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"

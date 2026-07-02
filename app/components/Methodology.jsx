@@ -106,7 +106,7 @@ export default function Methodology() {
                 key={step.period}
                 data-idx={i}
                 ref={(el) => (stageRefs.current[i] = el)}
-                className={`relative grid grid-cols-[3rem_1fr] gap-x-5 border-t border-stone/15 py-8 transition-colors first:border-t-0 sm:grid-cols-[3.5rem_1fr_5.5rem] ${
+                className={`relative grid grid-cols-[3rem_1fr] gap-x-5 border-t border-stone/15 py-4 transition-colors first:border-t-0 sm:grid-cols-[3.5rem_1fr_5.5rem] sm:py-8 ${
                   active === i ? "bg-violet/5" : ""
                 }`}
               >

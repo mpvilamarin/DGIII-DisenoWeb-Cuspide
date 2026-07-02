@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const navLinks = [
   { label: "PROGRAMAS", href: "#" },
   { label: "ESCUELA DE GUÍAS", href: "#" },
@@ -40,20 +42,19 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-ink text-bone">
-      <div className="mx-auto max-w-350 px-8">
-        <div className="flex items-stretch border-b border-bone/10">
+      <div className="mx-auto max-w-350 px-6 sm:px-8">
+        <div className="flex flex-col border-b border-bone/10 sm:flex-row sm:items-stretch">
           {/* Left: Logo + tagline */}
-          <div className="flex items-center gap-4 py-8 pr-10 border-r border-bone/10">
-            <svg viewBox="0 0 40 36" fill="none" className="h-9 w-9 shrink-0" aria-hidden="true">
-              <polygon points="20,2 38,34 2,34" stroke="#05CDC2" strokeWidth="2.2" fill="none" />
-              <polygon points="20,12 30,30 10,30" stroke="#05CDC2" strokeWidth="2.2" fill="none" />
-            </svg>
-            <div className="h-9 w-px bg-bone/20 mx-1" />
-            <span className="font-display text-xl font-bold uppercase tracking-widest text-bone">
-              CÚSPIDE
-            </span>
-            <div className="h-9 w-px bg-bone/10 ml-6" />
-            <p className="ml-6 text-xs leading-relaxed text-bone/70 whitespace-nowrap">
+          <div className="flex items-center gap-4 py-8 sm:border-r sm:border-bone/10 sm:pr-10">
+            <Image
+              src="/images/Logo blanco.png"
+              alt="Cúspide"
+              width={140}
+              height={32}
+              className="h-8 w-auto shrink-0"
+            />
+            <div className="h-9 w-px bg-bone/10 ml-6 shrink-0" />
+            <p className="ml-6 text-xs leading-relaxed text-bone/70">
               No te llevamos a la montaña.<br />
               Te preparamos para{" "}
               <a href="#" className="text-violet-light hover:underline">merecerla</a>.
@@ -61,7 +62,7 @@ export default function Footer() {
           </div>
 
           {/* Center: Nav links */}
-          <div className="flex flex-1 items-center justify-center gap-8 px-10">
+          <div className="flex flex-1 flex-wrap items-center gap-x-6 gap-y-3 pb-8 sm:justify-center sm:gap-8 sm:px-10 sm:py-0">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -75,11 +76,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex items-center justify-between py-3 text-xs text-bone/40">
+        <div className="flex flex-col items-center gap-3 py-5 text-center text-xs text-bone/40 sm:flex-row sm:justify-between sm:py-3 sm:text-left">
           <p>© {new Date().getFullYear()} Cúspide · Formación de montaña</p>
 
           <div className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4 shrink-0">
               <path d="M12 2C8.686 2 6 4.686 6 8c0 5 6 14 6 14s6-9 6-14c0-3.314-2.686-6-6-6z" />
               <circle cx="12" cy="8" r="2" />
             </svg>

@@ -3,8 +3,7 @@
 import { useEffect } from "react";
 
 const SVG_W = 1440;
-const SVG_H = 8000;
-const LINE_SPACING = 58;
+const MIN_H = 8000;
 const GVX = [180, 380, 580, 780, 980, 1180, 1360];
 
 const MARKERS = [
@@ -50,30 +49,103 @@ const MARKERS = [
   { x: 950,  y: 7600, lat: "47°52′10″S", lon: "72°16′40″W", elev: "2.850 m" },
 ];
 
-function buildSVG() {
-  const numLines = Math.ceil(SVG_H / LINE_SPACING);
+function mulberry32(seed) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-  const contours = Array.from({ length: numLines }, (_, i) => {
-    const y = i * LINE_SPACING;
-    const isIdx = i % 5 === 0;
-    const amp = 6 + (i % 4) * 5;
-    const shift = ((i * 137) % 220) - 110;
-    const d = `M 0,${y} C ${SVG_W * 0.18},${y - amp + shift * 0.03} ${SVG_W * 0.38},${y + amp * 0.85} ${SVG_W * 0.56},${y - amp * 0.5 + shift * 0.02} S ${SVG_W * 0.84},${y + amp * 0.9} ${SVG_W},${y}`;
-    return `<path d="${d}" stroke="rgba(28,18,48,${isIdx ? 0.15 : 0.07})" stroke-width="${isIdx ? 1 : 0.65}" fill="none"/>`;
-  }).join("");
+// Perfil angular fijo por pico: define la forma orgánica (no circular) del cerro.
+// Al reutilizar la misma función para todos los anillos de un pico, los contornos
+// quedan anidados y concéntricos sin cruzarse entre sí, igual que en un mapa real.
+function ringOffset(angle, seed) {
+  return (
+    0.22 * Math.sin(angle * 3 + seed) +
+    0.14 * Math.sin(angle * 5 + seed * 1.7) +
+    0.1 * Math.sin(angle * 2 + seed * 0.6) +
+    0.07 * Math.sin(angle * 7 + seed * 2.3)
+  );
+}
+
+function ringPath(cx, cy, r, seed) {
+  const N = 32;
+  const pts = [];
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2;
+    const rr = r * (1 + ringOffset(a, seed));
+    pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * 0.82]);
+  }
+
+  const n = pts.length;
+  const d = [`M ${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`];
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % n];
+    const p3 = pts[(i + 2) % n];
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d.push(`C ${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`);
+  }
+  d.push("Z");
+  return d.join(" ");
+}
+
+function buildContours(H) {
+  const rand = mulberry32(1337);
+  const rowH = 2600;
+  const rows = Math.ceil(H / rowH);
+  const RING_SPACING = 40;
+  const peaks = [];
+
+  for (let row = 0; row < rows; row++) {
+    const side = row % 2 === 0 ? 0.28 : 0.72;
+    const maxR = 1000 + rand() * 400;
+    peaks.push({
+      x: SVG_W * side + (rand() - 0.5) * 220,
+      y: row * rowH + rowH * 0.5 + (rand() - 0.5) * rowH * 0.3,
+      maxR,
+      rings: Math.max(6, Math.round(maxR / RING_SPACING)),
+      seed: rand() * 1000,
+    });
+  }
+
+  return peaks
+    .map((p) => {
+      const paths = [];
+      for (let i = 1; i <= p.rings; i++) {
+        const r = (i / p.rings) * p.maxR;
+        const isIdx = i === p.rings || i % 4 === 0;
+        paths.push(
+          `<path d="${ringPath(p.x, p.y, r, p.seed)}" stroke="rgba(28,18,48,${isIdx ? 0.08 : 0.035})" stroke-width="${isIdx ? 1 : 0.7}" fill="none"/>`
+        );
+      }
+      return paths.join("");
+    })
+    .join("");
+}
+
+function buildSVG(H) {
+  const contours = buildContours(H);
 
   const vlines = GVX.map(
-    (x) => `<line x1="${x}" y1="0" x2="${x}" y2="${SVG_H}" stroke="rgba(28,18,48,0.06)" stroke-width="0.5" stroke-dasharray="3 14" fill="none"/>`
+    (x) => `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="rgba(28,18,48,0.06)" stroke-width="0.5" stroke-dasharray="3 14" fill="none"/>`
   ).join("");
 
-  const numH = Math.ceil(SVG_H / 320);
+  const numH = Math.ceil(H / 320);
   const hlines = Array.from({ length: numH }, (_, i) =>
     `<line x1="0" y1="${i * 320}" x2="${SVG_W}" y2="${i * 320}" stroke="rgba(28,18,48,0.04)" stroke-width="0.5" stroke-dasharray="2 22" fill="none"/>`
   ).join("");
 
   const crossPositions = [];
   for (let xi = 0; xi < 4; xi++) {
-    for (let yi = 0; yi < Math.ceil(SVG_H / 460); yi++) {
+    for (let yi = 0; yi < Math.ceil(H / 460); yi++) {
       crossPositions.push([90 + xi * 360, 120 + yi * 460]);
     }
   }
@@ -91,18 +163,33 @@ function buildSVG() {
       `<text x="${m.x + 12}" y="${m.y + 9}" font-family="monospace" font-size="6.5" fill="rgba(28,18,48,0.18)" letter-spacing="0.4">▲ ${m.elev}</text>`
   ).join("");
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${SVG_H}" viewBox="0 0 ${SVG_W} ${SVG_H}">${vlines}${hlines}${contours}${crosses}${labels}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${H}" viewBox="0 0 ${SVG_W} ${H}">${vlines}${hlines}${contours}${crosses}${labels}</svg>`;
 }
 
 export default function TopoBackground() {
   useEffect(() => {
-    const svg = buildSVG();
-    const uri = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+    let currentH = 0;
 
-    document.body.style.backgroundImage = uri;
-    document.body.style.backgroundSize = `${SVG_W}px ${SVG_H}px`;
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center 0px";
+    const apply = () => {
+      // El fondo debe cubrir toda la altura real de la página (no un valor fijo),
+      // si no las secciones más abajo (Escuela de Guías, CTA final) quedan sin trama.
+      const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, MIN_H);
+      if (Math.abs(pageH - currentH) < 200) return;
+      currentH = pageH;
+
+      // El parallax (factor 0.5 más abajo) hace que la imagen se recorra a
+      // media velocidad del scroll: para que llegue a cubrir el final real
+      // de la página necesita bastante más alto que el alto de la página.
+      const bgH = Math.ceil(pageH * 1.6);
+      const svg = buildSVG(bgH);
+      const uri = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+
+      document.body.style.backgroundImage = uri;
+      document.body.style.backgroundSize = `${SVG_W}px ${bgH}px`;
+      document.body.style.backgroundRepeat = "no-repeat";
+    };
+
+    apply();
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -112,10 +199,19 @@ export default function TopoBackground() {
       document.body.style.backgroundPosition = `center ${-y * 0.5}px`;
     };
 
+    document.body.style.backgroundPosition = "center 0px";
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", apply);
+    window.addEventListener("load", apply);
+
+    const resizeObserver = new ResizeObserver(apply);
+    resizeObserver.observe(document.body);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", apply);
+      window.removeEventListener("load", apply);
+      resizeObserver.disconnect();
       document.body.style.backgroundImage = "";
       document.body.style.backgroundSize = "";
       document.body.style.backgroundRepeat = "";
