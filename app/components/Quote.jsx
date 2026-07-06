@@ -46,7 +46,7 @@ export default function Quote() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-2 py-10 text-center sm:py-20 md:px-6 md:py-6"
+      className="relative overflow-hidden bg-ink px-2 py-10 text-center sm:py-20 md:px-6 md:py-6"
     >
       {/* Línea decorativa */}
       <span
@@ -63,7 +63,7 @@ export default function Quote() {
               className={`quote-line ${
                 line.gradient
                   ? "bg-linear-to-r text-gradient-cool"
-                  : "text-ink"
+                  : "text-bone"
               }`}
             >
               {line.text}

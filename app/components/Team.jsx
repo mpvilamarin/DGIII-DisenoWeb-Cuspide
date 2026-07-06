@@ -50,17 +50,17 @@ export default function Team() {
   return (
     <section
       id="equipo-tecnico"
-      className="border-t border-stone/15 py-24 md:py-20"
+      className="border-t border-white/10 bg-ink py-24 md:py-20"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <Reveal>
-          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-stone sm:text-left">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-violet-light sm:text-left">
             Equipo técnico
           </p>
 
           <span className="mx-auto mt-4 block h-[2px] w-12 bg-violet-light sm:mx-0" />
 
-          <h2 className="mx-auto mt-7 max-w-4xl wrap-break-word text-center font-display text-2xl uppercase leading-[0.95] text-ink sm:mx-0 sm:text-left sm:text-3xl md:text-4xl">
+          <h2 className="mx-auto mt-7 max-w-4xl wrap-break-word text-center font-display text-2xl uppercase leading-[0.95] text-bone sm:mx-0 sm:text-left sm:text-3xl md:text-4xl">
             <span className="bg-gradient-to-r text-gradient-cool">
               Instructores,
             </span>

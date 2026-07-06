@@ -6,32 +6,25 @@ import Reveal from "./Reveal";
 
 const steps = [
   {
-    period: "Mes 1",
+    period: "Evaluación y admisión",
     duration: "2 semanas",
-    title: "Evaluación física y de antecedentes",
-    body: "Test de aptitud y entrevista con guías certificados.",
+    title: "Evaluación y admisión",
+    body: "Test de aptitud física, antecedentes médicos y entrevista con guías certificados. El equipo determina si tu perfil es compatible antes de aceptar la postulación.",
     image: "/images/metodo-01.png",
   },
   {
-    period: "Mes 1—5",
-    duration: "4 meses",
-    title: "Entrenamiento y capacitación técnica",
-    body: "Resistencia, fuerza progresiva y clínica de cuerdas, crampones y autorrescate en terreno real.",
+    period: "Preparación física y técnica",
+    duration: "3 meses",
+    title: "Preparación física y técnica",
+    body: "Entrenamiento de resistencia, fuerza y técnica de montaña con seguimiento mensual. Al cierre, el equipo determina si estás en condiciones de avanzar. No hay excepciones.",
     image: "/images/metodo-02.png",
   },
   {
-    period: "Mes 5—6",
-    duration: "3 semanas",
-    title: "Revisión de equipo y briefing final",
-    body: "Prueba en condiciones simuladas y evaluación final de aptitud. Sin excepciones.",
-    image: "/images/meto-03.png",
-  },
-  {
-    period: "Expedición",
+    period: "Expedición y cierre",
     duration: "12—16 días",
-    title: "Ascenso en cordada y debrief",
-    body: "El objetivo real de la preparación, con análisis y aprendizajes posteriores.",
-    image: "/images/meto-04.png",
+    title: "Expedición y cierre",
+    body: "Ascenso en cordada, gestión de riesgo y campamento glaciario. Debrief posterior con tu guía: observaciones técnicas y próximos pasos en tu formación.",
+    image: "/images/meto-03.png",
   },
 ];
 
@@ -78,7 +71,7 @@ export default function Methodology() {
 
           <div className="absolute bottom-10 left-8 z-10 max-w-65 rounded-lg border border-bone/10 bg-ink/10 px-4 py-3 backdrop-blur-md">
             <p className="font-mono text-[10px] uppercase tracking-widest text-violet-light">
-              {String(active + 1).padStart(2, "0")} / {steps[active].period}
+              {String(active + 1).padStart(2, "0")} / {steps[active].duration}
             </p>
             <p className="mt-1 font-mono text-xs text-bone/90">
               {steps[active].title}
@@ -129,7 +122,7 @@ export default function Methodology() {
                     {step.body}
                   </p>
                   <p className="mt-3 font-mono text-xs uppercase tracking-widest text-violet sm:hidden">
-                    {step.period} · {step.duration}
+                    {step.duration}
                   </p>
                 </div>
                 <span className="hidden whitespace-nowrap pt-1 text-right font-mono text-xs uppercase tracking-widest text-violet/70 sm:block">

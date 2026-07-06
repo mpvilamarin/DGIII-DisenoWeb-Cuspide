@@ -66,13 +66,13 @@ export default function FinalCTA() {
               </p>
               <span className="mx-auto mt-2 block h-px w-8 bg-violet-light lg:mx-0" />
               <h2 className="mt-3 font-display text-xl uppercase leading-[0.95] text-bone sm:mt-4 sm:text-2xl lg:text-[1.75rem]">
-                ¿Listo para tu{" "}
+                ¿Estás dispuesto a{" "}
                 <span className="bg-gradient-to-r text-gradient-cool">
-                  próxima cumbre?
+                  prepararte?
                 </span>
               </h2>
               <p className="mx-auto mt-2 max-w-xs font-mono text-xs leading-relaxed text-bone/65 sm:mt-3 lg:mx-0">
-                Escribinos y armemos juntos tu próxima aventura.
+                Cúspide no acepta a todos. Antes de confirmar tu lugar, evaluamos tu perfil, tu experiencia y tu compromiso con el proceso.
               </p>
             </div>
 
@@ -110,10 +110,10 @@ export default function FinalCTA() {
             {/* Botón */}
             <div className="flex shrink-0 justify-center lg:justify-start lg:pl-8">
               <Link
-                href="#contacto"
+                href="/postulacion"
                 className="group inline-flex items-center gap-3 bg-violet px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:px-7 sm:py-4"
               >
-                Contactanos
+                Postulate a un programa
                 <span className="transition group-hover:translate-x-1">→</span>
               </Link>
             </div>

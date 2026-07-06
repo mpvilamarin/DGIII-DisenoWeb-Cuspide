@@ -121,7 +121,7 @@ export default function Reviews() {
             >
               {REVIEWS.map((r) => (
                 <div key={r.name} className="w-72 shrink-0 snap-start pb-1">
-                  {/* Nube de texto con pico junto al avatar */}
+                  {/* Nube de texto con pico alineado al borde izquierdo del avatar */}
                   <div className="relative rounded-2xl border border-stone/10 bg-white p-6 shadow-sm">
                     <p className="min-h-24 text-sm leading-relaxed text-stone">
                       {r.text}
@@ -129,10 +129,10 @@ export default function Reviews() {
                     <div className="mt-4">
                       <StarRow rating={r.rating} />
                     </div>
-                    <span className="absolute -bottom-4 left-6 z-20 h-5 w-5 rotate-45 border-b border-r border-stone/10 bg-white" />
+                    <span className="absolute -bottom-2 left-9 z-20 h-4 w-4 rotate-45 border-b border-r border-stone/10 bg-white" />
                   </div>
 
-                  {/* Avatar debajo, sin superponerse a la burbuja */}
+                  {/* Avatar debajo */}
                   <div className="relative z-10 mt-4 flex items-center gap-3 pl-9">
                     <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-bone">
                       <Image

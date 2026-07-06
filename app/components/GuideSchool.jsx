@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mountain, RefreshCw, ShieldCheck, Users, Plus } from "lucide-react";
 import Reveal from "./Reveal";
 import Parallax from "./Parallax";
@@ -8,7 +9,7 @@ const stages = [
     num: "01",
     title: "Formación inicial",
     short: "Bases técnicas, seguridad y liderazgo en montaña.",
-    body: "Fundamentos técnicos, física de montaña y primeros auxilios avanzados en terreno real.",
+    body: "Formación en fundamentos técnicos, física de montaña y primeros auxilios avanzados en terreno real.",
     image: "/images/escuela-01.png",
     features: [
       { icon: Mountain, label: "Técnica de base" },
@@ -20,7 +21,7 @@ const stages = [
     num: "02",
     title: "Prácticas en terreno",
     short: "Progresión en hielo, roca y mixto con supervisión directa de guías UIAGM certificados.",
-    body: "Progresión en hielo, roca y mixto con supervisión directa de guías UIAGM certificados.",
+    body: "Formación en progresión de hielo, roca y mixto, con supervisión directa de guías UIAGM certificados.",
     image: "/images/escuela-02.png",
     features: [
       { icon: Mountain, label: "Terreno real" },
@@ -32,7 +33,7 @@ const stages = [
     num: "03",
     title: "Evaluación UIAGM",
     short: "Exámenes técnicos y de liderazgo según estándares internacionales.",
-    body: "Examen internacional bajo estándar IFMGA. Protocolo sin excepciones.",
+    body: "Evaluación internacional bajo estándar IFMGA. Protocolo sin excepciones.",
     image: "/images/escuela-03.png",
     features: [
       { icon: Mountain, label: "Examen técnico" },
@@ -43,8 +44,8 @@ const stages = [
   {
     num: "04",
     title: "Salida laboral",
-    short: "Guías preparados para liderar expediciones en todo el mundo.",
-    body: "Integración al equipo Cúspide con acompañamiento y asignación de expediciones reales.",
+    short: "Guías formados para liderar expediciones en todo el mundo.",
+    body: "Integración al equipo Cúspide, con acompañamiento y asignación de expediciones reales.",
     image: "/images/escuela-04.png",
     features: [
       { icon: Mountain, label: "Expediciones reales" },
@@ -61,21 +62,21 @@ export default function GuideSchool() {
       <Reveal>
         <div className="mx-auto max-w-7xl px-6 pb-6 md:px-10 lg:px-16">
           <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
-            Escuela de Guías
+            Escuela de Guías — 2027
           </p>
 
           <span className="mt-4 block h-0.5 w-12 bg-violet-light" />
 
           <h2 className="mt-7 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
             <span className="bg-linear-to-r text-gradient-cool">
-              Formamos guías con
+              Formación de guías con
             </span>
             <br />
             criterio y experiencia.
           </h2>
 
           <p className="mt-4 max-w-2xl text-sm text-stone">
-            Formación profesional basada en estándares internacionales y años de trabajo en terreno.
+            Formación profesional basada en estándares internacionales, diseñada para preparar a la próxima generación de guías.
           </p>
         </div>
       </Reveal>
@@ -157,11 +158,21 @@ export default function GuideSchool() {
       </Reveal>
 
       {/* Línea final */}
-      <div className="mx-auto mt-6 flex max-w-7xl items-center justify-center gap-2 px-6 md:px-10 lg:px-16">
-        <ShieldCheck className="h-4 w-4 text-violet-light" strokeWidth={1.8} />
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-stone">
-          Formación seria. Montaña real. Decisiones reales.
-        </p>
+      <div className="mx-auto mt-6 flex max-w-7xl flex-col items-center justify-center gap-5 px-6 md:px-10 lg:px-16">
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="h-4 w-4 text-violet-light" strokeWidth={1.8} />
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-stone">
+            Formación seria. Montaña real. Decisiones reales.
+          </p>
+        </div>
+
+        <Link
+          href="#contacto"
+          className="group inline-flex items-center gap-3 bg-violet px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:px-7 sm:py-4"
+        >
+          Sumarme a la lista de espera
+          <span className="transition group-hover:translate-x-1">→</span>
+        </Link>
       </div>
     </section>
   );

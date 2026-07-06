@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const SVG_W = 1440;
 const MIN_H = 8000;
+const Y_OFFSET = 80; // corrimiento fijo hacia arriba del fondo topográfico
 const GVX = [180, 380, 580, 780, 980, 1180, 1360];
 
 const MARKERS = [
@@ -196,10 +197,10 @@ export default function TopoBackground() {
     const onScroll = () => {
       if (reduced) return;
       const y = window.scrollY;
-      document.body.style.backgroundPosition = `center ${-y * 0.5}px`;
+      document.body.style.backgroundPosition = `center ${-y * 0.5 - Y_OFFSET}px`;
     };
 
-    document.body.style.backgroundPosition = "center 0px";
+    document.body.style.backgroundPosition = `center -${Y_OFFSET}px`;
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", apply);
     window.addEventListener("load", apply);

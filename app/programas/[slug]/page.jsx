@@ -227,7 +227,7 @@ export default async function ProgramaPage({ params }) {
 
           {/* Right: requisitos */}
           <Reveal delay={80}>
-            <div className="rounded-2xl border border-stone/15 bg-white/70 p-8 shadow-sm lg:p-10">
+            <div id="requisitos" className="scroll-mt-24 rounded-2xl border border-stone/15 bg-white/70 p-8 shadow-sm lg:p-10">
               <p className="text-center font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark sm:text-left">
                 Requisitos
               </p>
@@ -273,7 +273,7 @@ export default async function ProgramaPage({ params }) {
         <div className="relative overflow-hidden rounded-r-2xl bg-violet-dark px-6 py-7 sm:px-9">
           <div className="map-grid pointer-events-none absolute inset-0" />
           <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4 sm:text-left">
+            <div className="flex flex-col items-center gap-3 text-center sm:flex-1 sm:flex-row sm:gap-6 sm:text-left">
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bone/30">
                 <span className="absolute inset-0 rounded-full border border-bone/30 animate-ping [animation-duration:2.5s]" />
                 <Image
@@ -285,27 +285,31 @@ export default async function ProgramaPage({ params }) {
                 />
               </span>
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
-                  ¿Listo para tu próximo desafío?
-                </p>
-                <h2 className="mt-1 font-display text-xl uppercase text-bone sm:text-2xl">
-                  Hablemos de tu expedición.
+                <h2 className="font-display text-xl uppercase text-bone sm:text-xl">
+                  Este programa no es para todos.
                 </h2>
+                <p className="mt-1 max-w-2xl font-mono text-xs leading-relaxed text-bone/60">
+                  Si llegaste hasta acá y estás dispuesto a comprometerte con el
+                  proceso, el siguiente paso es postularte. El equipo evaluará
+                  tu perfil antes de confirmar tu lugar.
+                </p>
               </div>
             </div>
-            <a
-              href="mailto:info@cuspide.com"
-              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-md bg-bone px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-ink transition hover:bg-violet-dark hover:text-bone"
-            >
-              Escribinos <span>→</span>
-            </a>
+            <div className="flex shrink-0 flex-col items-center gap-3 sm:flex-row">
+              <a
+                href="#postulacion"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-bone bg-bone px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-ink transition hover:bg-transparent hover:text-bone"
+              >
+                Postulate a este programa <span>→</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ─── POSTULACIÓN ─── */}
       <section id="postulacion" className="border-t border-stone/15 px-6 py-20 md:px-10 md:py-28 lg:px-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           <Reveal>
             <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-violet-dark sm:text-left">
               Proceso de postulación

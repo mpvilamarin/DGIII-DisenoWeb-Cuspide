@@ -23,7 +23,7 @@ export default function SafetyProtocols() {
   return (
     <section
       id="protocolos"
-      className="relative mt-20 overflow-hidden bg-violet-dark"
+      className="relative mt-20 overflow-hidden bg-ink"
     >
       <div className="map-grid pointer-events-none absolute inset-0" />
 

@@ -174,9 +174,9 @@ export default function Hero() {
 
             <a
               href="#programas"
-              className="rounded-md border border-bone/40 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone/10"
+              className="hidden rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:inline-flex"
             >
-              Ver programas
+              Ver expediciones
             </a>
           </div>
 
