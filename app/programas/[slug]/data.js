@@ -180,7 +180,7 @@ export const programs = [
     grade: "AD",
     gradeLabel: "Assez Difficile",
     tagline: "Cuatro kilómetros de hielo vivo sobre el mayor glaciar accesible del planeta.",
-    image: "/images/ice-couloir.jpg",
+    image: "/images/Hero-peritoMoreno.png",
     altImage: "/images/rope-team.jpg",
 
     waypoints: [

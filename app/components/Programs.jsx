@@ -153,18 +153,21 @@ export default function Programs() {
   return (
     <section
       id="programas"
-      className="flex min-h-screen flex-col justify-center border-t border-stone/15 px-6 py-10 md:px-10 md:py-12"
+      className="flex min-h-screen flex-col justify-center border-t border-stone/15 px-6 pt-16 pb-10 md:px-10 md:pt-20 md:pb-12"
     >
       <div className="mx-auto w-full max-w-6xl">
         <Reveal>
-          <div className="text-center">
+          <div className="text-center sm:text-left">
             <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
               Expediciones destacadas
             </p>
-            <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
-              Elegí tu próxima cumbre
+            <span className="mx-auto mt-4 block h-0.5 w-12 bg-violet-light sm:mx-0" />
+            <h2 className="mt-7 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
+              <span className="bg-linear-to-r text-gradient-cool">Elegí tu próxima</span>
+              <br />
+              cumbre.
             </h2>
-            <p className="mx-auto mt-3 max-w-md text-sm text-stone">
+            <p className="mx-auto mt-4 max-w-md text-sm text-stone sm:mx-0">
               Programas diseñados para llevarte más allá, con seguridad y propósito.
             </p>
           </div>

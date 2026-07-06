@@ -60,29 +60,23 @@ export default function GuideSchool() {
       {/* Header */}
       <Reveal>
         <div className="mx-auto max-w-7xl px-6 pb-6 md:px-10 lg:px-16">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
-                Escuela de Guías
-              </p>
-              <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
-                Formamos guías con
-                <br />
-                criterio y experiencia.
-              </h2>
-              <p className="mt-3 max-w-md text-sm text-stone">
-                Formación profesional basada en estándares internacionales y años de trabajo en terreno.
-              </p>
-            </div>
-            <a
-              href="#newsletter"
-              className="group shrink-0 font-mono text-xs font-bold uppercase tracking-[0.16em] text-stone transition hover:text-violet"
-            >
-              <span className="border-b border-violet/40 pb-1 transition group-hover:border-violet">
-                Más información →
-              </span>
-            </a>
-          </div>
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
+            Escuela de Guías
+          </p>
+
+          <span className="mt-4 block h-0.5 w-12 bg-violet-light" />
+
+          <h2 className="mt-7 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
+            <span className="bg-linear-to-r text-gradient-cool">
+              Formamos guías con
+            </span>
+            <br />
+            criterio y experiencia.
+          </h2>
+
+          <p className="mt-4 max-w-2xl text-sm text-stone">
+            Formación profesional basada en estándares internacionales y años de trabajo en terreno.
+          </p>
         </div>
       </Reveal>
 
@@ -105,23 +99,23 @@ export default function GuideSchool() {
                     alt={stage.title}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                    className="object-cover saturate-[0.35] transition-all duration-500 group-hover:scale-105 group-hover:saturate-100"
                   />
                 </Parallax>
 
-                {/* Overlay — solo abajo, para no oscurecer toda la imagen */}
-                <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/10 to-transparent transition-all duration-400 group-hover:from-ink/85 group-hover:via-ink/25" />
+                {/* Overlay — solo detrás del texto, no tapa el resto de la imagen */}
+                <div className="absolute inset-0 bg-linear-to-t from-ink/95 from-10% via-ink/25 via-45% to-transparent to-70% transition-all duration-400 group-hover:from-ink/97 group-hover:via-ink/55 group-hover:via-55% group-hover:to-transparent group-hover:to-85%" />
 
                 {/* Número */}
                 <div className="relative z-10 p-5">
-                  <p className="font-display text-2xl leading-none text-bone/70 sm:text-3xl">
+                  <p className="font-display text-2xl leading-none text-bone/85 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] sm:text-3xl">
                     {stage.num}
                   </p>
                 </div>
 
                 {/* Contenido inferior */}
                 <div className="relative z-10 mt-auto p-5">
-                  <h3 className="font-display text-xl uppercase leading-[0.95] text-bone sm:text-2xl">
+                  <h3 className="font-display text-xl uppercase leading-[0.95] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] sm:text-2xl">
                     {titleFirst}
                     {titleSecond && (
                       <>
@@ -133,8 +127,8 @@ export default function GuideSchool() {
 
                   {/* Colapsado */}
                   <div className="translate-y-0 opacity-100 transition-all duration-300 group-hover:pointer-events-none group-hover:absolute group-hover:-translate-y-2 group-hover:opacity-0">
-                    <p className="mt-2 text-sm leading-snug text-bone/65">{stage.short}</p>
-                    <span className="mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-bone/30 text-bone/70 transition group-hover:border-violet-light group-hover:text-violet-light">
+                    <p className="mt-2 text-sm leading-snug text-bone/85 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">{stage.short}</p>
+                    <span className="mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-bone/40 text-bone/85 transition group-hover:border-violet-light group-hover:text-violet-light">
                       <Plus className="h-4 w-4" strokeWidth={1.8} />
                     </span>
                   </div>
@@ -142,12 +136,12 @@ export default function GuideSchool() {
                   {/* Expandido */}
                   <div className="pointer-events-none absolute translate-y-2 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:static group-hover:translate-y-0 group-hover:opacity-100">
                     <span className="mt-3 block h-px w-8 bg-violet-light" />
-                    <p className="mt-3 text-sm leading-relaxed text-bone/80">{stage.body}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-bone/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">{stage.body}</p>
                     <div className="mt-5 space-y-2.5">
                       {stage.features.map((feature) => (
                         <div
                           key={feature.label}
-                          className="flex items-center gap-2.5 text-sm text-bone/85"
+                          className="flex items-center gap-2.5 text-sm text-bone/95 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]"
                         >
                           <feature.icon className="h-4 w-4 text-violet-light" strokeWidth={1.8} />
                           {feature.label}

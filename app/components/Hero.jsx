@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BadgeCheck, ShieldCheck, Calendar } from "lucide-react";
+import { BadgeCheck, ShieldCheck, Mountain } from "lucide-react";
 
 const PLAYBACK_RATE = 0.6;
 
 const credentials = [
-  { icon: BadgeCheck, label: "Certificación UIAGM / IFMGA" },
-  { icon: ShieldCheck, label: "Protocolos WFR" },
-  { icon: Calendar, label: "18 años en terreno" },
+  { icon: BadgeCheck, line1: "Certificación", line2: "UIAGM / IFMGA" },
+  { icon: ShieldCheck, line1: "Protocolos", line2: "WFR" },
+  { icon: Mountain, line1: "18 años", line2: "en terreno" },
 ];
 
 export default function Hero() {
@@ -117,35 +117,42 @@ export default function Hero() {
         className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
       />
 
-      {/* Overlay: degradado oscuro solo donde hay texto, centro transparente */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 45%), " +
-            "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 40%)",
-        }}
-      />
-
-      {/* Overlay morado sutil del lado del título, se desvanece hacia el resto */}
+      {/* Overlay principal — oscurece el lado del texto, deja la imagen clara del resto */}
       <div
         className="absolute inset-0 sm:hidden"
         style={{
           background:
-            "radial-gradient(ellipse 120% 100% at 50% 100%, rgba(76,29,149,0.4) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+            "linear-gradient(to top, rgba(8,6,18,0.75) 0%, rgba(8,6,18,0.55) 25%, rgba(8,6,18,0.2) 42%, rgba(8,6,18,0) 58%)",
         }}
       />
       <div
         className="absolute inset-0 hidden sm:block"
         style={{
           background:
-            "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.4) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+            "linear-gradient(to right, rgba(8,6,18,0.75) 0%, rgba(8,6,18,0.55) 25%, rgba(8,6,18,0.2) 42%, rgba(8,6,18,0) 58%)",
+        }}
+      />
+      {/* Franjas superior/inferior — legibilidad del nav y los credenciales */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 22%), " +
+            "linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 26%)",
+        }}
+      />
+      {/* Acento violeta sutil, solo de marca */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.25) 0%, rgba(76,29,149,0.1) 35%, rgba(76,29,149,0) 55%)",
         }}
       />
       <div className="grain absolute inset-0" />
 
-      <div className="relative z-10 flex h-screen min-h-160 flex-col items-center justify-end sm:items-start">
-        <div className="mx-auto w-full max-w-7xl px-6 pb-10 text-center md:px-10 md:pb-10 sm:text-left">
+      <div className="relative z-10 flex h-screen min-h-160 flex-col items-center justify-center pt-22 sm:items-start">
+        <div className="mx-auto w-full max-w-7xl px-6 text-center md:px-10 sm:text-left">
 
           <h1 className="mt-5 font-display text-[9vw] uppercase leading-[0.82] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] sm:text-[9vw] md:text-[6vw]">
             Cúspide
@@ -153,7 +160,7 @@ export default function Hero() {
 
           <div className="mt-6 max-w-4xl sm:mx-0 mx-auto">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-bone sm:whitespace-nowrap sm:text-base">
-              La Patagonia exige preparación. Nosotros la garantizamos.
+              La Patagonia exige preparación. <br/> Nosotros la garantizamos.
             </p>
           </div>
 
@@ -167,23 +174,30 @@ export default function Hero() {
 
             <a
               href="#programas"
-              className="rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
+              className="rounded-md border border-bone/40 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone/10"
             >
               Ver programas
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-bone/15 pt-6 sm:justify-start">
-            {credentials.map((item) => {
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-y-5 sm:justify-start">
+            {credentials.map((item, i) => {
               const Icon = item.icon;
               return (
-                <span
-                  key={item.label}
-                  className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-bone/80"
+                <div
+                  key={item.line1}
+                  className={`flex items-center gap-4 px-6 first:pl-0 ${i > 0 ? "border-l border-bone/20" : ""}`}
                 >
-                  <Icon className="h-4 w-4 text-teal" strokeWidth={1.6} />
-                  {item.label}
-                </span>
+                  <Icon className="h-7 w-7 shrink-0 text-violet-light" strokeWidth={1.5} />
+                  <div className="text-left">
+                    <p className="font-mono text-sm font-semibold uppercase leading-tight tracking-widest text-bone">
+                      {item.line1}
+                    </p>
+                    <p className="font-mono text-xs uppercase leading-tight tracking-widest text-bone/60">
+                      {item.line2}
+                    </p>
+                  </div>
+                </div>
               );
             })}
           </div>

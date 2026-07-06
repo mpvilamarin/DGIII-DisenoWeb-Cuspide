@@ -52,15 +52,16 @@ export default function Institutional() {
     <section className="border-t border-stone/15 px-6 py-20 md:px-10 md:py-28 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-stone sm:text-left">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.32em] text-violet-light sm:text-left">
             La institución
           </p>
-          <h2 className="mt-4 text-center font-display text-3xl uppercase leading-[0.95] text-violet-dark sm:text-left sm:text-4xl md:text-5xl">
-            Una formación.
+          <span className="mx-auto mt-4 block h-0.5 w-12 bg-violet-light sm:mx-0" />
+          <h2 className="mt-7 text-center font-display text-2xl uppercase leading-[0.95] text-ink sm:text-left sm:text-3xl md:text-4xl">
+            <span className="bg-linear-to-r text-gradient-cool">Una formación.</span>
             <br />
             No una agencia.
           </h2>
-          <p className="mt-5 text-center text-sm leading-relaxed text-stone sm:text-left">
+          <p className="mt-4 text-center text-sm leading-relaxed text-stone sm:text-left">
             Cúspide nace de guías de montaña, no de operadores turísticos.
             Cada programa tiene la rigurosidad de una formación de rescate.
           </p>

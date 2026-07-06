@@ -109,16 +109,15 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
       className="flex min-h-[80vh] flex-col justify-center border-t border-stone/15 bg-bone px-6 py-10 md:px-10 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="flex items-center justify-center gap-3 sm:justify-start">
-          <span className="block h-5 w-px bg-violet" />
-          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-violet-dark">
-            Ruta de ascenso
-          </p>
-        </div>
-        <h2 className="mt-3 text-center font-display text-2xl uppercase text-ink sm:text-left sm:text-3xl">
-          Perfil de la expedición
+        <p className="text-center font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark sm:text-left">
+          Ruta de ascenso
+        </p>
+        <span className="mx-auto mt-3 block h-0.5 w-10 bg-violet sm:mx-0" />
+        <h2 className="mt-6 text-center font-display text-3xl uppercase leading-[0.95] text-ink sm:text-left sm:text-4xl">
+          Perfil de{" "}
+          <span className="text-gradient-cool">la expedición.</span>
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-stone sm:mx-0 sm:text-left">
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-stone sm:mx-0 sm:text-left">
           Altitud día a día. Pasá el cursor sobre cada parada para ver el detalle de la jornada.
         </p>
 

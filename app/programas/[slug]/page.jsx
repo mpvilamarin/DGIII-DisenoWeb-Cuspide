@@ -84,20 +84,29 @@ export default async function ProgramaPage({ params }) {
           className="object-cover object-center"
         />
 
-        {/* Overlays — mismo esquema que el Hero de la home */}
+        {/* Overlay principal — oscurece el lado del texto, deja la imagen clara del lado derecho */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0) 45%), " +
-              "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 40%)",
+              "linear-gradient(to right, rgba(8,6,18,0.92) 0%, rgba(8,6,18,0.75) 35%, rgba(8,6,18,0.35) 58%, rgba(8,6,18,0) 78%)",
           }}
         />
+        {/* Franjas superior/inferior — legibilidad del nav y de la barra de stats */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.6) 0%, rgba(76,29,149,0.3) 40%, rgba(76,29,149,0) 60%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%), " +
+              "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 26%)",
+          }}
+        />
+        {/* Acento violeta sutil, solo de marca */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.35) 0%, rgba(76,29,149,0.15) 35%, rgba(76,29,149,0) 55%)",
           }}
         />
         <div className="grain absolute inset-0 opacity-50" />

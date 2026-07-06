@@ -26,8 +26,8 @@ export default function Navbar() {
             className="h-10 w-auto"
             priority
           />
-          <span className="font-display text-xl tracking-widest text-bone uppercase">
-            Cúspide
+          <span className="-ml-[10px] font-display text-xl tracking-widest text-bone uppercase">
+            úspide
           </span>
         </Link>
 

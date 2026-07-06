@@ -88,11 +88,14 @@ export default function Methodology() {
 
         <div className="px-6 pt-8 pb-16 sm:pt-28 md:px-10 md:pt-36 md:pb-24 lg:pl-16">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.2em] text-violet">
+            <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
               Metodología de preparación
             </p>
-            <h2 className="mt-4 font-display text-3xl uppercase text-ink sm:text-4xl">
-              Un sistema, no un tour
+            <span className="mt-4 block h-0.5 w-12 bg-violet-light" />
+            <h2 className="mt-7 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
+              <span className="bg-linear-to-r text-gradient-cool">Un sistema,</span>
+              <br />
+              no un tour.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-stone">
               Cada etapa tiene un propósito técnico medible. No se avanza
