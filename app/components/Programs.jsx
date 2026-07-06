@@ -66,12 +66,12 @@ function MetaRow({ days, exigencia, date, light }) {
 
 function StandardCard({ program, delay }) {
   return (
-    <Reveal delay={delay} className="h-full">
+    <Reveal delay={delay} className="h-full lg:scale-[0.96] lg:opacity-90">
       <Link
         href={`/programas/${program.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.14)]"
+        className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition hover:-translate-y-1 hover:opacity-100 hover:shadow-[0_8px_32px_rgba(0,0,0,0.14)]"
       >
-        <div className="relative h-60 shrink-0 overflow-hidden">
+        <div className="relative h-48 shrink-0 overflow-hidden">
           <Image
             src={program.image}
             alt={program.name}
@@ -81,19 +81,19 @@ function StandardCard({ program, delay }) {
           />
         </div>
 
-        <div className="flex flex-1 flex-col p-5">
-          <h3 className="font-display text-xl uppercase text-ink">{program.name}</h3>
+        <div className="flex flex-1 flex-col p-4">
+          <h3 className="font-display text-lg uppercase text-ink">{program.name}</h3>
           <p className="mt-1 text-sm font-semibold text-stone">{program.subtitle}</p>
-          <span className="mt-3 block h-px bg-stone/15" />
+          <span className="mt-2.5 block h-px bg-stone/15" />
 
-          <div className="mt-4">
+          <div className="mt-3">
             <MetaRow days={program.days} exigencia={program.exigencia} date={program.date} />
           </div>
 
-          <div className="mt-4 flex flex-1 items-end justify-between border-t border-stone/15 pt-4">
+          <div className="mt-3 flex flex-1 items-end justify-between border-t border-stone/15 pt-3">
             <div>
               <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-stone-light">Desde</p>
-              <p className="mt-0.5 font-display text-2xl text-ink">${program.price}</p>
+              <p className="mt-0.5 font-display text-xl text-ink">${program.price}</p>
               <p className="mt-0.5 text-[11px] text-stone-light">ARS · todo incluido</p>
             </div>
             <ArrowRight className="h-5 w-5 text-stone transition group-hover:translate-x-1" strokeWidth={1.8} />
@@ -106,39 +106,39 @@ function StandardCard({ program, delay }) {
 
 function FeaturedCard({ program, delay }) {
   return (
-    <Reveal delay={delay} className="relative h-full pt-5 lg:-mt-6">
-      <span className="rounded-lg absolute left-1/2 top-0 z-10 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap bg-violet px-4 py-1.5 text-xs font-bold uppercase tracking-[0.08em] text-bone shadow-md">
-        <Star className="h-3.5 w-3.5" fill="currentColor" strokeWidth={0} />
-        Plan destacado
-      </span>
-
+    <Reveal delay={delay} className="relative z-20 h-full lg:scale-[1.1] lg:-translate-y-3">
       <Link
         href={`/programas/${program.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl bg-ink shadow-[0_4px_24px_rgba(0,0,0,0.22)] transition hover:-translate-y-1 hover:shadow-[0_8px_36px_rgba(0,0,0,0.35)]"
-      >
-        <div className="relative h-60 shrink-0 overflow-hidden">
+        className="group flex h-full flex-col overflow-hidden rounded-2xl bg-ink shadow-[0_20px_50px_rgba(76,29,149,0.4)] ring-2 ring-teal/40 transition hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(76,29,149,0.5)]">
+        <div className="relative h-48 shrink-0 overflow-hidden">
           <Image
             src={program.image}
             alt={program.name}
             fill
-            sizes="(min-width: 1024px) 33vw, 100vw"
+            sizes="(min-width: 1024px) 36vw, 100vw"
             className="object-cover transition duration-700 group-hover:scale-105"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
+
+          <span className="rounded-lg absolute left-4 top-4 z-10 flex items-center gap-1.5 whitespace-nowrap bg-violet px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.08em] text-bone shadow-md">
+            <Star className="h-3.5 w-3.5" fill="currentColor" strokeWidth={0} />
+            Plan destacado
+          </span>
         </div>
 
-        <div className="flex flex-1 flex-col p-5">
-          <h3 className="font-display text-xl uppercase text-bone">{program.name}</h3>
+        <div className="flex flex-1 flex-col p-4">
+          <h3 className="font-display text-lg uppercase text-bone">{program.name}</h3>
           <p className="mt-1 text-sm font-semibold text-violet-light">{program.subtitle}</p>
-          <span className="mt-3 block h-px bg-bone/15" />
+          <span className="mt-2.5 block h-px bg-bone/15" />
 
-          <div className="mt-4">
+          <div className="mt-3">
             <MetaRow days={program.days} exigencia={program.exigencia} date={program.date} light />
           </div>
 
-          <div className="mt-4 flex flex-1 items-end justify-between border-t border-bone/15 pt-4">
+          <div className="mt-3 flex flex-1 items-end justify-between border-t border-bone/15 pt-3">
             <div>
               <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/50">Desde</p>
-              <p className="mt-0.5 font-display text-2xl text-bone">${program.price}</p>
+              <p className="mt-0.5 font-display text-xl text-bone">${program.price}</p>
               <p className="mt-0.5 text-[11px] text-bone/50">ARS · todo incluido</p>
             </div>
             <ArrowRight className="h-5 w-5 text-teal transition group-hover:translate-x-1" strokeWidth={1.8} />
@@ -153,7 +153,7 @@ export default function Programs() {
   return (
     <section
       id="programas"
-      className="border-t border-stone/15 px-6 py-16 md:px-10 md:py-20"
+      className="flex min-h-screen flex-col justify-center border-t border-stone/15 px-6 py-10 md:px-10 md:py-12"
     >
       <div className="mx-auto w-full max-w-6xl">
         <Reveal>
@@ -161,16 +161,16 @@ export default function Programs() {
             <p className="font-mono text-xs uppercase tracking-[0.32em] text-stone">
               Expediciones destacadas
             </p>
-            <h2 className="mt-4 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
+            <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
               Elegí tu próxima cumbre
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-sm text-stone">
+            <p className="mx-auto mt-3 max-w-md text-sm text-stone">
               Programas diseñados para llevarte más allá, con seguridad y propósito.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-start">
+        <div className="mt-10 grid grid-cols-1 gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-6">
           {programs.map((program, i) =>
             program.featured ? (
               <FeaturedCard key={program.slug} program={program} delay={i * 80} />
@@ -181,7 +181,7 @@ export default function Programs() {
         </div>
 
         <Reveal delay={240}>
-          <div className="mt-10 text-center">
+          <div className="mt-8 text-center lg:mt-10">
             <Link
               href="/programas"
               className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-stone transition hover:text-ink"

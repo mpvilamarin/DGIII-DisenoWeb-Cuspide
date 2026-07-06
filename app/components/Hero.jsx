@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BadgeCheck, ShieldCheck, Calendar } from "lucide-react";
 
-const FADE_MS = 500;
-const FADE_LEAD = 0.80;
+const PLAYBACK_RATE = 0.6;
 
 const credentials = [
   { icon: BadgeCheck, label: "Certificación UIAGM / IFMGA" },
@@ -15,7 +14,9 @@ const credentials = [
 export default function Hero() {
   const videoRef = useRef(null);
   const [videoOpacity, setVideoOpacity] = useState(1);
-  const fadingOut = useRef(false);
+  const directionRef = useRef("forward");
+  const rafRef = useRef(null);
+  const lastTsRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -23,7 +24,7 @@ export default function Hero() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    video.playbackRate = 0.6;
+    video.playbackRate = PLAYBACK_RATE;
 
     if (prefersReduced) {
       // Mantener loop nativo sin fade
@@ -32,35 +33,70 @@ export default function Hero() {
       return;
     }
 
-    // Fade in al cargar
     const handleLoaded = () => {
       setVideoOpacity(1);
     };
 
-    // Fade loop: detectar cuando se acerca el fin
-    const handleTimeUpdate = () => {
-      const { currentTime, duration } = video;
-      if (!duration) return;
+    const playForward = () => {
+      video.play().catch(() => {
+        // Reintenta una vez si el navegador rechazó el play() (p. ej. seek en curso)
+        rafRef.current = requestAnimationFrame(() => video.play().catch(() => {}));
+      });
+    };
 
-      if (!fadingOut.current && currentTime >= duration - FADE_LEAD) {
-        fadingOut.current = true;
-        setVideoOpacity(0);
+    // Reproduce el video hacia atrás cuadro a cuadro (no hay playbackRate negativo nativo)
+    // para que el loop sea continuo (adelante → atrás) en vez de saltar de golpe al inicio.
+    // Cada paso espera a que el "seeked" anterior se resuelva antes de pedir el siguiente:
+    // encadenarlos por rAF sin esperar satura la cola de seeks y el video termina trabado en pausa.
+    const stepReverse = (ts) => {
+      if (directionRef.current !== "backward") return;
+      if (lastTsRef.current == null) lastTsRef.current = ts;
+      const dt = (ts - lastTsRef.current) / 1000;
+      lastTsRef.current = ts;
 
-        setTimeout(() => {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-          setVideoOpacity(1);
-          fadingOut.current = false;
-        }, FADE_MS);
+      const t = video.currentTime - dt * PLAYBACK_RATE;
+      if (t <= 0) {
+        directionRef.current = "forward";
+        lastTsRef.current = null;
+        video.currentTime = 0;
+        return;
+      }
+      video.currentTime = t;
+    };
+
+    const handleSeeked = () => {
+      if (directionRef.current === "backward") {
+        rafRef.current = requestAnimationFrame(stepReverse);
+      } else {
+        playForward();
+      }
+    };
+
+    const handleEnded = () => {
+      directionRef.current = "backward";
+      lastTsRef.current = null;
+      rafRef.current = requestAnimationFrame(stepReverse);
+    };
+
+    // Si algo pausa el video durante la fase de avance (throttling del navegador,
+    // pestaña en segundo plano, etc.), lo retomamos para que el loop nunca quede parado.
+    const handlePause = () => {
+      if (directionRef.current === "forward" && !video.ended) {
+        playForward();
       }
     };
 
     video.addEventListener("loadeddata", handleLoaded);
-    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("ended", handleEnded);
+    video.addEventListener("seeked", handleSeeked);
+    video.addEventListener("pause", handlePause);
 
     return () => {
       video.removeEventListener("loadeddata", handleLoaded);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("seeked", handleSeeked);
+      video.removeEventListener("pause", handlePause);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -75,7 +111,7 @@ export default function Hero() {
         preload="auto"
         poster="/images/Hero.png"
         style={{
-          transition: `opacity ${FADE_MS}ms ease`,
+          transition: "opacity 500ms ease",
           opacity: videoOpacity,
         }}
         className="absolute inset-0 h-full w-full object-cover object-[center_15%]"

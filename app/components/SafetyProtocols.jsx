@@ -57,7 +57,7 @@ export default function SafetyProtocols() {
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-teal transition-transform duration-400 ease-out group-hover:scale-x-100" />
 
                 {/* Número fantasma */}
-                <span className="pointer-events-none absolute -bottom-4 -right-2 font-display text-[7rem] leading-none text-bone/3 transition-colors duration-400 group-hover:text-teal/10">
+                <span className="pointer-events-none absolute -bottom-4 -right-2 font-display text-[7rem] leading-none text-bone/3 transition-colors duration-400 group-hover:text-teal/5">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
@@ -71,7 +71,7 @@ export default function SafetyProtocols() {
                 <p className="relative font-display text-sm uppercase leading-[1.15] tracking-wide text-bone/60 transition-colors duration-300 group-hover:text-bone">
                   {pillar.title}
                 </p>
-                <p className="relative mt-3 text-xs leading-relaxed text-bone/30 transition-colors duration-300 group-hover:text-bone/50">
+                <p className="relative mt-3 text-xs leading-relaxed text-bone/50 transition-colors duration-300 group-hover:text-bone">
                   {pillar.detail}
                 </p>
               </div>

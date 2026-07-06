@@ -76,18 +76,18 @@ export default function Team() {
             const lastName = lastNameParts.join(" ");
 
             return (
-              <Reveal
+              <div
                 key={member.name}
-                delay={100 + i * 90}
                 className={`transition-all duration-500 ease-in-out ${
-                  isActive ? "flex-[4.4]" : "flex-[1]"
+                  isActive ? "flex-[4.4]" : "flex-1"
                 }`}
               >
-                <div
-                  onMouseEnter={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  className="group relative h-full cursor-pointer overflow-hidden border border-bone/60 bg-ink"
-                >
+                <Reveal delay={100 + i * 90} className="h-full">
+                  <div
+                    onMouseEnter={() => setActive(i)}
+                    onClick={() => setActive(i)}
+                    className="group relative h-full cursor-pointer overflow-hidden border border-bone/60 bg-ink"
+                  >
                   <Parallax strength={0.08}>
                     <Image
                       src={member.image}
@@ -183,7 +183,8 @@ export default function Team() {
                     </div>
                   </div>
                 </div>
-              </Reveal>
+                </Reveal>
+              </div>
             );
           })}
         </div>

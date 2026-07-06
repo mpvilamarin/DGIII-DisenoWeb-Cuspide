@@ -1,174 +1,173 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import { Mountain, RefreshCw, ShieldCheck, Users, Plus } from "lucide-react";
 import Reveal from "./Reveal";
 import Parallax from "./Parallax";
 
 const stages = [
   {
     num: "01",
-    title: "Formación integral",
-    duration: "8 meses",
+    title: "Formación inicial",
+    short: "Bases técnicas, seguridad y liderazgo en montaña.",
     body: "Fundamentos técnicos, física de montaña y primeros auxilios avanzados en terreno real.",
-    image: "/images/fitzroy-approach.jpg",
-    height: "clamp(100px, 16vh, 200px)",
+    image: "/images/escuela-01.png",
+    features: [
+      { icon: Mountain, label: "Técnica de base" },
+      { icon: ShieldCheck, label: "Primeros auxilios" },
+      { icon: Users, label: "Liderazgo en grupo" },
+    ],
   },
   {
     num: "02",
     title: "Prácticas en terreno",
-    duration: "6 salidas",
+    short: "Progresión en hielo, roca y mixto con supervisión directa de guías UIAGM certificados.",
     body: "Progresión en hielo, roca y mixto con supervisión directa de guías UIAGM certificados.",
-    image: "/images/rope-team.jpg",
-    height: "clamp(140px, 22vh, 280px)",
+    image: "/images/escuela-02.png",
+    features: [
+      { icon: Mountain, label: "Terreno real" },
+      { icon: RefreshCw, label: "Evaluación continua" },
+      { icon: ShieldCheck, label: "Estándares UIAGM" },
+    ],
   },
   {
     num: "03",
     title: "Evaluación UIAGM",
-    duration: "3 semanas",
+    short: "Exámenes técnicos y de liderazgo según estándares internacionales.",
     body: "Examen internacional bajo estándar IFMGA. Protocolo sin excepciones.",
-    image: "/images/ridge-walk.jpg",
-    height: "clamp(180px, 28vh, 360px)",
+    image: "/images/escuela-03.png",
+    features: [
+      { icon: Mountain, label: "Examen técnico" },
+      { icon: ShieldCheck, label: "Estándar IFMGA" },
+      { icon: Users, label: "Evaluación de liderazgo" },
+    ],
   },
   {
     num: "04",
     title: "Salida laboral",
-    duration: "Temporada completa",
+    short: "Guías preparados para liderar expediciones en todo el mundo.",
     body: "Integración al equipo Cúspide con acompañamiento y asignación de expediciones reales.",
-    image: "/images/summit-clouds.jpg",
-    height: "clamp(220px, 34vh, 440px)",
+    image: "/images/escuela-04.png",
+    features: [
+      { icon: Mountain, label: "Expediciones reales" },
+      { icon: Users, label: "Acompañamiento" },
+      { icon: ShieldCheck, label: "Equipo Cúspide" },
+    ],
   },
 ];
 
-const maxStageHeight = stages[stages.length - 1].height;
-
 export default function GuideSchool() {
-  const [active, setActive] = useState(null);
-
   return (
-    <section id="escuela-de-guias" className="text-bone">
+    <section id="escuela-de-guias" className="flex min-h-screen flex-col justify-center bg-bone py-10 text-bone md:py-12">
       {/* Header */}
       <Reveal>
-        <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-10 md:pt-20 lg:px-16">
-          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
+        <div className="mx-auto max-w-7xl px-6 pb-6 md:px-10 lg:px-16">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.32em] text-violet-light">
                 Escuela de Guías
               </p>
-              <h2 className="mt-3 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl">
+              <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] text-ink sm:text-5xl">
                 Formamos guías con
                 <br />
                 criterio y experiencia.
               </h2>
+              <p className="mt-3 max-w-md text-sm text-stone">
+                Formación profesional basada en estándares internacionales y años de trabajo en terreno.
+              </p>
             </div>
             <a
               href="#newsletter"
-              className="shrink-0 font-mono text-xs font-bold uppercase tracking-[0.16em] text-stone transition hover:text-violet-light"
+              className="group shrink-0 font-mono text-xs font-bold uppercase tracking-[0.16em] text-stone transition hover:text-violet"
             >
-              Más información →
+              <span className="border-b border-violet/40 pb-1 transition group-hover:border-violet">
+                Más información →
+              </span>
             </a>
           </div>
         </div>
       </Reveal>
 
-      {/* Mobile: acordeón vertical — Desktop: paneles en escalera */}
-      <div className="flex h-[65vh] min-h-140 flex-col gap-2 px-6 pb-10 sm:h-auto sm:min-h-0 sm:flex-row sm:items-end sm:gap-[3px] sm:pb-0 md:px-10 lg:px-16">
-        {stages.map((stage, i) => {
-          const isActive = active === i;
-          return (
-            <div
-              key={stage.num}
-              style={{
-                "--stage-h": stage.height,
-                "--max-h": maxStageHeight,
-                ...(isActive ? { height: "var(--max-h)" } : {}),
-              }}
-              onClick={() => setActive(isActive ? null : i)}
-              className={`group relative cursor-pointer overflow-hidden transition-[flex-grow,height] duration-300 ease-out sm:h-(--stage-h) sm:flex-1 sm:hover:h-(--max-h) ${
-                isActive ? "flex-[3]" : "flex-1"
-              }`}
-            >
-              {/* Imagen */}
-              <Parallax strength={0.06}>
-                <Image
-                  src={stage.image}
-                  alt={stage.title}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 50vw"
-                  className={`object-cover transition-all duration-500 grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-90 group-hover:scale-105 ${
-                    isActive ? "grayscale-0 brightness-90 scale-105" : ""
-                  }`}
-                />
-              </Parallax>
+      {/* Cards */}
+      <Reveal delay={80}>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 px-6 sm:grid-cols-2 md:px-10 lg:grid-cols-4 lg:px-16">
+          {stages.map((stage) => {
+            const [titleFirst, ...titleRest] = stage.title.split(" ");
+            const titleSecond = titleRest.join(" ");
 
-              {/* Overlay base — siempre oscuro */}
-              <div className="absolute inset-0 bg-ink/40" />
-              {/* Overlay hover — gradiente fuerte para leer el texto */}
+            return (
               <div
-                className={`absolute inset-0 bg-linear-to-t from-ink/90 via-ink/50 to-ink/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-                  isActive ? "opacity-100" : ""
-                }`}
-              />
-
-              {/* Número */}
-              <div
-                className={`absolute left-4 top-4 font-display text-2xl leading-none text-bone/35 transition-colors duration-300 group-hover:text-bone/20 sm:text-4xl ${
-                  isActive ? "text-bone/20" : ""
-                }`}
+                key={stage.num}
+                className="group relative flex h-72 flex-col overflow-hidden rounded-2xl ring-1 ring-ink/10 transition-all duration-400 hover:z-10 hover:ring-2 hover:ring-violet hover:shadow-[0_20px_60px_rgba(124,58,237,0.35)] sm:h-88 lg:h-105 lg:hover:-translate-y-2 lg:hover:scale-[1.02]"
               >
-                {stage.num}
+                {/* Imagen */}
+                <Parallax strength={0.06}>
+                  <Image
+                    src={stage.image}
+                    alt={stage.title}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                  />
+                </Parallax>
+
+                {/* Overlay — solo abajo, para no oscurecer toda la imagen */}
+                <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/10 to-transparent transition-all duration-400 group-hover:from-ink/85 group-hover:via-ink/25" />
+
+                {/* Número */}
+                <div className="relative z-10 p-5">
+                  <p className="font-display text-2xl leading-none text-bone/70 sm:text-3xl">
+                    {stage.num}
+                  </p>
+                </div>
+
+                {/* Contenido inferior */}
+                <div className="relative z-10 mt-auto p-5">
+                  <h3 className="font-display text-xl uppercase leading-[0.95] text-bone sm:text-2xl">
+                    {titleFirst}
+                    {titleSecond && (
+                      <>
+                        <br />
+                        {titleSecond}
+                      </>
+                    )}
+                  </h3>
+
+                  {/* Colapsado */}
+                  <div className="translate-y-0 opacity-100 transition-all duration-300 group-hover:pointer-events-none group-hover:absolute group-hover:-translate-y-2 group-hover:opacity-0">
+                    <p className="mt-2 text-sm leading-snug text-bone/65">{stage.short}</p>
+                    <span className="mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-bone/30 text-bone/70 transition group-hover:border-violet-light group-hover:text-violet-light">
+                      <Plus className="h-4 w-4" strokeWidth={1.8} />
+                    </span>
+                  </div>
+
+                  {/* Expandido */}
+                  <div className="pointer-events-none absolute translate-y-2 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:static group-hover:translate-y-0 group-hover:opacity-100">
+                    <span className="mt-3 block h-px w-8 bg-violet-light" />
+                    <p className="mt-3 text-sm leading-relaxed text-bone/80">{stage.body}</p>
+                    <div className="mt-5 space-y-2.5">
+                      {stage.features.map((feature) => (
+                        <div
+                          key={feature.label}
+                          className="flex items-center gap-2.5 text-sm text-bone/85"
+                        >
+                          <feature.icon className="h-4 w-4 text-violet-light" strokeWidth={1.8} />
+                          {feature.label}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
+            );
+          })}
+        </div>
+      </Reveal>
 
-              {/* Línea izquierda */}
-              <span
-                className={`absolute left-0 top-0 h-full w-0.5 bg-violet-light opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-                  isActive ? "opacity-100" : ""
-                }`}
-              />
-
-              {/* Título (estado normal): horizontal en mobile, vertical rotado en desktop */}
-              <div
-                className={`absolute inset-x-0 bottom-0 flex items-center justify-center px-4 py-3 transition-opacity duration-200 group-hover:opacity-0 sm:bottom-5 sm:py-0 ${
-                  isActive ? "opacity-0" : ""
-                }`}
-              >
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-bone/70 sm:rotate-180 sm:text-[9px] sm:tracking-[0.18em] sm:text-bone/60 sm:[writing-mode:vertical-rl]">
-                  {stage.title}
-                </p>
-              </div>
-
-              {/* Contenido expandido */}
-              <div
-                className={`absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
-                  isActive ? "translate-y-0 opacity-100" : ""
-                }`}
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-violet-light sm:text-[10px]">
-                  {stage.duration}
-                </p>
-                <h3 className="mt-1.5 font-display text-xl uppercase leading-[0.95] text-bone sm:text-lg">
-                  {stage.title}
-                </h3>
-                <span className="mt-2.5 block h-px w-7 bg-violet-light" />
-                <p className="mt-2.5 font-mono text-xs leading-relaxed text-bone/60 sm:text-[10px]">
-                  {stage.body}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Línea base — solo desktop */}
-      <div className="mx-6 hidden border-t border-dashed border-violet/25 sm:block md:mx-10 lg:mx-16" />
-      <div className="hidden gap-0.75 px-6 pb-10 sm:flex md:px-10 lg:px-16">
-        {stages.map((stage) => (
-          <div key={stage.num} className="flex-1 pt-3">
-            <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-bone/30">
-              {stage.num}
-            </p>
-          </div>
-        ))}
+      {/* Línea final */}
+      <div className="mx-auto mt-6 flex max-w-7xl items-center justify-center gap-2 px-6 md:px-10 lg:px-16">
+        <ShieldCheck className="h-4 w-4 text-violet-light" strokeWidth={1.8} />
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-stone">
+          Formación seria. Montaña real. Decisiones reales.
+        </p>
       </div>
     </section>
   );

@@ -123,7 +123,7 @@ function buildContours(H) {
         const r = (i / p.rings) * p.maxR;
         const isIdx = i === p.rings || i % 4 === 0;
         paths.push(
-          `<path d="${ringPath(p.x, p.y, r, p.seed)}" stroke="rgba(28,18,48,${isIdx ? 0.08 : 0.035})" stroke-width="${isIdx ? 1 : 0.7}" fill="none"/>`
+          `<path d="${ringPath(p.x, p.y, r, p.seed)}" stroke="rgba(28,18,48,${isIdx ? 0.04 : 0.018})" stroke-width="${isIdx ? 1 : 0.7}" fill="none"/>`
         );
       }
       return paths.join("");
@@ -135,12 +135,12 @@ function buildSVG(H) {
   const contours = buildContours(H);
 
   const vlines = GVX.map(
-    (x) => `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="rgba(28,18,48,0.06)" stroke-width="0.5" stroke-dasharray="3 14" fill="none"/>`
+    (x) => `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="rgba(28,18,48,0.03)" stroke-width="0.5" stroke-dasharray="3 14" fill="none"/>`
   ).join("");
 
   const numH = Math.ceil(H / 320);
   const hlines = Array.from({ length: numH }, (_, i) =>
-    `<line x1="0" y1="${i * 320}" x2="${SVG_W}" y2="${i * 320}" stroke="rgba(28,18,48,0.04)" stroke-width="0.5" stroke-dasharray="2 22" fill="none"/>`
+    `<line x1="0" y1="${i * 320}" x2="${SVG_W}" y2="${i * 320}" stroke="rgba(28,18,48,0.02)" stroke-width="0.5" stroke-dasharray="2 22" fill="none"/>`
   ).join("");
 
   const crossPositions = [];
@@ -151,16 +151,16 @@ function buildSVG(H) {
   }
   const crosses = crossPositions.map(
     ([x, y]) =>
-      `<line x1="${x - 5}" y1="${y}" x2="${x + 5}" y2="${y}" stroke="rgba(28,18,48,0.18)" stroke-width="0.7" fill="none"/><line x1="${x}" y1="${y - 5}" x2="${x}" y2="${y + 5}" stroke="rgba(28,18,48,0.18)" stroke-width="0.7" fill="none"/>`
+      `<line x1="${x - 5}" y1="${y}" x2="${x + 5}" y2="${y}" stroke="rgba(28,18,48,0.09)" stroke-width="0.7" fill="none"/><line x1="${x}" y1="${y - 5}" x2="${x}" y2="${y + 5}" stroke="rgba(28,18,48,0.09)" stroke-width="0.7" fill="none"/>`
   ).join("");
 
   const labels = MARKERS.map(
     (m) =>
-      `<line x1="${m.x - 8}" y1="${m.y}" x2="${m.x + 8}" y2="${m.y}" stroke="rgba(28,18,48,0.22)" stroke-width="0.7" fill="none"/>` +
-      `<line x1="${m.x}" y1="${m.y - 8}" x2="${m.x}" y2="${m.y + 8}" stroke="rgba(28,18,48,0.22)" stroke-width="0.7" fill="none"/>` +
-      `<circle cx="${m.x}" cy="${m.y}" r="1.5" fill="rgba(28,18,48,0.28)"/>` +
-      `<text x="${m.x + 12}" y="${m.y - 3}" font-family="monospace" font-size="7" fill="rgba(28,18,48,0.28)" letter-spacing="0.6">${m.lat} / ${m.lon}</text>` +
-      `<text x="${m.x + 12}" y="${m.y + 9}" font-family="monospace" font-size="6.5" fill="rgba(28,18,48,0.18)" letter-spacing="0.4">▲ ${m.elev}</text>`
+      `<line x1="${m.x - 8}" y1="${m.y}" x2="${m.x + 8}" y2="${m.y}" stroke="rgba(28,18,48,0.11)" stroke-width="0.7" fill="none"/>` +
+      `<line x1="${m.x}" y1="${m.y - 8}" x2="${m.x}" y2="${m.y + 8}" stroke="rgba(28,18,48,0.11)" stroke-width="0.7" fill="none"/>` +
+      `<circle cx="${m.x}" cy="${m.y}" r="1.5" fill="rgba(28,18,48,0.14)"/>` +
+      `<text x="${m.x + 12}" y="${m.y - 3}" font-family="monospace" font-size="7" fill="rgba(28,18,48,0.14)" letter-spacing="0.6">${m.lat} / ${m.lon}</text>` +
+      `<text x="${m.x + 12}" y="${m.y + 9}" font-family="monospace" font-size="6.5" fill="rgba(28,18,48,0.09)" letter-spacing="0.4">▲ ${m.elev}</text>`
   ).join("");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${H}" viewBox="0 0 ${SVG_W} ${H}">${vlines}${hlines}${contours}${crosses}${labels}</svg>`;
