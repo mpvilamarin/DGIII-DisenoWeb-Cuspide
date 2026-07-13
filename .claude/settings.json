@@ -37,7 +37,8 @@
       "Bash(node measure.js)",
       "Bash(node measure2.js)",
       "Bash(node shot-mobile.js)",
-      "Bash(powershell -c \"\\(Get-Item 'public/Hero.mp4'\\).Length\")"
+      "Bash(powershell -c \"\\(Get-Item 'public/Hero.mp4'\\).Length\")",
+      "Bash(node cta-check.js)"
     ]
   }
 }

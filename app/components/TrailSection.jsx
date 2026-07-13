@@ -177,6 +177,7 @@ export default function TrailSection() {
         alt="Ruta Laguna de los Tres, Fitz Roy, El Chaltén"
         fill
         sizes="100vw"
+        quality={90}
         className="object-cover object-center opacity-60"
       />
 

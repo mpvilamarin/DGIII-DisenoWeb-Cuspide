@@ -20,7 +20,7 @@ const GEAR = [
     y: 95,
     zoom: 420,
     description:
-      "Compatibles con bota de doble capa rígida. Obligatorios desde el momento en que pisás el hielo. Provistos por Cúspide, ajustados individualmente antes de la expedición.",
+      "Compatibles con bota de doble capa rígida. Obligatorios desde el momento en que pisás el hielo. Provistos por Cúspides, ajustados individualmente antes de la expedición.",
   },
   {
     id: "piolet",
@@ -56,7 +56,7 @@ const GEAR = [
     y: 58,
     zoom: 340,
     description:
-      "Para progresión en cordada y zonas de grietas. Provistos y verificados por Cúspide. El nudo de encordamiento es evaluado antes de cada salida.",
+      "Para progresión en cordada y zonas de grietas. Provistos y verificados por Cúspides. El nudo de encordamiento es evaluado antes de cada salida.",
   },
 ];
 
@@ -81,7 +81,7 @@ export default function GearShowcase() {
             Lo que llevás{" "}
             <span className="text-gradient-cool">puesto no es opcional.</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone sm:mx-0">
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70 sm:mx-0">
             Pasá el cursor o tocá cada ítem para ver el detalle del equipo
             técnico que se usa en esta expedición.
           </p>
@@ -118,73 +118,76 @@ export default function GearShowcase() {
 
         {/* Right: imagen con puntos interactivos */}
         <div className="relative">
-          <div
-            className="relative mx-auto max-w-md overflow-hidden rounded-2xl bg-ink lg:mx-0"
-            style={{ aspectRatio: "3 / 4" }}
-          >
-            <Image
-              src="/detail/ropa01.png"
-              alt="Guía equipado para travesía de hielo"
-              fill
-              sizes="(min-width: 1024px) 500px, 90vw"
-              className="object-cover"
-              priority={false}
-            />
+          {/* Caja de coordenadas compartida por la imagen recortada y la tarjeta flotante,
+              sin overflow-hidden propio para que la tarjeta nunca se corte si sale del marco. */}
+          <div className="relative mx-auto max-w-md lg:mx-0" style={{ aspectRatio: "3 / 4" }}>
+            {/* Imagen — este es el único nivel que recorta (bordes redondeados) */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl bg-ink">
+              <Image
+                src="/detail/ropa01.png"
+                alt="Guía equipado para travesía de hielo"
+                fill
+                sizes="(min-width: 1024px) 500px, 90vw"
+                quality={90}
+                className="object-cover"
+                priority={false}
+              />
 
-            {/* Líneas guía — igual que en el gráfico de ascenso, siempre hacia el borde izquierdo */}
-            <svg
-              viewBox="0 0 100 133.33"
-              preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            >
-              {GEAR.map((g) => {
-                if (g.id !== active) return null;
-                const y = (g.y / 100) * 133.33;
-                return (
-                  <line
-                    key={g.id}
-                    x1={g.x}
-                    y1={y}
-                    x2={0}
-                    y2={y}
-                    stroke="rgba(247,248,252,0.8)"
-                    strokeWidth="0.35"
-                  />
-                );
-              })}
-            </svg>
-
-            {/* Pines — punto igual al del gráfico de ascenso, con halo pulsante */}
-            <div className="pointer-events-none absolute inset-0">
-              {GEAR.map((g) => {
-                const isActive = active === g.id;
-                return (
-                  <button
-                    key={g.id}
-                    type="button"
-                    aria-label={g.label}
-                    onMouseEnter={() => setHover(g.id)}
-                    onMouseLeave={() => clearHover(g.id)}
-                    onClick={() => toggle(g.id)}
-                    className="pointer-events-auto absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-                    style={{ left: `${g.x}%`, top: `${g.y}%` }}
-                  >
-                    {!isActive && (
-                      <span className="pulse-halo absolute h-4 w-4 rounded-full border border-dashed border-violet" />
-                    )}
-                    <span
-                      className={`relative h-2.5 w-2.5 rounded-full border transition-all ${
-                        isActive
-                          ? "scale-125 border-bone bg-violet"
-                          : "border-bone/70 bg-violet-light"
-                      }`}
+              {/* Líneas guía — igual que en el gráfico de ascenso, siempre hacia el borde izquierdo */}
+              <svg
+                viewBox="0 0 100 133.33"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute inset-0 h-full w-full"
+              >
+                {GEAR.map((g) => {
+                  if (g.id !== active) return null;
+                  const y = (g.y / 100) * 133.33;
+                  return (
+                    <line
+                      key={g.id}
+                      x1={g.x}
+                      y1={y}
+                      x2={0}
+                      y2={y}
+                      stroke="rgba(247,248,252,0.8)"
+                      strokeWidth="0.35"
                     />
-                  </button>
-                );
-              })}
+                  );
+                })}
+              </svg>
+
+              {/* Pines — punto igual al del gráfico de ascenso, con halo pulsante */}
+              <div className="pointer-events-none absolute inset-0">
+                {GEAR.map((g) => {
+                  const isActive = active === g.id;
+                  return (
+                    <button
+                      key={g.id}
+                      type="button"
+                      aria-label={g.label}
+                      onMouseEnter={() => setHover(g.id)}
+                      onMouseLeave={() => clearHover(g.id)}
+                      onClick={() => toggle(g.id)}
+                      className="pointer-events-auto absolute z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+                      style={{ left: `${g.x}%`, top: `${g.y}%` }}
+                    >
+                      {!isActive && (
+                        <span className="pulse-halo absolute h-4 w-4 rounded-full border border-dashed border-violet" />
+                      )}
+                      <span
+                        className={`relative h-2.5 w-2.5 rounded-full border transition-all ${
+                          isActive
+                            ? "scale-125 border-bone bg-violet"
+                            : "border-bone/70 bg-violet-light"
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Tarjeta flotante — siempre sobre la foto, pegada al costado izquierdo */}
+            {/* Tarjeta flotante — fuera del contenedor recortado, así se ve completa aunque quede fuera de la foto */}
             {activeItem && (
               <div
                 className="pointer-events-none absolute z-20 left-2 w-56 -translate-y-1/2"
@@ -205,7 +208,7 @@ export default function GearShowcase() {
                     <p className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-violet-dark">
                       {activeItem.label}
                     </p>
-                    <p className="mt-1.5 text-[11px] leading-relaxed text-stone">
+                    <p className="mt-1.5 text-[11px] leading-relaxed text-ink/75">
                       {activeItem.description}
                     </p>
                   </div>
@@ -214,7 +217,7 @@ export default function GearShowcase() {
             )}
           </div>
 
-          <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-stone-light lg:hidden">
+          <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-stone lg:hidden">
             Tocá los puntos del equipo
           </p>
         </div>

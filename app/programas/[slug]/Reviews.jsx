@@ -5,6 +5,13 @@ import Image from "next/image";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 import Reveal from "../../components/Reveal";
 
+// Referencia única para el pico de la burbuja y el avatar: el padding del
+// bloque de avatar y el centro del pico se calculan a partir de estas mismas
+// constantes, así nunca se desalinean si cambia el tamaño del avatar.
+const AVATAR_SIZE = 40; // h-10 w-10
+const AVATAR_OFFSET = 36; // padding-left del bloque de avatar y posición del pico — ambos alineados a la izquierda
+const TAIL_LEFT = AVATAR_OFFSET;
+
 const REVIEWS = [
   {
     name: "Martina Ríos",
@@ -17,7 +24,7 @@ const REVIEWS = [
     name: "Diego Salas",
     time: "hace 10 días",
     rating: 5,
-    text: "Ya hice dos expediciones con Cúspide y ambas superaron mis expectativas. El ratio guía/cliente se nota en cada decisión que toman en el terreno.",
+    text: "Ya hice dos expediciones con Cúspides y ambas superaron mis expectativas. El ratio guía/cliente se nota en cada decisión que toman en el terreno.",
     photo: "/detail/diego-salas.jpg",
   },
   {
@@ -120,32 +127,51 @@ export default function Reviews() {
               className="flex snap-x snap-mandatory gap-5 overflow-x-auto scrollbar-none px-1 py-2 lg:max-w-160 xl:max-w-215"
             >
               {REVIEWS.map((r) => (
-                <div key={r.name} className="w-72 shrink-0 snap-start pb-1">
-                  {/* Nube de texto con pico alineado al borde izquierdo del avatar */}
+                <div key={r.name} className="w-72 shrink-0 snap-start pb-2">
+                  {/* Burbuja */}
                   <div className="relative rounded-2xl border border-stone/10 bg-white p-6 shadow-sm">
                     <p className="min-h-24 text-sm leading-relaxed text-stone">
                       {r.text}
                     </p>
+
                     <div className="mt-4">
                       <StarRow rating={r.rating} />
                     </div>
-                    <span className="absolute -bottom-2 left-9 z-20 h-4 w-4 rotate-45 border-b border-r border-stone/10 bg-white" />
+
+                    {/* Pico — centrado con el avatar vía TAIL_LEFT (deriva de AVATAR_OFFSET + AVATAR_SIZE) */}
+                    <span
+                      className="absolute -bottom-2.25 h-4.5 w-4.5 rotate-45 rounded-xs border-r border-b border-stone/10 bg-white"
+                      style={{ left: TAIL_LEFT }}
+                    />
                   </div>
 
-                  {/* Avatar debajo */}
-                  <div className="relative z-10 mt-4 flex items-center gap-3 pl-9">
-                    <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-bone">
+                  {/* Avatar */}
+                  <div
+                    className="relative mt-5 flex items-center gap-3"
+                    style={{ paddingLeft: AVATAR_OFFSET }}
+                  >
+                    <div
+                      className="relative shrink-0 overflow-hidden rounded-full ring-2 ring-bone"
+                      style={{ height: AVATAR_SIZE, width: AVATAR_SIZE }}
+                    >
                       <Image
                         src={r.photo}
                         alt={r.name}
                         fill
-                        sizes="40px"
+                        sizes={`${AVATAR_SIZE}px`}
+                        quality={90}
                         className="object-cover"
                       />
-                    </span>
+                    </div>
+
                     <div>
-                      <p className="text-xs font-semibold text-ink">{r.name}</p>
-                      <p className="text-[10px] text-stone-light">{r.time}</p>
+                      <p className="text-sm font-semibold leading-none text-ink">
+                        {r.name}
+                      </p>
+
+                      <p className="mt-1 text-xs text-stone-light">
+                        {r.time}
+                      </p>
                     </div>
                   </div>
                 </div>

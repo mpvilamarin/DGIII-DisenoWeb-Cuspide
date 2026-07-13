@@ -106,7 +106,7 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
   return (
     <section
       ref={sectionRef}
-      className="flex min-h-[80vh] flex-col justify-center border-t border-stone/15 bg-bone px-6 py-10 md:px-10 lg:px-16"
+      className="flex min-h-[80vh] flex-col justify-center border-t border-stone/15 bg-bone px-6 pt-10 pb-20 md:px-10 md:pb-28 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         <p className="text-center font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-violet-dark sm:text-left">
@@ -321,6 +321,7 @@ export default function AscentRoute({ itinerario, galeria = [], mainImage }) {
                       alt={activePoint.titulo}
                       fill
                       sizes="288px"
+                      quality={90}
                       className="object-cover"
                     />
                   </div>

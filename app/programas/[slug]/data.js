@@ -7,6 +7,9 @@ export const programs = [
     grade: "D",
     gradeLabel: "Difficile",
     tagline: "La cumbre más disputada de Patagonia exige más que condición física.",
+    category: "Expedición de alta montaña",
+    price: "980.000",
+    priceUSD: "860",
     image: "/images/pinnacle-back.jpg",
     altImage: "/images/fitzroy-approach.jpg",
 
@@ -180,7 +183,10 @@ export const programs = [
     grade: "AD",
     gradeLabel: "Assez Difficile",
     tagline: "Cuatro kilómetros de hielo vivo sobre el mayor glaciar accesible del planeta.",
-    image: "/images/Hero-peritoMoreno.png",
+    category: "Expedición de alta montaña",
+    price: "1.690.000",
+    priceUSD: "1.490",
+    image: "/images/Hero-perito.png",
     altImage: "/images/rope-team.jpg",
 
     waypoints: [
@@ -303,9 +309,9 @@ export const programs = [
     headline: "Hielo.\nMovimiento.\nVida real.",
     incluye: [
       { icon: "User", label: "Guía AAGM", sub: "Certificado" },
-      { icon: "Package", label: "Logística completa", sub: "En glaciar" },
-      { icon: "Wrench", label: "Equipamiento grupal", sub: "Crampones y cuerdas" },
-      { icon: "Home", label: "Alojamiento", sub: "Campamento" },
+      { icon: "Package", label: "Logística completa", sub: "En destino" },
+      { icon: "Wrench", label: "Equipamiento grupal", sub: "Comprobado y cuidado" },
+      { icon: "Home", label: "Alojamiento", sub: "Seleccionado" },
       { icon: "Radio", label: "Comunicaciones", sub: "Radio satelital" },
       { icon: "Shield", label: "Seguro", sub: "Asistencia médica" },
     ],
@@ -328,6 +334,9 @@ export const programs = [
     grade: "D+",
     gradeLabel: "Très Difficile",
     tagline: "El grito de piedra. La línea donde termina la preparación y empieza el alpinismo de élite.",
+    category: "Expedición de alta montaña",
+    price: "1.000.000",
+    priceUSD: "880",
     image: "/images/rock-face.png",
     altImage: "/images/ice-couloir.jpg",
 
@@ -353,7 +362,7 @@ export const programs = [
     desafio: [
       "El Cerro Torre es considerado uno de los seis grandes problemas del alpinismo mundial. Su cumbre es técnicamente más difícil que el Fitz Roy: mezcla de granito compacto, terreno mixto y un champiñón de hielo en la cima que cambia de forma cada temporada.",
       "La ruta Ragni di Lecco implica escalada en roca hasta grado 6a en terreno expuesto, progresión en terreno glaciario crevaseado y manejo de condiciones extremas en altura. El cociente de intento/cumbre histórico es del 12%.",
-      "Este es el programa más exigente de Cúspide. No se accede sin haber completado el Fitz Roy u otro D equivalente. Los nueve meses de preparación no son una formalidad: son el mínimo viable para tener opciones reales en la cumbre.",
+      "Este es el programa más exigente de Cúspides. No se accede sin haber completado el Fitz Roy u otro D equivalente. Los nueve meses de preparación no son una formalidad: son el mínimo viable para tener opciones reales en la cumbre.",
     ],
 
     cronograma: [
@@ -490,6 +499,9 @@ export const programs = [
     grade: "PD",
     gradeLabel: "Peu Difficile",
     tagline: "El primer paso en la montaña real. Sin atajos, sin simulaciones.",
+    category: "Iniciación en montaña",
+    price: "450.000",
+    priceUSD: "395",
     image: "/images/rope-team.jpg",
     altImage: "/images/ridge-walk.jpg",
 

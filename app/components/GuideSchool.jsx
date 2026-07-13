@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Mountain, RefreshCw, ShieldCheck, Users, Plus } from "lucide-react";
 import Reveal from "./Reveal";
 import Parallax from "./Parallax";
@@ -9,7 +8,6 @@ const stages = [
     num: "01",
     title: "Formación inicial",
     short: "Bases técnicas, seguridad y liderazgo en montaña.",
-    body: "Formación en fundamentos técnicos, física de montaña y primeros auxilios avanzados en terreno real.",
     image: "/images/escuela-01.png",
     features: [
       { icon: Mountain, label: "Técnica de base" },
@@ -21,7 +19,6 @@ const stages = [
     num: "02",
     title: "Prácticas en terreno",
     short: "Progresión en hielo, roca y mixto con supervisión directa de guías UIAGM certificados.",
-    body: "Formación en progresión de hielo, roca y mixto, con supervisión directa de guías UIAGM certificados.",
     image: "/images/escuela-02.png",
     features: [
       { icon: Mountain, label: "Terreno real" },
@@ -33,7 +30,6 @@ const stages = [
     num: "03",
     title: "Evaluación UIAGM",
     short: "Exámenes técnicos y de liderazgo según estándares internacionales.",
-    body: "Evaluación internacional bajo estándar IFMGA. Protocolo sin excepciones.",
     image: "/images/escuela-03.png",
     features: [
       { icon: Mountain, label: "Examen técnico" },
@@ -45,12 +41,11 @@ const stages = [
     num: "04",
     title: "Salida laboral",
     short: "Guías formados para liderar expediciones en todo el mundo.",
-    body: "Integración al equipo Cúspide, con acompañamiento y asignación de expediciones reales.",
     image: "/images/escuela-04.png",
     features: [
       { icon: Mountain, label: "Expediciones reales" },
       { icon: Users, label: "Acompañamiento" },
-      { icon: ShieldCheck, label: "Equipo Cúspide" },
+      { icon: ShieldCheck, label: "Equipo Cúspides" },
     ],
   },
 ];
@@ -100,6 +95,7 @@ export default function GuideSchool() {
                     alt={stage.title}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
+                    quality={90}
                     className="object-cover saturate-[0.35] transition-all duration-500 group-hover:scale-105 group-hover:saturate-100"
                   />
                 </Parallax>
@@ -137,7 +133,6 @@ export default function GuideSchool() {
                   {/* Expandido */}
                   <div className="pointer-events-none absolute translate-y-2 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:static group-hover:translate-y-0 group-hover:opacity-100">
                     <span className="mt-3 block h-px w-8 bg-violet-light" />
-                    <p className="mt-3 text-sm leading-relaxed text-bone/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">{stage.body}</p>
                     <div className="mt-5 space-y-2.5">
                       {stage.features.map((feature) => (
                         <div
@@ -165,14 +160,6 @@ export default function GuideSchool() {
             Formación seria. Montaña real. Decisiones reales.
           </p>
         </div>
-
-        <Link
-          href="#contacto"
-          className="group inline-flex items-center gap-3 bg-violet px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:px-7 sm:py-4"
-        >
-          Sumarme a la lista de espera
-          <span className="transition group-hover:translate-x-1">→</span>
-        </Link>
       </div>
     </section>
   );

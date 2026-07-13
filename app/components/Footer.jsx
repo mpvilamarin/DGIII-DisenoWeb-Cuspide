@@ -6,7 +6,7 @@ const navLinks = [
   { label: "ESCUELA DE GUÍAS", href: "#" },
   { label: "EXPEDICIONES", href: "#" },
   { label: "RECURSOS", href: "#" },
-  { label: "SOBRE CÚSPIDE", href: "#" },
+  { label: "SOBRE CÚSPIDES", href: "#" },
 ];
 
 const socials = [
@@ -50,9 +50,10 @@ export default function Footer() {
             <Link href="/" className="shrink-0">
               <Image
                 src="/images/Logo blanco.png"
-                alt="Cúspide"
+                alt="Cúspides"
                 width={140}
                 height={32}
+                quality={100}
                 className="h-7 w-auto sm:h-8"
               />
             </Link>
@@ -80,7 +81,7 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="flex flex-col items-center gap-2 py-4 text-center text-xs text-bone/40 sm:flex-row sm:justify-between sm:gap-3 sm:py-3 sm:text-left">
-          <p>© {new Date().getFullYear()} Cúspide · Formación de montaña</p>
+          <p>© {new Date().getFullYear()} Cúspides · Formación de montaña</p>
 
           <div className="flex items-center gap-2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4 shrink-0">

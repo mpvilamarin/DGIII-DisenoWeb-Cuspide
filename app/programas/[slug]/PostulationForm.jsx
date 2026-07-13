@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function PostulationForm({ programName }) {
   const [submitted, setSubmitted] = useState(false);
@@ -39,7 +40,7 @@ export default function PostulationForm({ programName }) {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-stone/15 bg-stone/5 px-4 py-3 text-sm text-ink placeholder:text-stone-light outline-none transition focus:border-violet focus:bg-white focus:ring-2 focus:ring-violet/15";
+    "w-full rounded-lg border border-violet/30 bg-white px-4 py-3 text-sm text-ink placeholder:text-stone-light outline-none transition focus:border-violet focus:ring-2 focus:ring-violet/15";
 
   return (
     <form
@@ -73,22 +74,25 @@ export default function PostulationForm({ programName }) {
           placeholder="Teléfono (opcional)"
           className={inputClass}
         />
-        <select
-          name="experiencia"
-          required
-          value={form.experiencia}
-          onChange={handleChange}
-          className={`${inputClass} cursor-pointer appearance-none ${form.experiencia ? "" : "text-stone-light"}`}
-        >
-          <option value="" disabled>
-            Nivel de experiencia
-          </option>
-          <option value="sin-experiencia">Sin experiencia técnica</option>
-          <option value="pd">PD — Peu Difficile</option>
-          <option value="ad">AD — Assez Difficile</option>
-          <option value="d">D — Difficile</option>
-          <option value="d-plus">D+ — Très Difficile</option>
-        </select>
+        <div className="relative">
+          <select
+            name="experiencia"
+            required
+            value={form.experiencia}
+            onChange={handleChange}
+            className={`${inputClass} custom-select cursor-pointer appearance-none pr-10 ${form.experiencia ? "" : "text-stone-light"}`}
+          >
+            <option value="" disabled className="text-stone-light">
+              Nivel de experiencia
+            </option>
+            <option value="sin-experiencia" className="text-ink">Sin experiencia técnica</option>
+            <option value="pd" className="text-ink">PD — Peu Difficile</option>
+            <option value="ad" className="text-ink">AD — Assez Difficile</option>
+            <option value="d" className="text-ink">D — Difficile</option>
+            <option value="d-plus" className="text-ink">D+ — Très Difficile</option>
+          </select>
+          <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone" strokeWidth={1.8} />
+        </div>
       </div>
 
       <textarea
@@ -97,7 +101,7 @@ export default function PostulationForm({ programName }) {
         rows={3}
         value={form.motivacion}
         onChange={handleChange}
-        placeholder="Contanos tu experiencia y por qué querés hacer este programa"
+        placeholder="Describí tu experiencia en montaña y por qué querés sumarte a este programa"
         className={`${inputClass} mt-4 resize-none`}
       />
 
@@ -105,7 +109,7 @@ export default function PostulationForm({ programName }) {
         type="submit"
         className="group mt-5 inline-flex w-full items-center justify-center gap-3 rounded-lg bg-violet py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-bone transition hover:bg-violet-dark sm:w-auto sm:px-8"
       >
-        Enviar postulación
+        Postularme
         <span className="transition group-hover:translate-x-1">→</span>
       </button>
     </form>

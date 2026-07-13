@@ -40,6 +40,7 @@ export default function ProgramGallery({ images }) {
               alt={`Galería ${i + 1}`}
               fill
               sizes="33vw"
+              quality={90}
               className="object-cover transition duration-500 hover:scale-105"
             />
           </div>

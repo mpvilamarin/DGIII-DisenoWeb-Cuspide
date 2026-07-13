@@ -61,6 +61,7 @@ export default function Methodology() {
                 alt={step.title}
                 fill
                 sizes="50vw"
+                quality={90}
                 className={`object-cover transition-opacity duration-700 ${
                   active === i ? "opacity-100" : "opacity-0"
                 }`}

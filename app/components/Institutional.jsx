@@ -62,7 +62,7 @@ export default function Institutional() {
             No una agencia.
           </h2>
           <p className="mt-4 text-center text-sm leading-relaxed text-stone sm:text-left">
-            Cúspide nace de guías de montaña, no de operadores turísticos.
+            Cúspides nace de guías de montaña, no de operadores turísticos.
             Cada programa tiene la rigurosidad de una formación de rescate.
           </p>
         </Reveal>
@@ -76,9 +76,10 @@ export default function Institutional() {
               <Parallax>
                 <Image
                   src="/images/rock-face.png"
-                  alt="Guía de Cúspide escalando una pared de roca con vista a la cordillera"
+                  alt="Guía de Cúspides escalando una pared de roca con vista a la cordillera"
                   fill
                   sizes="(min-width: 640px) 40vw, 100vw"
+                  quality={90}
                   className="object-cover object-[18%_38%]"
                 />
               </Parallax>

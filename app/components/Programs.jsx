@@ -77,6 +77,7 @@ function StandardCard({ program, delay }) {
             alt={program.name}
             fill
             sizes="(min-width: 1024px) 33vw, 100vw"
+            quality={90}
             className="object-cover transition duration-700 group-hover:scale-105"
           />
         </div>
@@ -116,6 +117,7 @@ function FeaturedCard({ program, delay }) {
             alt={program.name}
             fill
             sizes="(min-width: 1024px) 36vw, 100vw"
+            quality={90}
             className="object-cover transition duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />

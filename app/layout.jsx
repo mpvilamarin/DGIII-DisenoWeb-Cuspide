@@ -15,9 +15,9 @@ const technical = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Cúspide — La montaña no negocia",
+  title: "Cúspides — La montaña no negocia",
   description:
-    "Cúspide prepara durante meses, física y mentalmente, a quienes están dispuestos a ganarse la cumbre.",
+    "Cúspides prepara durante meses, física y mentalmente, a quienes están dispuestos a ganarse la cumbre.",
 };
 
 export default function RootLayout({ children }) {

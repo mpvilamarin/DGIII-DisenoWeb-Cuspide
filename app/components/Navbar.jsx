@@ -20,14 +20,15 @@ export default function Navbar() {
         <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
             src="/images/Logo blanco.png"
-            alt="Cúspide"
+            alt="Cúspides"
             width={160}
             height={40}
+            quality={100}
             className="h-10 w-auto"
             priority
           />
           <span className="-ml-[10px] font-display text-xl tracking-widest text-bone uppercase">
-            úspide
+            úspides
           </span>
         </Link>
 

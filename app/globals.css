@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
+
   --background: #f3efe7;
   --foreground: #08101f;
 
@@ -54,6 +56,33 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Popup nativo del <select> con estilos de marca — soportado en navegadores
+   con la Customizable Select API (Chrome/Edge recientes); en el resto cae
+   de forma segura al popup nativo del sistema operativo. */
+.custom-select {
+  appearance: base-select;
+}
+.custom-select::picker(select) {
+  appearance: base-select;
+  margin-top: 6px;
+  padding: 6px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(91, 56, 148, 0.3);
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(24, 16, 43, 0.18);
+}
+.custom-select option {
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+}
+.custom-select option:hover {
+  background-color: rgba(91, 56, 148, 0.12);
+}
+.custom-select option:checked {
+  background: var(--color-violet);
+  color: var(--color-bone);
 }
 
 .grain {

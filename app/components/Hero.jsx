@@ -149,13 +149,13 @@ export default function Hero() {
             "radial-gradient(ellipse 120% 100% at 0% 100%, rgba(76,29,149,0.25) 0%, rgba(76,29,149,0.1) 35%, rgba(76,29,149,0) 55%)",
         }}
       />
-      <div className="grain absolute inset-0" />
+      <div className="grain absolute inset-0 opacity-20" />
 
       <div className="relative z-10 flex h-screen min-h-160 flex-col items-center justify-center pt-22 sm:items-start">
         <div className="mx-auto w-full max-w-7xl px-6 text-center md:px-10 sm:text-left">
 
           <h1 className="mt-5 font-display text-[9vw] uppercase leading-[0.82] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] sm:text-[9vw] md:text-[6vw]">
-            Cúspide
+            Cúspides
           </h1>
 
           <div className="mt-6 max-w-4xl sm:mx-0 mx-auto">
@@ -174,7 +174,7 @@ export default function Hero() {
 
             <a
               href="#programas"
-              className="hidden rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:inline-flex"
+              className="inline-flex rounded-md border-2 border-bone px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
             >
               Ver expediciones
             </a>

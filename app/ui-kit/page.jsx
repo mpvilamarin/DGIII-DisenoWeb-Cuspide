@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Kit de interfaz — Cúspide",
-  description: "Referencia interna de estilos y componentes del sitio de Cúspide.",
+  title: "Kit de interfaz — Cúspides",
+  description: "Referencia interna de estilos y componentes del sitio de Cúspides.",
 };
 
 const colors = [
@@ -90,7 +90,7 @@ export default function UIKitPage() {
             Documentación interna
           </p>
           <h1 className="mt-3 max-w-2xl font-display text-3xl uppercase leading-tight text-bone sm:text-4xl">
-            Piezas visuales del sitio de Cúspide
+            Piezas visuales del sitio de Cúspides
           </h1>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-bone/60">
             Relevamiento de los estilos ya construidos en el sitio — color, tipografía, botones
@@ -156,7 +156,7 @@ export default function UIKitPage() {
           >
             <div className="space-y-6 rounded-2xl border border-stone/15 bg-white p-6 sm:p-8">
               <div>
-                <p className="font-display text-4xl uppercase leading-none text-ink">Cúspide</p>
+                <p className="font-display text-4xl uppercase leading-none text-ink">Cúspides</p>
                 <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-stone-light">
                   Display / H1
                 </p>
@@ -328,7 +328,7 @@ export default function UIKitPage() {
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-ink shadow-[0_4px_24px_rgba(0,0,0,0.22)] transition hover:-translate-y-1 hover:shadow-[0_8px_36px_rgba(0,0,0,0.35)]">
                 <div className="flex h-32 items-end bg-linear-to-br from-violet-dark to-ink p-4">
-                  <p className="font-display text-lg uppercase text-bone">Cúspide</p>
+                  <p className="font-display text-lg uppercase text-bone">Cúspides</p>
                 </div>
                 <div className="flex flex-1 items-center justify-between p-4">
                   <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-bone/50">
@@ -395,7 +395,7 @@ export default function UIKitPage() {
 
       <div className="border-t border-stone/15 bg-bone px-6 py-10 text-center md:px-10">
         <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-stone-light">
-          Cúspide — Referencia interna de interfaz
+          Cúspides — Referencia interna de interfaz
         </p>
       </div>
     </div>
