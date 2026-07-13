@@ -92,8 +92,9 @@ function Block({ id, eyebrow, title, desc, children }) {
 export default function UIKitPage() {
   return (
     <div className="bg-bone">
-      <section className="bg-ink px-6 pb-14 pt-32 md:px-10 lg:px-16">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative overflow-hidden bg-ink px-6 pb-14 pt-32 md:px-10 lg:px-16">
+        <div className="map-grid pointer-events-none absolute inset-0" />
+        <div className="relative mx-auto max-w-6xl">
           <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-violet-light">
             Documentación interna
           </p>
