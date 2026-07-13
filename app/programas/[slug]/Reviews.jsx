@@ -9,7 +9,7 @@ import Reveal from "../../components/Reveal";
 // bloque de avatar y el centro del pico se calculan a partir de estas mismas
 // constantes, así nunca se desalinean si cambia el tamaño del avatar.
 const AVATAR_SIZE = 40; // h-10 w-10
-const AVATAR_OFFSET = 36; // padding-left del bloque de avatar y posición del pico — ambos alineados a la izquierda
+const AVATAR_OFFSET = 0; // padding-left del bloque de avatar y posición del pico — ambos alineados a la izquierda
 const TAIL_LEFT = AVATAR_OFFSET;
 
 const REVIEWS = [
@@ -79,11 +79,13 @@ export default function Reviews() {
               Reseñas de{" "}
               <span className="text-gradient-cool">quienes ya subieron.</span>
             </h2>
-            <div className="mt-5 flex items-center justify-center gap-2.5 lg:justify-start">
-              <span className="font-display text-lg text-ink">4.9/5</span>
-              <StarRow rating={5} />
-              <span className="text-stone-light">·</span>
-              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-stone">
+            <div className="mt-2 flex flex-col items-center gap-1.5 lg:flex-row lg:gap-2.5">
+              <div className="flex items-center gap-2.5">
+                <span className="font-display text-lg text-ink">4.9/5</span>
+                <StarRow rating={5} />
+              </div>
+              <span className="hidden text-stone-light lg:inline">·</span>
+              <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.14em] text-stone">
                 Basado en 184 reseñas
               </span>
             </div>
@@ -93,7 +95,7 @@ export default function Reviews() {
         <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-[220px_1fr] lg:items-center lg:gap-12">
           <Reveal delay={60}>
             <div className="text-center lg:text-left">
-              <span className="font-display text-6xl leading-none text-violet/15">
+              <span className="hidden font-display text-6xl leading-none text-violet/15 lg:inline">
                 &ldquo;
               </span>
               <p className="mt-1 font-display text-lg uppercase leading-tight text-ink">
@@ -129,7 +131,7 @@ export default function Reviews() {
               {REVIEWS.map((r) => (
                 <div key={r.name} className="w-72 shrink-0 snap-start pb-2">
                   {/* Burbuja */}
-                  <div className="relative rounded-2xl border border-stone/10 bg-white p-6 shadow-sm">
+                  <div className="relative rounded-2xl rounded-bl-none border border-stone/10 bg-white p-6 shadow-sm">
                     <p className="min-h-24 text-sm leading-relaxed text-stone">
                       {r.text}
                     </p>

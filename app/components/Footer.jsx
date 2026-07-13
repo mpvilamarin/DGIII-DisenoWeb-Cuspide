@@ -81,7 +81,13 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="flex flex-col items-center gap-2 py-4 text-center text-xs text-bone/40 sm:flex-row sm:justify-between sm:gap-3 sm:py-3 sm:text-left">
-          <p>© {new Date().getFullYear()} Cúspides · Formación de montaña</p>
+          <p className="flex flex-wrap items-center justify-center gap-x-2 sm:justify-start">
+            <span>© {new Date().getFullYear()} Cúspides · Formación de montaña</span>
+            <span className="hidden text-bone/20 sm:inline">·</span>
+            <Link href="/ui-kit" className="text-bone/40 underline-offset-2 hover:text-bone/70 hover:underline">
+              UI Kit
+            </Link>
+          </p>
 
           <div className="flex items-center gap-2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4 shrink-0">

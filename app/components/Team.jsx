@@ -60,7 +60,7 @@ export default function Team() {
 
           <span className="mx-auto mt-3 block h-[2px] w-12 bg-violet-light sm:mx-0" />
 
-          <h2 className="mx-auto mt-4 max-w-4xl wrap-break-word text-center font-display text-2xl uppercase leading-[0.95] text-bone sm:mx-0 sm:text-left sm:text-3xl md:text-4xl">
+          <h2 className="mx-auto mt-4 max-w-4xl wrap-break-word text-center font-display text-[1.75rem] uppercase leading-[0.95] text-bone sm:mx-0 sm:text-left sm:text-3xl md:text-4xl">
             <span className="bg-gradient-to-r text-gradient-cool">
               Instructores,
             </span>
@@ -69,7 +69,7 @@ export default function Team() {
           </h2>
         </Reveal>
 
-        <div className="mt-6 flex h-[50vh] min-h-96 flex-col gap-2 sm:h-[52vh] sm:min-h-100 sm:flex-row md:gap-3">
+        <div className="mt-6 flex h-[65vh] min-h-130 flex-col gap-2 sm:h-[52vh] sm:min-h-100 sm:flex-row md:gap-3">
           {team.map((member, i) => {
             const isActive = active === i;
             const [firstName, ...lastNameParts] = member.name.split(" ");
@@ -161,11 +161,11 @@ export default function Team() {
                     }`}
                   >
                     {/* En mobile no hay lugar para el bloque de arriba, así que el número/especialidad va acá */}
-                    <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-violet-light sm:hidden">
+                    <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-bone sm:hidden">
                       {String(i + 1).padStart(2, "0")} — {member.specialty}
                     </p>
 
-                    <h3 className="mt-1 font-display text-2xl uppercase leading-[0.9] text-bone drop-shadow-[0_12px_34px_rgba(0,0,0,0.5)] sm:mt-0 sm:text-3xl md:text-4xl">
+                    <h3 className="mt-1 font-display text-[1.75rem] uppercase leading-[0.9] text-bone drop-shadow-[0_12px_34px_rgba(0,0,0,0.5)] sm:mt-0 sm:text-3xl md:text-4xl">
                       {firstName}
                       <br />
                       {lastName}

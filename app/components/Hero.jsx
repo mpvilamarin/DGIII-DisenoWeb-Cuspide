@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BadgeCheck, ShieldCheck, Mountain } from "lucide-react";
+import { BadgeCheck, ShieldCheck, Mountain, Compass } from "lucide-react";
 
 const PLAYBACK_RATE = 0.6;
 
@@ -9,6 +9,7 @@ const credentials = [
   { icon: BadgeCheck, line1: "Certificación", line2: "UIAGM / IFMGA" },
   { icon: ShieldCheck, line1: "Protocolos", line2: "WFR" },
   { icon: Mountain, line1: "18 años", line2: "en terreno" },
+  { icon: Compass, line1: "240+", line2: "Expediciones" },
 ];
 
 export default function Hero() {
@@ -114,7 +115,7 @@ export default function Hero() {
           transition: "opacity 500ms ease",
           opacity: videoOpacity,
         }}
-        className="absolute inset-0 h-full w-full object-cover object-[center_15%]"
+        className="absolute inset-0 h-full w-full object-cover object-[83%_0%]"
       />
 
       {/* Overlay principal — oscurece el lado del texto, deja la imagen clara del resto */}
@@ -154,7 +155,7 @@ export default function Hero() {
       <div className="relative z-10 flex h-screen min-h-160 flex-col items-center justify-center pt-22 sm:items-start">
         <div className="mx-auto w-full max-w-7xl px-6 text-center md:px-10 sm:text-left">
 
-          <h1 className="mt-5 font-display text-[9vw] uppercase leading-[0.82] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] sm:text-[9vw] md:text-[6vw]">
+          <h1 className="mt-5 font-display text-[10.5vw] uppercase leading-[0.82] text-bone drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] sm:text-[9vw] md:text-[6vw]">
             Cúspides
           </h1>
 
@@ -174,19 +175,43 @@ export default function Hero() {
 
             <a
               href="#programas"
-              className="inline-flex rounded-md border-2 border-bone px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
+              className="mt-8 inline-flex w-full justify-center rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:mt-0 sm:w-auto"
             >
               Ver expediciones
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-y-5 sm:justify-start">
+          {/* Mobile: panel en grilla 2x2 */}
+          <div className="mx-auto mt-10 grid max-w-xs grid-cols-2 divide-x divide-y divide-bone/20 overflow-hidden rounded-xl border border-bone/20 bg-ink/40 sm:hidden">
+            {credentials.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.line1}
+                  className="flex flex-col items-center gap-1.5 px-3 py-3 text-center"
+                >
+                  <Icon className="h-5 w-5 shrink-0 text-violet-light" strokeWidth={1.5} />
+                  <div>
+                    <p className="font-mono text-xs font-semibold uppercase leading-tight tracking-widest text-bone">
+                      {item.line1}
+                    </p>
+                    <p className="font-mono text-[10px] uppercase leading-tight tracking-widest text-bone/60">
+                      {item.line2}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: fila única */}
+          <div className="mt-10 hidden w-fit items-center justify-start rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xs sm:flex sm:flex-wrap">
             {credentials.map((item, i) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.line1}
-                  className={`flex items-center gap-4 px-6 first:pl-0 ${i > 0 ? "border-l border-bone/20" : ""}`}
+                  className={`flex items-center gap-4 px-6 py-4 first:pl-6 ${i > 0 ? "border-l border-bone/20" : ""}`}
                 >
                   <Icon className="h-7 w-7 shrink-0 text-violet-light" strokeWidth={1.5} />
                   <div className="text-left">

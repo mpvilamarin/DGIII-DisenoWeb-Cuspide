@@ -164,7 +164,7 @@ export default function Programs() {
               Expediciones destacadas
             </p>
             <span className="mx-auto mt-4 block h-0.5 w-12 bg-violet-light sm:mx-0" />
-            <h2 className="mt-7 font-display text-2xl uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
+            <h2 className="mt-7 font-display text-[1.75rem] uppercase leading-[0.95] text-ink sm:text-3xl md:text-4xl">
               <span className="bg-linear-to-r text-gradient-cool">Elegí tu próxima</span>
               <br />
               cumbre.

@@ -53,14 +53,14 @@ export default function FinalCTA() {
                 Hablemos de tu próxima expedición
               </p>
               <span className="mx-auto mt-2 block h-px w-8 bg-violet-light lg:mx-0" />
-              <h2 className="mt-3 font-display text-xl uppercase leading-[0.95] text-bone sm:mt-4 sm:text-2xl lg:text-[1.75rem]">
+              <h2 className="mt-3 font-display text-[1.4rem] uppercase leading-[0.95] text-bone sm:mt-4 sm:text-2xl lg:text-[1.75rem]">
                 ¿Estás dispuesto a{" "}
                 <span className="bg-linear-to-r text-gradient-cool">
                   prepararte?
                 </span>
               </h2>
               <p className="mx-auto mt-2 max-w-xs font-mono text-xs leading-relaxed text-bone/85 sm:mt-3 lg:mx-0">
-                Cúspides no acepta a todos. Antes de confirmar tu lugar, evaluamos tu perfil, tu experiencia y tu compromiso con el proceso.
+                Antes de confirmar tu lugar, evaluamos tu perfil y tu compromiso con el proceso.
               </p>
             </div>
 
@@ -99,7 +99,7 @@ export default function FinalCTA() {
             <div className="flex shrink-0 justify-center lg:justify-start lg:pl-8">
               <Link
                 href="/postulacion"
-                className="group inline-flex items-center gap-3 bg-violet px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:px-7 sm:py-4"
+                className="group inline-flex w-full items-center justify-center gap-3 rounded-md bg-violet px-6 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:w-auto sm:rounded-none sm:px-7 sm:py-4"
               >
                 Postulate
                 <span className="transition group-hover:translate-x-1">→</span>

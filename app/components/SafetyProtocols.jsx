@@ -35,9 +35,7 @@ export default function SafetyProtocols() {
               Protocolos de seguridad
             </p>
             <h2 className="mt-4 font-display text-[clamp(1.6rem,2.4vw,2.2rem)] uppercase leading-[0.95] tracking-tight text-bone">
-              Cada
-              <br />
-              decisión
+              Cada decisión
               <br />
               tiene un
               <br />

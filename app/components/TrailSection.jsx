@@ -203,7 +203,7 @@ export default function TrailSection() {
         <p className="font-mono text-[9px] uppercase tracking-[0.32em] text-violet-light">
           Recorrido 01 · El Chaltén, Patagonia
         </p>
-        <h2 className="mt-2 font-display text-2xl uppercase leading-[0.95] text-bone sm:text-3xl md:text-4xl">
+        <h2 className="mt-2 font-display text-[1.75rem] uppercase leading-[0.95] text-bone sm:text-3xl md:text-4xl">
           Laguna de los Tres
         </h2>
         <div className="mt-3 hidden flex-wrap gap-x-5 gap-y-1 sm:flex">
@@ -375,7 +375,7 @@ export default function TrailSection() {
             </div>
 
             {/* Nombre */}
-            <h3 className="mt-2 font-display text-2xl uppercase leading-tight text-bone sm:text-3xl">
+            <h3 className="mt-2 font-display text-[1.7rem] uppercase leading-tight text-bone sm:text-3xl">
               {activeStop.nombre}
             </h3>
 

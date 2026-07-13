@@ -24,6 +24,9 @@ const colors = [
   { name: "Violeta", varName: "--color-violet", hex: "#5B3894", className: "bg-violet", desc: "Color primario de acción. Botones, badges, superficies." },
   { name: "Violeta claro", varName: "--color-violet-light", hex: "#7A52B8", className: "bg-violet-light", desc: "Hover de violeta, bordes en fondo oscuro." },
   { name: "Violeta oscuro", varName: "--color-violet-dark", hex: "#3C2568", className: "bg-violet-dark", desc: "Hover de botón violeta, texto sobre fondo claro." },
+  { name: "Turquesa", varName: "--color-teal", hex: "#05CDC2", className: "bg-teal", desc: "Acento interactivo — solo sobre fondos oscuros (protocolos de seguridad, itinerario)." },
+  { name: "Turquesa oscuro", varName: "--color-teal-dark", hex: "#0F6E56", className: "bg-teal-dark", desc: "Variante de turquesa para texto sobre fondo claro." },
+  { name: "Riesgo", varName: "--color-risk", hex: "#E24B4A", className: "bg-(--color-risk)", desc: "Reservado para peligro/protocolo. Declarado en globals.css, sin uso activo todavía." },
 ];
 
 const surface = [
@@ -65,8 +68,13 @@ const groups = [
     label: "Contenido",
     items: [
       ["contenedores", "Tarjetas y métricas"],
+      ["protocolos", "Sección sobre fondo oscuro"],
       ["formularios", "Formularios"],
     ],
+  },
+  {
+    label: "Utilidades",
+    items: [["utilidades", "Fondos y formas"]],
   },
 ];
 
@@ -358,6 +366,45 @@ export default function UIKitPage() {
           </Block>
 
           <Block
+            id="protocolos"
+            eyebrow="Contenido"
+            title="Sección sobre fondo oscuro"
+            desc="Patrón de bloque destacado en fondo ink: el turquesa reemplaza al violeta como acento cuando la superficie es oscura, con textura de grilla de mapa y punto parpadeante de estado."
+          >
+            <div className="relative overflow-hidden rounded-2xl bg-ink">
+              <div className="map-grid pointer-events-none absolute inset-0" />
+              <div className="relative grid grid-cols-1 sm:grid-cols-[1fr_2fr]">
+                <div className="flex flex-col justify-center border-b border-teal/15 px-6 py-8 sm:border-b-0 sm:border-r sm:px-8">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-teal/50">
+                    Eyebrow sobre fondo oscuro
+                  </p>
+                  <p className="mt-3 font-display text-xl uppercase leading-[0.95] text-bone">
+                    Con acento{" "}
+                    <span className="bg-linear-to-r text-gradient-cool">turquesa.</span>
+                  </p>
+                </div>
+                <div className="grid grid-cols-2">
+                  {["01", "02"].map((n) => (
+                    <div
+                      key={n}
+                      className="group relative border-b border-bone/6 px-6 py-6 transition-colors duration-300 last:border-b-0 hover:bg-teal/[0.04] sm:border-r sm:border-b-0 sm:last:border-r-0"
+                    >
+                      <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-teal transition-transform duration-400 ease-out group-hover:scale-x-100" />
+                      <div className="mb-3 flex items-center justify-between">
+                        <span className="font-mono text-[10px] tracking-[0.1em] text-teal">{n}</span>
+                        <span className="animate-blink-dot h-[5px] w-[5px] rounded-full bg-teal" />
+                      </div>
+                      <p className="font-display text-sm uppercase text-bone/60 transition-colors duration-300 group-hover:text-bone">
+                        Título de la tarjeta
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Block>
+
+          <Block
             id="formularios"
             eyebrow="Contenido"
             title="Formularios"
@@ -388,6 +435,55 @@ export default function UIKitPage() {
               <button className="mt-5 w-full rounded-lg bg-violet py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-bone transition hover:bg-violet-dark sm:w-auto sm:px-8">
                 Enviar formulario
               </button>
+
+              <select
+                defaultValue=""
+                className="custom-select mt-4 w-full cursor-pointer appearance-none rounded-lg border border-stone/15 bg-stone/5 px-4 py-3 text-sm text-stone-light outline-none transition focus:border-violet focus:bg-white focus:ring-2 focus:ring-violet/15"
+              >
+                <option value="" disabled>
+                  Select custom (Nivel de experiencia)
+                </option>
+                <option>Principiante</option>
+                <option>Intermedio</option>
+                <option>Avanzado</option>
+              </select>
+              <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.16em] text-stone-light">
+                .custom-select — popup con estilos de marca en navegadores compatibles
+              </p>
+            </div>
+          </Block>
+
+          <Block
+            id="utilidades"
+            eyebrow="Utilidades"
+            title="Fondos y formas"
+            desc="Clases de apoyo usadas para dar textura y quiebre geométrico a secciones enteras, más allá de componentes puntuales."
+          >
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="flex h-28 items-center justify-center rounded-2xl bg-ink px-4">
+                <p className="bg-linear-to-r text-gradient-cool font-display text-lg uppercase">
+                  Degradado violeta → turquesa
+                </p>
+              </div>
+
+              <div className="flex h-28 items-center justify-center rounded-2xl bg-violet/10">
+                <span className="blob h-16 w-16 bg-violet/60" />
+                <p className="ml-4 font-mono text-[10px] uppercase tracking-[0.16em] text-stone">
+                  .blob — forma orgánica
+                </p>
+              </div>
+
+              <div className="diagonal-top h-24 bg-ink px-4 pt-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-bone/60">
+                  .diagonal-top
+                </p>
+              </div>
+
+              <div className="diagonal-bottom h-24 bg-ink px-4 pt-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-bone/60">
+                  .diagonal-bottom
+                </p>
+              </div>
             </div>
           </Block>
         </div>

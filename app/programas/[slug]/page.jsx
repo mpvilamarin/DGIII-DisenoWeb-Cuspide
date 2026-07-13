@@ -133,10 +133,10 @@ export default async function ProgramaPage({ params }) {
         </nav>
 
         {/* Main content — título/CTA a la izquierda, card de precio a la derecha */}
-        <div className="relative z-10 mt-auto grid grid-cols-1 gap-6 px-6 pb-10 pt-8 md:px-10 lg:grid-cols-[1fr_240px] lg:items-end lg:gap-8 lg:px-16 lg:pb-12">
+        <div className="relative z-10 mt-auto grid grid-cols-1 gap-4 px-6 pb-4 pt-8 md:px-10 lg:grid-cols-[1fr_320px] lg:items-end lg:gap-8 lg:px-16 lg:pb-12">
           {/* Izquierda: título, tagline, chips, CTA */}
           <div className="text-center lg:text-left">
-            <h1 className="mt-8 font-display text-2xl uppercase leading-[0.9] text-bone sm:text-3xl md:text-4xl lg:text-[2.5rem]">
+            <h1 className="mt-8 font-display text-[2.1rem] uppercase leading-[0.9] text-bone sm:text-3xl md:text-4xl lg:text-[2.5rem]">
               {program.subtitle.split(" ").length > 1 ? (
                 <>
                   {program.subtitle.split(" ")[0]}
@@ -152,16 +152,16 @@ export default async function ProgramaPage({ params }) {
               {program.tagline}
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
               <a
                 href="#postulacion"
-                className="rounded-md bg-violet px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink"
+                className="hidden w-full rounded-md bg-violet px-6 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:bg-bone hover:text-ink sm:inline-block sm:w-auto"
               >
                 Ver fechas disponibles →
               </a>
               <a
                 href="#postulacion"
-                className="rounded-md border border-bone/40 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone/10"
+                className="mb-2 w-full rounded-md border border-bone/40 px-6 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.18em] text-bone transition hover:border-bone hover:bg-bone/10 sm:mb-0 sm:w-auto"
               >
                 Postularme
               </a>
@@ -169,25 +169,29 @@ export default async function ProgramaPage({ params }) {
           </div>
 
           {/* Derecha: card de precio */}
-          <div className="mx-auto w-full max-w-[220px] rounded-lg border border-bone/10 bg-ink/40 p-4 backdrop-blur-xl lg:mx-0">
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/70">
-              Precio por persona
-            </p>
-            <p className="mt-1 font-display text-xl text-bone">${program.price}</p>
-            <p className="font-mono text-[10px] text-bone/60">USD {program.priceUSD}</p>
+          <div className="mx-auto w-full max-w-xs rounded-lg border border-bone/10 bg-ink/40 p-3 backdrop-blur-xs lg:mx-0 lg:max-w-[320px] lg:p-4">
+            <div className="flex flex-col items-center gap-1 text-center lg:flex-row lg:items-start lg:justify-between lg:gap-4 lg:text-left">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/70">
+                  Precio por persona
+                </p>
+                <p className="mt-1 font-display text-xl text-bone">${program.price}</p>
+                <p className="font-mono text-[10px] text-bone/60">USD {program.priceUSD}</p>
+              </div>
 
-            <ul className="mt-3 space-y-1.5">
-              {checklist.map((item) => (
-                <li key={item} className="flex items-center gap-2 font-mono text-[10px] text-bone/90">
-                  <Check className="h-3 w-3 shrink-0 text-teal" strokeWidth={2} />
-                  {item}
-                </li>
-              ))}
-            </ul>
+              <ul className="hidden space-y-1.5 text-left lg:block">
+                {checklist.map((item) => (
+                  <li key={item} className="flex items-center gap-2 font-mono text-[10px] text-bone/90">
+                    <Check className="h-3 w-3 shrink-0 text-teal" strokeWidth={2} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <a
               href="#incluye"
-              className="mt-3 flex w-full items-center justify-end gap-1.5 font-mono text-[10px] uppercase tracking-widest text-bone transition hover:text-violet-light"
+              className="mt-1.5 flex w-full items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-bone transition hover:text-violet-light lg:mt-3 lg:justify-end"
             >
               Qué incluye →
             </a>
@@ -195,7 +199,7 @@ export default async function ProgramaPage({ params }) {
         </div>
 
         {/* Stats bar — integrated at bottom of hero, contenida con margen */}
-        <div className="relative z-10 mx-6 mb-4 mt-6 rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xl sm:mt-auto md:mx-10 md:mb-6 lg:mx-16">
+        <div className="relative z-10 mx-6 mb-4 mt-0 rounded-lg border border-bone/10 bg-ink/10 backdrop-blur-xs sm:mt-auto md:mx-10 md:mb-6 lg:mx-16">
           <div className="grid grid-cols-2 divide-x divide-bone/10 md:grid-cols-4">
             {statItems.map((stat, i) => {
               const Icon = stat.icon;
@@ -210,7 +214,7 @@ export default async function ProgramaPage({ params }) {
                     {stat.value}
                   </p>
                   <span className="h-px w-4 bg-bone/20" />
-                  <p className="font-mono text-[6px] uppercase tracking-[0.1em] text-bone/60 leading-snug sm:text-[8px] sm:tracking-[0.16em]">
+                  <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-bone/80 leading-snug sm:text-[9px] sm:tracking-[0.16em]">
                     {stat.label}
                   </p>
                 </div>
@@ -270,7 +274,7 @@ export default async function ProgramaPage({ params }) {
             <span className="mx-auto mt-3 block h-0.5 w-10 bg-violet-light sm:mx-0" />
             <h2 className="mt-6 text-center font-display text-3xl uppercase leading-[0.95] text-bone sm:text-left sm:text-4xl">
               Todo lo que necesitás, <span className="text-bone">para</span>{" "}
-              <span className="text-gradient-cool whitespace-nowrap">llegar preparado.</span>
+              <span className="text-gradient-cool sm:whitespace-nowrap">llegar preparado.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-bone/80 sm:mx-0 sm:text-left">
               Te brindamos todo lo necesario para que tu única preocupación
@@ -312,9 +316,9 @@ export default async function ProgramaPage({ params }) {
                 </p>
                 <span className="mx-auto mt-2.5 block h-0.5 w-8 bg-violet-light sm:mx-0" />
                 <h2 className="mt-4 text-center font-display text-lg uppercase leading-[1.05] text-bone sm:text-left sm:text-xl">
-                  <span className="whitespace-nowrap">Para tu seguridad,</span>
+                  <span className="sm:whitespace-nowrap">Para tu seguridad,</span>
                   <br />
-                  <span className="text-gradient-cool whitespace-nowrap">exigimos lo mejor.</span>
+                  <span className="text-gradient-cool sm:whitespace-nowrap">exigimos lo mejor.</span>
                 </h2>
 
                 <ul className="mt-5 divide-y divide-bone/15">
@@ -367,7 +371,7 @@ export default async function ProgramaPage({ params }) {
                 />
               </span>
               <div>
-                <h2 className="font-display text-xl uppercase text-bone sm:text-xl">
+                <h2 className="font-display text-[1.4rem] uppercase text-bone sm:text-xl">
                   Este programa no es para todos.
                 </h2>
                 <p className="mt-1 max-w-2xl font-mono text-xs leading-relaxed text-bone/85">
@@ -440,7 +444,7 @@ export default async function ProgramaPage({ params }) {
                 <p className="mt-10 text-center font-mono text-[10px] uppercase tracking-[0.24em] text-bone/50 sm:text-left">
                   PRIMER PASO
                 </p>
-                <h3 className="mt-2 text-center font-display text-xl uppercase leading-tight text-bone sm:text-left">
+                <h3 className="mt-2 text-center font-display text-[1.4rem] uppercase leading-tight text-bone sm:text-left">
                   EL PROCESO EMPIEZA ACÁ.
                 </h3>
                 <ul className="mt-8 space-y-5">
